@@ -1,0 +1,39 @@
+<!--utf8編碼-->
+{literal}
+<style type="text/css">
+td.label {
+  text-align: right;
+  vertical-align: top;
+  font-weight: bold;
+  padding: 5px 1em;
+}
+.kscontact_mail_tabl{
+	background:#0CF;
+}
+.kscontact_mail_tabl td{
+	background:#FFF;
+}
+</style>
+{/literal}
+<table width="500" cellpadding="1" class="kscontact_mail_tabl">
+	<tr>
+		<td class="label" width="100">{$lang.lab_add_time}:</td>
+		<td>{$data_info.add_time|escape}</td>
+	</tr>
+	<tr>
+		<td class="label">{$lang.lab_name}:</td>
+		<td>{$data_info.name|escape}</td>
+	</tr>
+	<tr>
+		<td class="label">{$lang.lab_email}:</td>
+		<td>{$data_info.email|escape:html}</td>
+	</tr>
+	<tr>
+		<td class="label">{$lang.lab_phone}:</td>
+		<td>{$data_info.phone|escape:html}</td>
+	</tr>
+	<tr>
+		<td class="label">{$lang.lab_content}:</td>
+		<td> {$data_info.content|nl2br} </td>
+	</tr>
+</table>

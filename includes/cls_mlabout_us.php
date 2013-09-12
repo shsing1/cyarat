@@ -1,0 +1,6 @@
+<?php
+	// 繼承cls_data類構造自己的類，便於在整個系統中調用
+	require_once('cls_data.php');
+	class cls_mlabout_us extends cls_data {
+	}
+?>

@@ -1,0 +1,120 @@
+{if $full_page}
+{include file="pageheader.htm"}
+<script type="text/javascript" src="../../js/utils.js"></script>
+<script type="text/javascript" src="../js/listtable.js"></script>
+
+<!-- 資料列表 -->
+<form method="post" action="" id="listForm" name="listForm" onsubmit="return confirmSubmit(this)">
+	<!-- start data list -->
+	<div class="list-div" id="listDiv"> {/if}		
+		<table cellpadding="3" cellspacing="1">
+			<tr>
+				<th width="50"> <input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" />
+					{$lang.lab_id}</th>
+				<th>{$lang.lab_email_title}</th>
+				<th width="200">{$lang.lab_email}</th>
+				<th width="100">{$lang.lab_error}</th>
+				<th width="200">{$lang.lab_last_send}</th>
+				<th width="150">{$lang.lab_handler}</th>
+			<tr> {foreach from=$data_list item=data}
+			<tr>
+				<td><input type="checkbox" name="checkboxes[]" value="{$data.id}" />
+					{$data.id}</td>
+				<td class="first-cell"><span >{$data.email_title|escape:html}</span></td>
+				<td align="center">{$data.email|escape:html}</td>
+				<td align="center">{$data.error|escape:html}</td>
+				<td align="center">{$data.last_send|escape:html}</td>
+				<td align="center">
+					<a href="javascript:;" onclick="remove({$data.id})" title="{$lang.remove}"><img src="images/icon_drop.gif" width="16" height="16" border="0" /></a></td>
+			</tr>
+			{foreachelse}
+			<tr>
+				<td class="no-records" colspan="10">{$lang.no_records}</td>
+			</tr>
+			{/foreach}
+		</table>
+		<!-- end data list -->
+		<!-- 分頁 -->
+		<table id="page-table" cellspacing="0">
+			<tr>
+				<td align="right" nowrap="true"> {include file="page.htm"} </td>
+			</tr>
+		</table>
+		{if $full_page} </div>
+	<div>
+		<input type="hidden" name="act" value="batch" />
+		<select name="type" id="selAction" onchange="changeAction()">
+			<option value="">{$lang.select_please}</option>
+			<option value="drop">{$lang.drop}</option>			
+		</select>
+		<select name="target_cat" style="display:none">
+			<option value="0">{$lang.select_please}</option>
+			{$cat_list_all}  
+		</select>
+		<input type="submit" value="{$lang.button_submit}" id="btnSubmit" name="btnSubmit" class="button" disabled="true" />
+		<input type="button" value="{$lang.all_send}" class="button" onclick="all_send()"/>
+	</div>
+</form>
+<script type="text/javascript">	
+	{foreach from=$filter item=item key=key}
+	listTable.filter.{$key} = '{$item}';
+	{/foreach}
+	
+	{literal}
+	/**
+	* @param: bool ext 其他條件：用於轉移分類
+	*/
+	function confirmSubmit(frm, ext)
+	{
+		var b = false;
+		if (frm . elements['type'] . value == 'drop'){
+			jConfirm(batch_drop_confirm, SYS_MSG, function(r){if(r) do_batch_ajax();});
+		}else if (frm . elements['type'] . value == 'move_to'){
+			ext = (ext == undefined) ? true:ext;
+			b =  ext && frm . elements['target_cat'] . value != 0;
+		}
+		else if (frm . elements['type'] . value == ''){
+			b =  false;
+		}else{
+			b = true;
+		}
+		if(b){
+			do_batch_ajax();
+		}
+		return false;
+	}
+	
+	function do_batch_ajax(){
+		var data = $("#listForm").serialize();
+		data += '&is_ajax=1';
+		$.ajax({
+			data: data
+		});			
+	}
+	
+	function changeAction()
+	{
+		var frm = document . forms['listForm'];
+	
+		// 切換分類列表的顯示
+		frm . elements['target_cat'] . style . display = frm . elements['type'] . value ==
+			'move_to' ? '':'none';
+	
+//		if (!document . getElementById('btnSubmit') . disabled && confirmSubmit(frm, false))
+//		{
+//			//frm . submit();
+//			confirmSubmit(frm);
+//		}
+	}
+	
+	function all_send()
+	{
+		data = {act:'all_send', is_ajax:1}
+		$.ajax({
+			data: data
+		});
+	}
+	{/literal}
+</script>
+{include file="pagefooter.htm"}
+{/if}

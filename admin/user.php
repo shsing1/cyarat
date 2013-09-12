@@ -1,0 +1,377 @@
+<?php
+
+/**
+ * CHH 會員管理資料管理
+ * ============================================================================
+ *
+ *
+ * ============================================================================
+ * Author: shsing1
+ * Id: user.php 2009-11-27 12:00:00
+*/
+
+define('IN_CHH', true);
+
+require_once(dirname(__FILE__) . '/includes/init.php');
+
+require_once(ROOT_PATH . '/includes/cls_user_cat.php');
+$cat = new cls_user_cat($db, $chh->table("user_cat") );
+
+require_once(ROOT_PATH . '/includes/cls_user.php');
+$data = new cls_user($db, $chh->table("user"), $cat );
+
+/* act操作項的初始化 */
+if (empty($_REQUEST['act']))
+{
+    $_REQUEST['act'] = 'list';
+}
+else
+{
+    $_REQUEST['act'] = trim($_REQUEST['act']);
+}
+/* 設定功能路徑 */
+require_once(ROOT_PATH . '/includes/cls_sys_menu.php');
+$sys_menu = new cls_sys_menu($db, $chh->table("sys_menu") );
+$ur_here = $sys_menu->get_ur_here(31);
+$smarty->assign('ur_here',     $ur_here);
+
+/*------------------------------------------------------ */
+//-- 依act進行應對動作
+/*------------------------------------------------------ */
+switch($_REQUEST['act'] ){	
+/*------------------------------------------------------ */
+//-- 資料列表
+/*------------------------------------------------------ */
+	case 'list':
+		/* 獲取資料列表 */
+		$data_list = $data->get_list();
+		
+		/* 設定分類預設值 */
+		$cat_id	=	!isset($_REQUEST['cat_id'])	?	0	:	intval($_REQUEST['cat_id']);
+		
+		/* 取得分類選項 */
+		$cat_select = $cat->get_list_option(1, $cat_id, 1);
+		$smarty->assign('cat_list',  $cat_select);
+		
+		/* 設定搜尋關鍵字預設值 */
+		$serach_keyword	=	!isset($_REQUEST['keyword'])	?	''	:	trim($_REQUEST['keyword']);
+		$smarty->assign('serach_keyword',  $serach_keyword);
+		
+		/* 取得分類選項for轉移分類用 */
+		$cat_select = $cat->get_list_option();
+		$smarty->assign('cat_list_all',  $cat_select);
+	
+	
+		/* 模板賦值 */
+		$smarty->assign('action_link',  array('href' => 'user.php?act=add', 'text' => $_LANG['data_add']));
+		$smarty->assign('full_page',    1);
+	
+		$smarty->assign('data_list',	$data_list['list']);
+		$smarty->assign('filter',		$data_list['filter']);
+		
+		/* 排序標記 */
+		$sort_flag  = sort_flag($data_list['filter']);
+		$smarty->assign($sort_flag['tag'], $sort_flag['img']);
+	
+		/* 列表頁面 */
+		assign_query_info();
+		$smarty->display('user_list.htm');
+		
+		break;		
+/*------------------------------------------------------ */
+//-- 排序、分頁、查詢
+/*------------------------------------------------------ */
+	case 'query':
+	
+		/* 獲取資料列表 */
+		$data_list = $data->get_list();
+		
+		/* 取得分類選項 */
+		$cat_select = $cat->get_list_option(1, 0, 1);
+		$smarty->assign('cat_list',  $cat_select);
+	
+		/* 模板賦值 */
+		$smarty->assign('action_link',  array('href' => 'user.php?act=add', 'text' => $_LANG['data_add']));
+	
+		$smarty->assign('data_list',	$data_list['list']);
+		$smarty->assign('filter',		$data_list['filter']);
+		
+		/* 排序標記 */
+		$sort_flag  = sort_flag($data_list['filter']);
+		$smarty->assign($sort_flag['tag'], $sort_flag['img']);
+	
+		/* 列表頁面 */
+		assign_query_info();
+		
+		make_json_result(	$smarty->fetch('user_list.htm'), 
+							'',
+							array(	'filter' => $data_list['filter'], 'page_count' => $data_list['page_count'] )
+						);
+		break;		
+/*------------------------------------------------------ */
+//-- 添加資料
+/*------------------------------------------------------ */
+	case 'add':	
+		/* 模板賦值 */
+		$smarty->assign('action_link',  array('href' => 'user.php?act=list', 'text' => $_LANG['data_list']));
+		
+		/* 創建 html editor */
+		create_html_editor('desc');
+		
+		$cat_select = $cat->get_list_option(1, 2);
+		$smarty->assign('cat_select',   $cat_select);
+		
+		$smarty->assign('form_act',     'insert');
+		$smarty->assign('data_info',     array('sex'=>0, 'is_show' => 1));
+	
+		/* 顯示頁面 */
+		assign_query_info();
+		$smarty->display('user_info.htm');
+		
+		break;
+/*------------------------------------------------------ */
+//-- 資料添加時的處理
+/*------------------------------------------------------ */
+	case 'insert':	
+		/* 初始化變量 */
+		$field['name']     			= !isset($_POST['name'])     		?	''	: trim($_POST['name']);
+		$field['cat_id']   			= !isset($_POST['cat_id'])     		?	1	: intval($_POST['cat_id']);
+		$field['email']				= !isset($_POST['email'])   		?	''	: trim($_POST['email']);
+		$field['password']			= !isset($_POST['password'])		?	''	: trim($_POST['password']);
+		$field['pwd_confirm']		= !isset($_POST['pwd_confirm'])		?	''	: trim($_POST['pwd_confirm']);
+		$field['sex']				= !isset($_POST['sex'])				?	''	: trim($_POST['sex']);
+		$field['birthday']			= !isset($_POST['birthday'])		?	''	: trim($_POST['birthday']);
+		$field['office_phone']		= !isset($_POST['office_phone'])	?	''	: trim($_POST['office_phone']);
+		$field['home_phone']		= !isset($_POST['home_phone'])		?	''	: trim($_POST['home_phone']);
+		$field['mobile']			= !isset($_POST['mobile'])			?	''	: trim($_POST['mobile']);
+		$field['sort']   			= !isset($_POST['sort'])     		?	0	: intval($_POST['sort']);
+		$field['is_show']     		= !isset($_POST['is_show'])      	?	1	: intval($_POST['is_show']);
+		$field['reg_time']     		= gmtime();
+		
+		/* 將日期轉為時間戳 */
+		$field['birthday'] = empty($field['birthday']) ? local_date($_CFG['date_format']) : $field['birthday'];
+		$field['birthday'] = local_strtotime($field['birthday']);
+		
+		/* 參數檢查 */
+		if($field['name'] == ''){
+			make_json_error($_LANG['name_empty']);
+		}
+
+		/* email檢查 */
+		if(!is_email($field['email'])){
+			make_json_error($_LANG['email_invalid']);
+		}
+		
+		/* 密碼不可為空 */
+		if(!check_password($field['password']) || !check_password($field['pwd_confirm'])){
+			make_json_error($_LANG['password_invaild']);
+		}
+		
+		/* 比較密碼和確認密碼是否相同 */
+		if ($field['password'] <> $field['pwd_confirm'])
+		{
+			make_json_error($_LANG['password_error']);
+		}
+		else
+		{
+			$field['password'] = md5($field['password']);
+		}
+			
+		/* 資料入庫 */
+		if(!$data->add($field)){
+			make_json_error($_LANG['data_add_failed']);
+		}
+		
+		make_json_result('', $_LANG['data_add_succed'], array('url'=>'user.php?'.get_last_filter_url() ) );
+		
+		break;
+/*------------------------------------------------------ */
+//-- 編輯資料
+/*------------------------------------------------------ */
+	case 'edit':	
+		$id	=	!isset($_REQUEST['id'])	?	0	:	intval($_REQUEST['id']);
+	
+		$data_info = $data->get_info($id);
+		
+		$smarty->assign('action_link', array('text' => $_LANG['data_list'], 'href' => 'user.php?act=list'));
+		
+		/* 創建 html editor */
+		create_html_editor('desc', $data_info['desc']);
+		
+		$cat_select = $cat->get_list_option(1, $data_info['cat_id']);
+		$smarty->assign('cat_select',   $cat_select);
+	
+		$smarty->assign('data_info',    $data_info);
+		$smarty->assign('form_act',    'update');
+		$smarty->assign('data_select',  $data_select);
+	
+		/* 顯示頁面 */
+		assign_query_info();
+		$smarty->assign('ur_here',     $ur_here . ' - '.$data_info['name'] );
+		$smarty->display('user_info.htm');
+		
+		break;
+/*------------------------------------------------------ */
+//-- 編輯資料後的處理
+/*------------------------------------------------------ */
+	case 'update':	
+		/* 初始化變量 */
+		$field['id']				= !isset($_POST['id'])     			?	0	: intval($_POST['id']);	
+		$field['name']     			= !isset($_POST['name'])     		?	''	: trim($_POST['name']);
+		$field['cat_id']   			= !isset($_POST['cat_id'])     		?	1	: intval($_POST['cat_id']);
+		$field['email']				= !isset($_POST['email'])   		?	''	: trim($_POST['email']);
+		$field['new_password']		= !isset($_POST['new_password'])	?	''	: trim($_POST['new_password']);
+		$field['pwd_confirm']		= !isset($_POST['pwd_confirm'])		?	''	: trim($_POST['pwd_confirm']);
+		$field['sex']				= !isset($_POST['sex'])				?	''	: trim($_POST['sex']);
+		$field['birthday']			= !isset($_POST['birthday'])		?	''	: trim($_POST['birthday']);
+		$field['office_phone']		= !isset($_POST['office_phone'])	?	''	: trim($_POST['office_phone']);
+		$field['home_phone']		= !isset($_POST['home_phone'])		?	''	: trim($_POST['home_phone']);
+		$field['mobile']			= !isset($_POST['mobile'])			?	''	: trim($_POST['mobile']);
+		$field['sort']   			= !isset($_POST['sort'])     		?	0	: intval($_POST['sort']);
+		$field['is_show']     		= !isset($_POST['is_show'])      	?	1	: intval($_POST['is_show']);
+
+		if(empty($field['id'])){
+			make_json_error($_LANG['id_empty']);
+		}
+	
+		/* 將日期轉為時間戳 */
+		$field['birthday'] = empty($field['birthday']) ? local_date($_CFG['date_format']) : $field['birthday'];
+		$field['birthday'] = local_strtotime($field['birthday']);
+		
+		/* 參數檢查 */
+		if($field['name'] == ''){
+			make_json_error($_LANG['name_empty']);
+		}
+
+		/* email檢查 */
+		if(!is_email($field['email'])){
+			make_json_error($_LANG['email_invalid']);
+		}		
+		
+		/* 是否修改密碼 */
+		if(!empty($field['new_password']) || !empty($field['pwd_confirm']) ){
+			
+			/* 密碼不可為空 */
+			if(!check_password($field['new_password']) || !check_password($field['pwd_confirm'])){
+				make_json_error($_LANG['password_invaild']);
+			}
+			
+			if ($field['new_password'] <> $field['pwd_confirm'])
+			{
+				make_json_error($_LANG['password_error']);
+			}
+			else
+			{
+				$field['password'] = md5($field['new_password']);
+			}
+		}
+		
+		if(!$data->upd($field)){
+			make_json_error($_LANG['data_upd_failed']);
+		}
+		
+		make_json_result('', $_LANG['data_upd_succed'], array('url'=>'user.php?'.get_last_filter_url() ) );
+		
+		break;
+/*------------------------------------------------------ */
+//-- 複製資料
+/*------------------------------------------------------ */
+	case 'copy':	
+		$id	=	!isset($_REQUEST['id'])	?	0	:	intval($_REQUEST['id']);
+	
+		$data_info = $data->get_info($id);
+		$data_info['sort'] = 0;
+		
+		$smarty->assign('action_link', array('text' => $_LANG['data_list'], 'href' => 'user.php?act=list'));
+		
+		/* 創建 html editor */
+		create_html_editor('desc', $data_info['desc']);
+		
+		$cat_select = $cat->get_list_option(1, $data_info['cat_id']);
+		$smarty->assign('cat_select',   $cat_select);
+		
+		$smarty->assign('data_info',    $data_info);
+		$smarty->assign('form_act',    'insert');
+		$smarty->assign('data_select',  $data_select);
+	
+		/* 顯示頁面 */
+		assign_query_info();
+		$smarty->display('user_info.htm');
+		
+		break;		
+/*------------------------------------------------------ */
+//-- 刪除資料
+/*------------------------------------------------------ */
+	case 'remove':	
+		/* 初始化資料ID */
+		$id	=	!isset($_REQUEST['id'])	?	0	:	intval($_REQUEST['id']);
+		
+		/* 執行刪除動作 */
+		if(!$data->del($id)){
+			make_json_error($_LANG['data_del_failed']);
+		}
+		
+		make_json_result('', $_LANG['data_del_succed'], array('url'=>'user.php?'.get_last_filter_url() ) );
+		
+		break;
+/*------------------------------------------------------ */
+//-- 批量操作
+/*------------------------------------------------------ */
+	case 'batch':	
+		/* 取得要操作的商品編號 */
+		$arr 		= 	!isset($_POST['checkboxes'])	?	array()	:	$_POST['checkboxes'];
+		$type 		=	!isset($_POST['type'])			?	''		:	trim($_POST['type']);
+		$target_cat	=	!isset($_POST['target_cat'])	? 	1		:	intval($_POST['target_cat']);
+	
+		/* 動作處理 */
+		switch($type){
+			case 'drop':
+				foreach($arr as $id){
+					/* 執行刪除動作 */
+					if(!$data->del($id)){
+						make_json_error($_LANG['data_del_failed']);
+					}
+				}
+				break;
+			case 'enabled':
+				foreach($arr as $id){
+					/* 執行啟用動作 */
+					$field['id']		= $id;
+					$field['is_show']	= 1; 
+					if(!$data->upd($field)){
+						make_json_error($_LANG['data_enabled_failed']);
+					}
+				}
+				break;
+			case 'disabled':
+				foreach($arr as $id){
+					/* 執行禁用動作 */
+					$field['id']		= $id;
+					$field['is_show']  	= 0; 
+					if(!$data->upd($field)){
+						make_json_error($_LANG['data_disabled_failed']);
+					}
+				}
+				break;
+			case 'move_to':
+				foreach($arr as $id){
+					/* 執行轉移動作 */
+					$field['id']		= $id;
+					$field['cat_id']  	= $target_cat; 
+					if(!$data->upd($field)){
+						make_json_error($_LANG['data_move_to_failed']);
+					}
+				}
+				break;
+			default:
+				break;
+		}
+		
+		make_json_result('', $_LANG['data_batch_succed'], array('url'=>'user.php?'.get_last_filter_url() ) );
+		
+		break;
+
+	default:	
+		break;
+}
+?>

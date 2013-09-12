@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{$lang.cp_home}{if $ur_here} - {$ur_here}{/if}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/general.css" rel="stylesheet" type="text/css" />
+<link href="styles/main.css" rel="stylesheet" type="text/css" />
+<link href="../../css/alerts/jquery.alerts.css" rel="stylesheet" type="text/css" />
+{literal}
+<style type="text/css">
+body {
+	color: white;
+}
+</style>
+{/literal}
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/jquery.ui.custom.js"></script>
+<script type="text/javascript" src="../../js/jquery.alerts.js"></script>
+<script type="text/javascript" src="../../js/jquery.chh.js"></script>
+<script language="JavaScript">
+<!--
+// 這裡把JS用到的所有語言都賦值到這裡
+{foreach from=$lang.js_languages key=key item=item}
+var {$key} = "{$item}";
+{/foreach}
+{literal}
+//if (window.parent != window)
+//{
+//  window.top.location.href = location.href;
+//}
+{/literal}
+//-->
+</script>
+</head>
+<body style="background: #278296">
+<form action="" method="post" onsubmit="return do_ajax(this)">
+	<table cellspacing="0" cellpadding="0" style="margin-top: 100px" align="center">
+		<tr>
+			<td class="login">{$lang.cp_home}</td>
+			<td style="padding-left: 50px"><table>
+					<tr>
+						<td>{$lang.label_username}</td>
+						<td><input type="text" name="username" /></td>
+					</tr>
+					<tr>
+						<td>{$lang.label_password}</td>
+						<td><input type="password" name="password" /></td>
+					</tr>
+					{if $gd_version > 0}
+					<tr>
+						<td>{$lang.label_captcha}</td>
+						<td><input type="text" name="captcha" class="capital" /></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="right"><img src="../captcha.php?act=captcha&{$random}" alt="CAPTCHA" border="1" onclick= this.src="captcha.php?act=captcha&"+Math.random() style="cursor: pointer;" title="{$lang.click_for_another}" /></td>
+					</tr>
+					{/if}
+					<tr>
+						<td colspan="2"><input type="checkbox" value="1" name="remember" id="remember" />
+							<label for="remember">{$lang.remember}</label></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td><input type="submit" value="{$lang.signin_now}" class="button" /></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="right">&raquo; <a href="../" style="color:white">{$lang.back_home}</a> &raquo; <a href="admin.php?act=forget_pwd" style="color:white">{$lang.forget_pwd}</a></td>
+					</tr>
+				</table></td>
+		</tr>
+	</table>
+	<input type="hidden" name="act" value="signin" />
+</form>
+<script language="JavaScript">
+<!--
+	$("form input[name='username']").focus();
+//-->
+</script>
+</body>
+</html>

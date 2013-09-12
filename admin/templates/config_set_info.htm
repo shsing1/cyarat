@@ -1,0 +1,154 @@
+{include file="pageheader.htm"}
+<!-- start data 表單 -->
+<link href="../../css/prettyPhoto/prettyPhoto.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../js/jquery.prettyPhoto.js"></script>
+<script type="text/javascript" src="../../js/ajaxfileupload.js"></script>
+<!--{literal}-->
+<script type="text/javascript">
+	$(function() {
+		$("#tabs").tabs();
+	});
+
+	/**
+	 * 測試郵件的發送
+	 */
+	function sendTestEmail(o)
+	{
+		var eles = o.elements;
+		var smtp_host	= eles['data[37]'] . value;
+		var smtp_port	= eles['data[38]'] . value;
+		var smtp_user	= eles['data[39]'] . value;
+		var smtp_pass	= eles['data[40]'] . value;
+		var reply_email	= eles['data[41]'] . value;
+		var test_email	= eles['test_mail_address'] . value;
+
+		var mail_charset = 0;
+
+		for (i = 0; i < eles['data[42]'] . length; i++)
+		{
+			if (eles['data[42]'][i] . checked)
+			{
+				mail_charset = eles['data[42]'][i] . value;
+			}
+		}
+
+		var mail_service = 0;
+
+		for (i = 0; i < eles['data[35]'] . length; i++)
+		{
+			if (eles['data[35]'][i] . checked)
+			{
+				mail_service = eles['data[35]'][i] . value;
+			}
+		}
+
+		data = {
+				act:'send_test_email',
+				mail_service:mail_service,
+				smtp_host:smtp_host,
+				smtp_port:smtp_port,
+				smtp_user:smtp_user,
+				smtp_pass:smtp_pass,
+				reply_email:reply_email,
+				test_email:test_email,
+				mail_charset:mail_charset
+			};
+		$.ajax({
+		   	data: data
+		});
+
+	}
+
+	/*  刪除檔案 */
+	function del_file(id){
+		$.ajax({
+		   	data: {act:'del_file', id:id}
+		});
+	}
+</script>
+<!--{/literal}-->
+<div id="tabs">
+    <ul>
+		<!--{foreach from=$cat_list item=cat key=key}-->
+        <li><a href="#fragment-{$cat.id}"><span>{$cat.name}</span></a></li>
+		<!--{/foreach}-->
+    </ul>
+
+	<form action="" method="post" onsubmit="return do_ajax(this);">
+    <!--{foreach from=$cat_list item=cat key=key}-->
+	<div id="fragment-{$cat.id}">
+        <table width="90%" align="center">
+			<!--{foreach from=$cat.data item=data key=key}-->
+			<tr>
+				<td class="label">{$data.name}:</td>
+				<td>
+					<!--{if $data.type eq 0}-->
+					<input type="text" name="data[{$data.id}]" value="{$data.value|escape:html}" size="40" />
+
+					<!--{elseif $data.type eq 6}-->
+         			 <input name="data[{$data.id}]" type="password" value="{$data.value|escape:html}" size="40" />
+
+          			<!--{elseif $data.type eq 5}-->
+          			<textarea name="data[{$data.id}]" cols="40" rows="5">{$data.value|escape:html}</textarea>
+
+					<!--{elseif $data.type eq 4}-->
+						<!--{assign var='id' value=$data.id}-->
+						{html_radios name="data[$id]" options=$lang[$data.code] selected=$data.value}
+
+					<!--{elseif $data.type eq 7}-->
+						<!--{assign var='id' value=$data.id}-->
+						{html_options name="data[$id]" options=$lang[$data.code] selected=$data.value}
+					<!--{elseif $data.type eq 2}-->
+				  		<input name="{$data.id}" type="file" size="40" />
+				  		<!--{if ($data.code eq "no_picture" or $data.code eq "watermark") and $data.value}-->
+							<a href="javascript:;" onclick="del_file({$data.id})"><img src="images/no.gif" alt="Delete" border="0" /></a>
+							<a href="../../{$data.value}" rel="prettyPhoto" ><img src="images/yes.gif" border="0" /></a>
+						<!--{else}-->
+							<!--{if $data.value neq ""}-->
+								<img src="images/yes.gif" alt="yes" />
+							<!--{else}-->
+								<img src="images/no.gif" alt="no" />
+							<!--{/if}-->
+				  		<!--{/if}-->
+					<!--{elseif $data.type eq 3}-->
+						<!--{if $data.code eq "lang"}-->
+							<!--{assign var='id' value=$data.id}-->
+							{html_options name="data[$id]" options=$lang_list selected=$data.value}
+						<!--{/if}-->
+					<!--{/if}-->
+				</td>
+			</tr>
+			<!--{/foreach}-->
+			<!--{if $cat.id eq 5}-->
+			<tr>
+				<td class="label">{$lang.test_mail_address}:</td>
+				<td>
+					<input type="text" name="test_mail_address" size="30" />
+       				<input type="button" value="{$lang.send}" onclick="sendTestEmail(this.form);" class="button" />
+				</td>
+			<!--{/if}-->
+		</table>
+    </div>
+	<!--{/foreach}-->
+
+	<div class="button-div">
+		<input type="hidden" name="id" value="{$data_info.id}" />
+		<input type="submit" value="{$lang.button_submit}" class="button" />
+		<input type="reset" value="{$lang.button_reset}" class="button" />
+	</div>
+	<input type="hidden" name="act" value="{$form_act}" />
+	</form>
+</div>
+
+<!-- end data 表單 -->
+<!--{literal}-->
+<script language="JavaScript">
+<!--
+	$(document).ready(function(){
+		$("a[rel^='prettyPhoto']").prettyPhoto({theme:'dark_rounded'});
+	});
+//-->
+</script>
+<!--{/literal}-->
+
+{include file="pagefooter.htm"}

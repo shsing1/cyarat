@@ -1,0 +1,29 @@
+<!--utf8編碼-->
+<table width="90%">
+	<tr>
+		<td class="label" width="100">{$lang.lab_add_time}:</td>
+		<td>{$data_info.add_time|escape}</td>
+	</tr>
+	<tr>
+		<td class="label">{$lang.lab_name}:</td>
+		<td>{$data_info.name|escape}</td>
+	</tr>
+	<tr>
+		<td class="label">{$lang.lab_email}:</td>
+		<td>{$data_info.email|escape:html}</td>
+	</tr>
+	<tr>
+		<td class="label">{$lang.lab_phone}:</td>
+		<td>{$data_info.phone|escape:html}</td>
+	</tr>
+	<tr>
+		<td class="label">{$lang.lab_content}:</td>
+		<td> {$data_info.content|nl2br} </td>
+	</tr>
+    <tr>
+        <td class="label">{$lang.lab_is_show}:</td>
+        <td>        	
+        	<!--{if $data_info.is_show}-->{$lang.yes}<!--{else}-->{$lang.no}<!--{/if}-->
+        </td>
+    </tr>
+</table>

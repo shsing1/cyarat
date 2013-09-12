@@ -1,0 +1,127 @@
+{include file="pageheader.htm"}
+<!-- start data 表單 -->
+{literal}
+<script type="text/javascript">
+	$(function() {
+		$("#tabs").tabs();
+	});
+</script>
+{/literal}
+<div id="tabs">
+    <ul>
+        <li><a href="#fragment-1"><span>資料內容</span></a></li>
+		{*}<li><a href="#fragment-2"><span>{$lang.replied}</span></a></li>{*}
+    </ul>
+	
+	<form action="" method="post" onsubmit="return do_ajax(this);">
+    <input type="hidden" name="id" value="{$data_info.id}" />
+	<div id="fragment-1">
+        <table width="90%" align="center">
+			{*}
+            <tr>
+				<td class="label">{$lang.lab_add_time}:</td>
+				<td>{$data_info.add_time|escape}</td>
+			</tr>
+            {*}            
+			<tr>
+				<td class="label">{$lang.lab_date}:</td>
+				<td>{$data_info.date|escape}</td>
+			</tr>
+			<tr>
+				<td class="label">學校名稱或企業名稱:</td>
+				<td>{$data_info.name|escape}</td>
+			</tr>
+			<tr>
+				<td class="label">班級或部門單位:</td>
+				<td>{$data_info.unit|escape}</td>
+			</tr>
+			<tr>
+				<td class="label">參觀人數:</td>
+				<td>大人：{$data_info.adult|escape}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小孩：{$data_info.child|escape}</td>
+			</tr>
+			<tr>
+				<td class="label">帶團聯絡人:</td>
+				<td>{$data_info.contact|escape}</td>
+			</tr>
+			<tr>
+				<td class="label">聯絡電話:</td>
+				<td>{$data_info.phone|escape}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$data_info.phone2|escape}</td>
+			</tr>
+			<tr>
+				<td class="label">電子郵件:</td>
+				<td>{$data_info.email|escape:html}</td>
+			</tr>
+		</table>
+        {*}
+		<hr>
+		<table width="90%" align="center">
+			<tr>
+				<td class="label">{$lang.lab_reply_name}:</td>
+				<td><input type="text" name="name" value="{$reply_info.name|escape}" size="27" />{$lang.require_field}</td>
+			</tr>			 
+			<tr>
+				<td class="label">{$lang.lab_reply_email}:</td>
+				<td><input type='text' name='email' value='{$reply_info.email|escape:html}' size='27' />{$lang.require_field}</td>
+			</tr>
+			<tr>
+				<td class="label">{$lang.lab_reply_phone}:</td>
+				<td><input type='text' name='phone' value='{$reply_info.phone|escape:html}' size='27' />{$lang.require_field}</td>
+			</tr>
+			<tr>
+				<td class="label">{$lang.lab_reply_content}:</td>
+				<td>
+					<textarea name="content" cols="40" rows="5">{$reply_info.content|escape:html}</textarea>{$lang.require_field}
+					</td>
+			</tr>
+		</table>
+        {*}
+    </div>  
+    {*} 
+	<div id="fragment-2">
+		<!--{foreach from=$reply_list item=data_info key=key}-->
+			<!--{if $key neq 0}--><hr><!--{/if}-->
+        <table width="90%" align="center">
+			<tr>
+				<td class="label">{$lang.lab_reply_add_time}:</td>
+				<td>{$data_info.add_time|escape}</td>
+			</tr>
+			<tr>
+				<td class="label">{$lang.lab_reply_name}:</td>
+				<td>{$data_info.name|escape}</td>
+			</tr>		
+			<tr>
+				<td class="label">{$lang.lab_reply_email}:</td>
+				<td>{$data_info.email|escape:html}</td>
+			</tr>
+			<tr>
+				<td class="label">{$lang.lab_reply_phone}:</td>
+				<td>{$data_info.phone|escape:html}</td>
+			</tr>
+			<tr>
+				<td class="label">{$lang.lab_reply_content}:</td>
+				<td>
+					{$data_info.content|nl2br}
+				</td>
+			</tr>
+		</table>
+		<!--{foreachelse}-->
+		<table width="90%" align="center">
+			<tr>				
+				<td align="center">{$lang.no_records}</td>
+			</tr>
+		</table>
+		<!--{/foreach}-->
+    </div> 
+	
+	<div class="button-div">		
+		<input type="submit" value="{$lang.button_submit}" class="button" />
+		<input type="reset" value="{$lang.button_reset}" class="button" />
+	</div>
+    {*}
+	<input type="hidden" name="act" value="{$form_act}" />
+	</form>
+</div>
+
+<!-- end data 表單 -->
+
+{include file="pagefooter.htm"} 

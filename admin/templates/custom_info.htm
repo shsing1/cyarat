@@ -1,0 +1,75 @@
+{include file="pageheader.htm"}
+<!-- start data 表單 -->
+{literal}
+<script type="text/javascript">
+	$(function() {
+		$("#tabs").tabs();
+	});
+</script>
+{/literal}
+<div id="tabs">
+    <ul>
+		<!--{if $admin_cat_id == 2}-->
+        <li><a href="#fragment-1"><span>{$lang.tab_general}</span></a></li>
+		<!--{/if}-->
+        <li><a href="#fragment-2"><span>{$lang.tab_detail}</span></a></li>		
+    </ul>
+	
+	<form action="" method="post" onsubmit="return do_ajax(this);">
+    <!--{if $admin_cat_id == 2}-->
+	<div id="fragment-1">
+        <table width="90%" align="center">
+			<tr>
+				<td class="label">{$lang.lab_name}:</td>
+				<td><input type="text" name="name" value="{$data_info.name|escape}" size="27" />{$lang.require_field}</td>
+			</tr>			 
+			<tr>
+				<td class="label">{$lang.lab_cat}:</td>
+				<td>
+					<select name="cat_id">					
+            			{$cat_select}       
+					</select>
+				</td>
+			</tr>			
+			<tr>
+				<td class="label">{$lang.lab_meta_keywords}:</td>
+				<td><input type='text' name='meta_keywords' value='{$data_info.meta_keywords|escape:html}' size='27' /></td>
+			</tr>
+			<tr>
+				<td class="label">{$lang.lab_meta_description}:</td>
+				<td><input type='text' name='meta_description' value='{$data_info.meta_description|escape:html}' size='27' /></td>
+			</tr>
+			<tr>
+				<td class="label">{$lang.lab_sort}:</td>
+				<td><input type="text" name="sort" value="{$data_info.sort|default:0}" size="5" />{$lang.notice_sort}</td>
+			</tr>
+			<tr>
+				<td class="label">{$lang.lab_is_show}:</td>
+				<td><input type="radio" name="is_show" value="1" {if $data_info.is_show neq 0} checked="true"{/if}/>
+					{$lang.yes}
+					<input type="radio" name="is_show" value="0" {if $data_info.is_show eq 0} checked="true"{/if} />
+					{$lang.no} </td>
+			</tr>
+		</table>
+    </div>
+	<!--{/if}-->
+    <div id="fragment-2">
+        <table width="90%">
+			<tr>
+				<td>{$FCKeditor_desc}</td>
+			</tr>
+		</table>
+    </div>
+	
+	<div class="button-div">
+		<input type="hidden" name="id" value="{$data_info.id}" />
+		<input type="submit" value="{$lang.button_submit}" class="button" />
+		<input type="reset" value="{$lang.button_reset}" class="button" />
+	</div>
+	<input type="hidden" name="act" value="{$form_act}" />
+	</form>
+</div>
+
+<!-- end data 表單 -->
+
+{include file="pagefooter.htm"} 
