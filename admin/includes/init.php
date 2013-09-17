@@ -2,7 +2,7 @@
 /**
  * CHH 管理中心公用文件
  * ============================================================================
- * 
+ *
  * ============================================================================
  * Author: shsing
  * Id: init.php 2009-10-24 13:00:00
@@ -14,7 +14,6 @@ if (!defined('IN_CHH'))
 
 define('CHH_ADMIN', true);
 
-error_reporting(E_ALL);
 
 if (__FILE__ == '')
 {
@@ -41,7 +40,17 @@ else
     @ini_set('include_path',      '.:' . ROOT_PATH);
 }
 
-include(ROOT_PATH . 'includes/config.php');
+// 是否開啟firephp
+require_once(ROOT_PATH . 'includes/FirePHPCore/FirePHP.class.php');
+$firephp = FirePHP::getInstance(true);
+if (file_exists(ROOT_PATH . 'includes/formal.php')) {
+    error_reporting(0);
+    require_once(ROOT_PATH . 'includes/config.php');
+    $firephp->setEnabled(false);
+} else {
+    error_reporting(E_ALL);
+    require_once(ROOT_PATH . 'includes/config_dev.php');
+}
 
 // 除錯模式
 if (defined('DEBUG_MODE') == false)
@@ -73,6 +82,7 @@ require_once(ROOT_PATH . 'admin/includes/lib_main.php');
 //require_once(ROOT_PATH . 'admin/includes/cls_exchange.php');
 //print_r($_GET);
 
+
 /* 將加密的參數進行解密 */
 if(!empty($_GET['p'])){
 	$p = authcode($_GET['p']);
@@ -81,12 +91,12 @@ if(!empty($_GET['p'])){
 }else{
 	$_GET = array();
 }
-		
+
 /* 對用戶傳入的變量進行轉義操作。*/
 if (!get_magic_quotes_gpc())
 {
 	if (!empty($_GET))
-    {		
+    {
         $_GET  = addslashes_deep($_GET);
     }
     if (!empty($_POST))
@@ -127,7 +137,7 @@ $_REQUEST['act'] = empty($_REQUEST['act'] )?'':$_REQUEST['act'] ;
 //    setcookie('CHH[admin_pass]', '', 1);
 //
 //    $sess->destroy_session();
-	
+
 ///* 初始化 action */
 //if (!isset($_REQUEST['act']))
 //{
@@ -192,14 +202,14 @@ if(!$sess->is_admin() ){
 		make_json_error($_LANG['priv_error']);
 	}
 	else
-	{		
-		$p = "act=login";		
+	{
+		$p = "act=login";
 		$p = authcode($p, 'ENCODE');
 		if(empty($_REQUEST['act'])){
 			echo '<script type="text/javascript">window.top.document.location.href="' . "privilege.php?$p" . '";</script>';
 			//chh_header("Location: privilege.php?$p\n");
 		}
-		
+
 	}
 }
 

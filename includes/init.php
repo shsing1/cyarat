@@ -11,7 +11,7 @@ if (!defined('IN_CHH'))
 {
     die('Hacking attempt');
 }
-error_reporting(E_ALL);
+
 
 if (__FILE__ == '')
 {
@@ -38,7 +38,18 @@ else
     @ini_set('include_path', '.:' . ROOT_PATH);
 }
 
-require(ROOT_PATH . 'includes/config.php');
+// 是否開啟firephp
+require_once(ROOT_PATH . 'includes/FirePHPCore/FirePHP.class.php');
+$firephp = FirePHP::getInstance(true);
+if (file_exists(ROOT_PATH . 'includes/formal.php')) {
+    error_reporting(0);
+    require_once(ROOT_PATH . 'includes/config.php');
+    $firephp->setEnabled(false);
+} else {
+    error_reporting(E_ALL);
+    require_once(ROOT_PATH . 'includes/config_dev.php');
+}
+
 
 if (defined('DEBUG_MODE') == false)
 {
@@ -47,7 +58,7 @@ if (defined('DEBUG_MODE') == false)
 
 if (PHP_VERSION >= '5.1' && !empty($timezone))
 {
-    date_default_timezone_set("Asia/Taipei");
+    date_default_timezone_set($timezone);
 }
 
 $php_self = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME'];
@@ -67,6 +78,7 @@ require(ROOT_PATH . 'includes/lib_main.php');
 //require(ROOT_PATH . 'includes/lib_insert.php');
 //require(ROOT_PATH . 'includes/lib_goods.php');
 //require(ROOT_PATH . 'includes/lib_article.php');
+
 
 /* 將加密的參數進行解密 */
 if(!empty($_GET['p'])){
@@ -245,14 +257,14 @@ if (!defined('INIT_NO_USERS'))
     }
 }
 
-if ((DEBUG_MODE & 1) == 1)
-{
-    error_reporting(E_ALL);
-}
-else
-{
-    error_reporting(E_ALL ^ E_NOTICE);
-}
+// if ((DEBUG_MODE & 1) == 1)
+// {
+//     error_reporting(E_ALL);
+// }
+// else
+// {
+//     error_reporting(E_ALL ^ E_NOTICE);
+// }
 if ((DEBUG_MODE & 4) == 4)
 {
     include(ROOT_PATH . 'includes/lib.debug.php');
@@ -272,95 +284,20 @@ $page_title = $GLOBALS['_CFG']['site_title'];
 $keywords = htmlspecialchars($GLOBALS['_CFG']['site_keywords']);
 $description = htmlspecialchars($GLOBALS['_CFG']['site_desc']);
 
-$current_url = $chh->url();
-if(preg_match('/kaohsiung/', $current_url)){
-	$open_qrcode = gmtime()>gmstr2time('2012-06-21')?true:false;
-	$qrcode_qty['total'] = 0;
-	$qrcode_qty['today'] = 0;
-	if($open_qrcode){
-		include_once(ROOT_PATH . '/includes/class.http.php');
-		$http = new Http();
-		$http->execute('http://qmk-s0.appspot.com/animaris/REST/count' );
+// 左邊選單
+$menu = array();
 
-		if(!$http->error){
-			$rs_qrcode = $http->result;
-			$obj_qrcode = json_decode($rs_qrcode);
-			if($obj_qrcode->{total}){
-				$qrcode_qty['total'] = $obj_qrcode->{total};
-			}
-		}
-		$today = local_date('Ymd');
-		$http->execute('http://qmk-s0.appspot.com/animaris/REST/count?date='.$today );
+// 上方選單
+$main_nav = array(
+    array('name' => '關於藝動節', 'url' => 'about.php', 'current' => false),
+    array('name' => '城市藝境', 'url' => 'index.php', 'current' => false),
+    array('name' => '1010國慶超人路跑', 'url' => 'index.php', 'current' => false),
+    array('name' => '最新動態', 'url' => 'news.php', 'current' => false),
+    array('name' => '聯絡我們', 'url' => 'index.php', 'current' => false),
+    array('name' => '回首頁', 'url' => 'index.php', 'current' => false)
+);
 
-		if(!$http->error){
-			$rs_qrcode = $http->result;
-			$obj_qrcode = json_decode($rs_qrcode);
-			if($obj_qrcode->{datas}){
-				$qrcode_qty['today'] = $obj_qrcode->{total};
-			}
-		}
-	}
+$css_ext = array('css/style.css');
 
-	require_once(ROOT_PATH . '/includes/cls_custom.php');
-	$data = new cls_custom($db, $chh->table("custom") );
-	$footerInfo = $data->get_info(9);
-
-}else if(preg_match('/miaoli/', $current_url)){
-	require_once(ROOT_PATH . '/includes/cls_mlsponsors_cat.php');
-	$cat = new cls_mlsponsors_cat($db, $chh->table("mlsponsors_cat") );
-
-	require_once(ROOT_PATH . '/includes/cls_mlsponsors.php');
-	$data = new cls_mlsponsors($db, $chh->table("mlsponsors"), $cat);
-
-	$mlsponsors_list = $data->get_list(true, 1);
-	$mlsponsors_list = $mlsponsors_list['list'];
-
-	foreach($mlsponsors_list as $k=>$v){
-		$v['target'] = empty($v['is_target']) || empty($v['link'])? '' : 'target="_blank"';
-		$v['link'] = empty($v['link'])? 'javascript://' : trim($v['link']);
-		$mlsponsors_list[$k] = $v;
-	}
-}else if(preg_match('/taichung/', $current_url)){
-}else{
-
-	require_once(ROOT_PATH . '/includes/cls_sponsors_cat.php');
-	$cat = new cls_sponsors_cat($db, $chh->table("sponsors_cat") );
-
-	require_once(ROOT_PATH . '/includes/cls_sponsors.php');
-	$data = new cls_sponsors($db, $chh->table("sponsors"), $cat);
-
-	$sponsors_list = $data->get_list(true, 1);
-	$sponsors_list = $sponsors_list['list'];
-
-	foreach($sponsors_list as $k=>$v){
-		$v['target'] = empty($v['is_target']) || empty($v['link'])? '' : 'target="_blank"';
-		$v['link'] = empty($v['link'])? 'javascript://' : trim($v['link']);
-		$sponsors_list[$k] = $v;
-	}
-
-	$open_qrcode = gmtime()>gmstr2time('2011-12-01')?true:false;
-	if($open_qrcode){
-		include_once(ROOT_PATH . '/includes/class.http.php');
-		$http = new Http();
-		$http->execute('http://qmk-s0.appspot.com/animaris/REST/count' );
-		$qrcode_qty['total'] = 0;
-		if(!$http->error){
-			$rs_qrcode = $http->result;
-			$obj_qrcode = json_decode($rs_qrcode);
-			if($obj_qrcode->{total}){
-				$qrcode_qty['total'] = $obj_qrcode->{total};
-			}
-		}
-		$today = local_date('Ymd');
-		$http->execute('http://qmk-s0.appspot.com/animaris/REST/count?date='.$today );
-		$qrcode_qty['today'] = 0;
-		if(!$http->error){
-			$rs_qrcode = $http->result;
-			$obj_qrcode = json_decode($rs_qrcode);
-			if($obj_qrcode->{datas}){
-				$qrcode_qty['today'] = $obj_qrcode->{total};
-			}
-		}
-	}
-}
+$js_ext = array();
 ?>

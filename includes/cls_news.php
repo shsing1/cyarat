@@ -90,10 +90,18 @@
 				$v['year'] = local_date('Y', $v['date']);
 				$v['mon'] = local_date('n月', $v['date']);
 				$v['day'] = local_date('d', $v['date']);
-				$v['sp_date'] = local_date('Y.n.j', $v['date']);
-				$v['date'] = local_date($GLOBALS['_CFG']['date_format'], $v['date']);
+				$v['ap'] = local_date('a', $v['date']);
+				$ap = $v['ap'] === 'am' ? '上午' : '下午';
+				$v['sp_date'] = local_date('Y年n月j日 '.$ap.'h:i', $v['date']);
+				$v['sp_date2'] = local_date('Y.n.j', $v['date']);
+				$v['date'] = local_date($GLOBALS['_CFG']['time_format'], $v['date']);
 				$cat_info = $this->cat->get_info($v['cat_id']);
 				$v['cat_name'] = $cat_info['name'];
+
+				$brief = strip_tags($v['desc']);
+				preg_replace( "/\s/", "" , $brief);
+				$v['brief'] = $brief;
+
 				$arr[$k] = $v;
 			}
 			return array('list' => $arr, 'filter' => $filter);
@@ -106,7 +114,7 @@
 			$v['year'] = local_date('Y', $v['date']);
 			$v['mon'] = local_date('n月', $v['date']);
 			$v['day'] = local_date('d', $v['date']);
-			$info['date'] = local_date($GLOBALS['_CFG']['date_format'], $info['date']);
+			$info['date'] = local_date($GLOBALS['_CFG']['time_format'], $info['date']);
 			$cat_info = $this->cat->get_info($info['cat_id']);
 			$info['cat_name'] = $cat_info['name'];
 			return $info;

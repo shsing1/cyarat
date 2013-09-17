@@ -9,14 +9,14 @@
 	$(function() {
 		$("#tabs").tabs();
 	});
-		
+
 	/**
 	* 刪除該資料圖片
 	*/
 	function drop_img(id)
 	{
-		jConfirm(drop_img_confirm, 
-				 SYS_MSG, 
+		jConfirm(drop_img_confirm,
+				 SYS_MSG,
 				 function(r){
 					if(r){
 						$.ajax({
@@ -29,8 +29,8 @@
 									jAlert(r.message, SYS_MSG);
 								}else{
 									if(r.message){
-										jAlert( r.message, 
-												SYS_MSG, 
+										jAlert( r.message,
+												SYS_MSG,
 												function(){
 													if(	r.url){
 														location.href = r.url;
@@ -42,16 +42,16 @@
 							}
 						});
 					}
-		});			
+		});
 	}
-	
+
 	/**
 	* 刪除該資料圖片
 	*/
 	function drop_img2(id)
 	{
-		jConfirm(drop_img_confirm, 
-				 SYS_MSG, 
+		jConfirm(drop_img_confirm,
+				 SYS_MSG,
 				 function(r){
 					if(r){
 						$.ajax({
@@ -64,8 +64,8 @@
 									jAlert(r.message, SYS_MSG);
 								}else{
 									if(r.message){
-										jAlert( r.message, 
-												SYS_MSG, 
+										jAlert( r.message,
+												SYS_MSG,
 												function(){
 													if(	r.url){
 														location.href = r.url;
@@ -77,7 +77,7 @@
 							}
 						});
 					}
-		});			
+		});
 	}
 </script>
 {/literal}
@@ -86,21 +86,21 @@
         <li><a href="#fragment-1"><span>{$lang.tab_general}</span></a></li>
         <li><a href="#fragment-2"><span>{$lang.tab_detail}</span></a></li>
     </ul>
-	
+
 	<form action="" method="post" onsubmit="return do_ajax(this);">
-    
+
 	<div id="fragment-1">
         <table width="90%" align="center">
 			<tr>
 				<td class="label">{$lang.lab_name}:</td>
 				<td><input type="text" name="name" value="{$data_info.name|escape}" size="27" />{$lang.require_field}</td>
-			</tr>	
-            {*}		 
+			</tr>
+            {*}
 			<tr>
 				<td class="label">{$lang.lab_cat}:</td>
 				<td>
-					<select name="cat_id">					
-            			{$cat_select}       
+					<select name="cat_id">
+            			{$cat_select}
 					</select>
 				</td>
 			</tr>
@@ -117,7 +117,7 @@
 			<tr>
 				<td class="label">{$lang.lab_brief}:</td>
 				<td><textarea name="brief" cols="50" rows="5">{$data_info.brief|escape}</textarea></td>
-			</tr>	
+			</tr>
             <tr>
 				<td class="label">{$lang.lab_author}:</td>
 				<td><input type="text" name="author" value="{$data_info.author|escape}" size="27" /></td>
@@ -125,7 +125,7 @@
             {*}
 			<tr>
 				<td class="label">{$lang.lab_date}:</td>
-				<td><input type='text' name='date' value='{$data_info.date|escape:html}' size='27' class="Wdate" {literal}onFocus="WdatePicker({isShowClear:false,readOnly:true})"{/literal}/></td>
+				<td><input type='text' name='date' value='{$data_info.date|escape:html}' size='27' class="Wdate" {literal}onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false,readOnly:true})"{/literal}/></td>
 			</tr>
             {*}
 			<tr>
@@ -139,7 +139,7 @@
 					<!--{/if}-->
 				</td>
 			</tr>
-            
+
             <tr>
 				<td class="label">首頁圖:</td>
 				<td><input type="file" name="img2" id="img2" />
@@ -151,7 +151,7 @@
 					<!--{/if}--><br>
                     建議尺寸：314*107
 				</td>
-			</tr>            
+			</tr>
 			<tr style="display:none;">
 				<td class="label">{$lang.lab_sort}:</td>
 				<td><input type="text" name="sort" value="{$data_info.sort|default:0}" size="5" />{$lang.notice_sort}</td>
@@ -164,7 +164,7 @@
 					{$lang.no} </td>
 			</tr>
             {*}
-            
+{*}
 			<tr>
 				<td class="label">HOT:</td>
 				<td><input type="radio" name="is_hot" value="1" {if $data_info.is_hot neq 0} checked="true"{/if}/>
@@ -172,6 +172,7 @@
 					<input type="radio" name="is_hot" value="0" {if $data_info.is_hot eq 0} checked="true"{/if} />
 					{$lang.no} </td>
 			</tr>
+{*}
 			<tr>
 				<td class="label">{$lang.lab_is_show}:</td>
 				<td><input type="radio" name="is_show" value="1" {if $data_info.is_show neq 0} checked="true"{/if}/>
@@ -188,7 +189,7 @@
 			</tr>
 		</table>
     </div>
-	
+
 	<div class="button-div">
 		<input type="hidden" name="id" value="{$data_info.id}" />
 		<input type="submit" value="{$lang.button_submit}" class="button" />
@@ -207,4 +208,4 @@
 </script>
 {/literal}
 
-{include file="pagefooter.htm"} 
+{include file="pagefooter.htm"}

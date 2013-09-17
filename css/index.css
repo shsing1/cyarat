@@ -5,8 +5,9 @@ body {
 /* 主要區塊 */
 #wrapper{
 	position:relative;
-	min-height:615px;
+	height:630px;
 }
+#pagebody{}
 #logo{
 	position:absolute;
 	right:0; top:0;
@@ -21,22 +22,45 @@ body {
 }
 
 /* 背景 */
+.bg_slider{
+	margin:0 auto;
+	overflow:hidden;
+}
 ul.index_bg{ height:630px;}
-ul.index_bg li{}
+ul.items_bar li{
+	position:absolute;
+	left:0; top:0;
+	width:100%;
+}
 
-.arrow_btn{}
-.arrow_l{
-	background:url(../images/index/arrow_01.png) no-repeat left top;
+.bg_slider>li{}
+.arrow{
 	width:61px; height:116px;
 	position:absolute;
+	display:block;
+	z-index:10;
+}
+.arr_prev{
+	background:url(../images/index/arrow_01.png) no-repeat left top;
 	left:0px; top:215px;
 }
-.arrow_r{
+.arr_next{
 	background:url(../images/index/arrow_02.png) no-repeat left top;
-	width:61px; height:116px;
-	position:absolute;
 	right:0px; top:215px;
 }
+.rsContent{
+	position:relative;
+	color:#fff;
+}
+.rsABlock{
+	position:absolute;
+	left:20%; top:0;
+	z-index:9;
+	text-align:left;
+	width:525px;
+}
+.rsContent h1{font-size:36px; color:#fff; top:295px; padding:0; margin:0;}
+.rsContent h2{ font-size:15px; color:#fff; top:350px; padding:0; margin:0;}
 
 /* 主選單 */
 #box_menu{
@@ -86,11 +110,51 @@ ul.index_bg li{}
 }
 .menu_05{
 	background:url(../images/default/menu_05.png) no-repeat left top;
-	width:126px; height:45px;
+	width:220px; height:45px;
 }
 .menu_05:hover, .menu_05.click{
 	background:url(../images/default/menu_05ov.png) no-repeat left top;
 }
+
+/* 最新消息 */
+#box_news{
+	position: absolute;
+	bottom:0;
+	width:100%;
+}
+#box_news .container{
+	background:url(../images/index/news_bg.png) repeat left top;
+	overflow:hidden;
+}
+.news_btn{
+	text-align:center;
+	background:url(../images/index/btn_news.png) no-repeat center center;
+	width:132px; height:31px;
+	margin:0 auto;
+}
+.news_center{
+	color:#3f3f3f;
+	font-size:12px;
+	padding:15px 25px 25px 25px;
+	overflow:hidden;
+}
+.news_title{
+	display:block;
+	font-size:15px;
+	color:#f84746;
+	margin-bottom:10px;
+}
+.news_center li{
+	float:left;
+	width:30%;
+	padding:0 2% 0 0;
+	margin:0 2% 0 0;
+	border-right:#fff4bc 1px solid;
+	line-height:1.2;
+	text-align:left;
+}
+.news_center li:last-child{ border:none; padding:0; margin:0;}
+.news_center li a{color:#3f3f3f;}
 
 /* 頁尾 */
 .footer_copyright{

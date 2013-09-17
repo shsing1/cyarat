@@ -73,6 +73,7 @@ input[type="checkbox"]{}
 
 /* 共用區塊 */
 .container{
+	position:relative;
 	width:1000px;
 	margin:0 auto;
 }

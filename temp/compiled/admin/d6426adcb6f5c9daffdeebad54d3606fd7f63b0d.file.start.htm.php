@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.14, created on 2013-09-11 16:32:53
+<?php /* Smarty version Smarty-3.1.14, created on 2013-09-17 08:58:35
          compiled from "D:\xampp\htdocs\cyarat\admin\templates\start.htm" */ ?>
-<?php /*%%SmartyHeaderCode:2677752309b35935f81-42673829%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:5862523819bb363d31-37583690%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2677752309b35935f81-42673829',
+  'nocache_hash' => '5862523819bb363d31-37583690',
   'function' => 
   array (
   ),
@@ -25,9 +25,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.14',
-  'unifunc' => 'content_52309b359af121_45035247',
+  'unifunc' => 'content_523819bb3d51d4_66837482',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_52309b359af121_45035247')) {function content_52309b359af121_45035247($_smarty_tpl) {?><?php echo $_smarty_tpl->getSubTemplate ("pageheader.htm", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+<?php if ($_valid && !is_callable('content_523819bb3d51d4_66837482')) {function content_523819bb3d51d4_66837482($_smarty_tpl) {?><?php echo $_smarty_tpl->getSubTemplate ("pageheader.htm", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
 
 <!-- directory install start -->
 <ul id="lilist" style="padding:0; margin: 0; list-style-type:none; color: #CC0000;">

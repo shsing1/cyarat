@@ -8,7 +8,7 @@
 	$(function() {
 		$("#tabs").tabs();
 	});
-	
+
 	/**
 	 * 新增一個上傳欄位
 	 */
@@ -18,11 +18,11 @@
 		var new_f = o.clone();
 		var html_str = new_f.html();
 //		new_f.html(html_str.replace(/(.*)(add_file)(.*)(\[)(\＋)/i, "$1remove_file$3$4－"));
-		new_f.html(html_str.replace(/(.*)(add_file)(.*)(<img.*?>)(.*)/i, '$1remove_file$3<img src="images/icon_drop.gif"  alt="刪除" />$5'));						
-		
-		o.parent().append(new_f);			   
+		new_f.html(html_str.replace(/(.*)(add_file)(.*)(<img.*?>)(.*)/i, '$1remove_file$3<img src="images/icon_drop.gif"  alt="刪除" />$5'));
+
+		o.parent().append(new_f);
 	}
-	
+
 	/**
 	* 刪除上傳欄位
 	*/
@@ -30,14 +30,14 @@
 	{
 		obj.parentNode.parentNode.removeChild(obj.parentNode);
 	}
-	
+
 	/**
 	* 刪除該資料圖片
 	*/
 	function drop_img(id)
 	{
-		jConfirm(drop_img_confirm, 
-				 SYS_MSG, 
+		jConfirm(drop_img_confirm,
+				 SYS_MSG,
 				 function(r){
 					if(r){
 						$.ajax({
@@ -50,8 +50,8 @@
 									jAlert(r.message, SYS_MSG);
 								}else{
 									if(r.message){
-										jAlert( r.message, 
-												SYS_MSG, 
+										jAlert( r.message,
+												SYS_MSG,
 												function(){
 													if(	r.url){
 														location.href = r.url;
@@ -63,16 +63,16 @@
 							}
 						});
 					}
-		});			
+		});
 	}
-	
+
 	/**
 	* 刪除圖片管理圖片
 	*/
 	function drop_gallery_img(id)
 	{
-		jConfirm(drop_img_confirm, 
-				 SYS_MSG, 
+		jConfirm(drop_img_confirm,
+				 SYS_MSG,
 				 function(r){
 					if(r){
 						$.ajax({
@@ -85,8 +85,8 @@
 									jAlert(r.message, SYS_MSG);
 								}else{
 									if(r.message){
-										jAlert( r.message, 
-												SYS_MSG, 
+										jAlert( r.message,
+												SYS_MSG,
 												function(){
 													$("#gallery_"+id).remove();
 												}
@@ -96,9 +96,9 @@
 							}
 						});
 					}
-		});			
+		});
 	}
-	
+
 </script>
 {/literal}
 <div id="tabs">
@@ -107,23 +107,23 @@
         <li><a href="#fragment-2"><span>{$lang.tab_detail}</span></a></li>
 		<li><a href="#fragment-3"><span>{$lang.tab_gallery}</span></a></li>
     </ul>
-	
+
 	<form action="" method="post" onsubmit="return do_ajax(this);" >
-    
-	<div id="fragment-1">        
+
+	<div id="fragment-1">
         <table width="90%" align="center">
 			<tr>
 				<td class="label">{$lang.lab_name}:</td>
 				<td><input type="text" name="name" value="{$data_info.name|escape}" size="27" />{$lang.require_field}</td>
-			</tr>			 
+			</tr>
 			<tr>
 				<td class="label">{$lang.lab_cat}:</td>
 				<td>
-					<select name="cat_id">					
-            			{$cat_select}       
+					<select name="cat_id">
+            			{$cat_select}
 					</select>
 				</td>
-			</tr>			
+			</tr>
 			<tr>
 				<td class="label">{$lang.lab_meta_keywords}:</td>
 				<td><input type='text' name='meta_keywords' value='{$data_info.meta_keywords|escape:html}' size='27' /></td>
@@ -192,7 +192,7 @@
 			</tr>
 		</table>
 	</div>
-	
+
 	<div class="button-div">
 		<input type="hidden" name="id" value="{$data_info.id}" />
 		<input type="submit" value="{$lang.button_submit}" class="button" />
@@ -210,4 +210,4 @@
 </script>
 {/literal}
 
-{include file="pagefooter.htm"} 
+{include file="pagefooter.htm"}

@@ -12,13 +12,13 @@
 $db_host   = "localhost:3306";
 
 // 資料庫名稱
-$db_name   = "cyarat";
+$db_name   = "cyarattw_self";
 
 // 資料庫帳號
-$db_user   = "root";
+$db_user   = "cyarattw_self";
 
 // 資料庫密碼
-$db_pass   = "NVXca7jGYDQYtNqU";
+$db_pass   = "59.FTuOo8mhh";
 
 // 表頭名稱
 $prefix    = "chh_";

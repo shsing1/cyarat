@@ -42,7 +42,7 @@ class cls_data
     }
 
 	/* 取得資料列表 */
-	function get_list($show_all=false, $cat_id=0){
+	function get_list($show_all = false, $cat_id = 0){
 
         $filter[$this->foreign_name]	= empty($cat_id)?empty($_REQUEST[$this->foreign_name])	? 1	: intval($_REQUEST[$this->foreign_name]):$cat_id;
         $filter['keyword']				= !isset($_REQUEST['keyword']) 			? '' 		: trim($_REQUEST['keyword']);
@@ -434,11 +434,12 @@ class cls_data
 
 	/* 取得資料路徑 */
 	function get_path($id, $last_url=false){
+
 		$info = $this->get_info($id);
 
 		$ur_here = $this->cat->get_path($info[$this->foreign_name], true);
 
-		$ur_here =  $ur_here. ' ＞ ' . $info['name'];
+		$ur_here = $ur_here. ' / ' . $info['name'];
 		return $ur_here;
 	}
 }
