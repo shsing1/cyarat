@@ -291,7 +291,7 @@ $menu = array();
 $main_nav = array(
     array('name' => '關於藝動節', 'url' => 'about.php', 'current' => false),
     array('name' => '城市藝境', 'url' => 'index.php', 'current' => false),
-    array('name' => '1010國慶超人路跑', 'url' => 'index.php', 'current' => false),
+    array('name' => '1010國慶超人路跑', 'url' => 'marathon.php', 'current' => false),
     array('name' => '最新動態', 'url' => 'news.php', 'current' => false),
     array('name' => '聯絡我們', 'url' => 'index.php', 'current' => false),
     array('name' => '回首頁', 'url' => 'index.php', 'current' => false)

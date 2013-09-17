@@ -16,14 +16,16 @@ $(function () {
         autoPlay : true,
         hashTags : false
     }).anythingSliderFx({
-        inFx : {
+        /*inFx : {
             '.main_title' : {top : 295, duration: 400, easing : 'easeOutBounce'},
             '.sub_title' : {top : 350, duration: 400, easing : 'easeOutBounce'}
         },
         outFx : {
             '.main_title' : {top : -2000, duration: 400, easing : 'easeOutBounce'},
             '.sub_title' : {top : -2000, duration: 400, easing : 'easeOutBounce'}
-        }
+        }*/
+        '.main_title' : ['fade'],
+        '.sub_title' : ['fade']
     });
 
     news_open_btn.click(function (evt) {

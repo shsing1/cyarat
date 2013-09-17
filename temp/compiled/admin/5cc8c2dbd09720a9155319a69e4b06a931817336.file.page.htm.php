@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.14, created on 2013-09-17 08:58:37
+<?php /* Smarty version Smarty-3.1.14, created on 2013-09-17 10:03:46
          compiled from "D:\xampp\htdocs\cyarat\admin\templates\page.htm" */ ?>
-<?php /*%%SmartyHeaderCode:4210523819bd82ee79-30642422%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1587852382902071329-82695679%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '5cc8c2dbd09720a9155319a69e4b06a931817336' => 
     array (
       0 => 'D:\\xampp\\htdocs\\cyarat\\admin\\templates\\page.htm',
-      1 => 1259490410,
+      1 => 1379409415,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '4210523819bd82ee79-30642422',
+  'nocache_hash' => '1587852382902071329-82695679',
   'function' => 
   array (
   ),
@@ -22,9 +22,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.14',
-  'unifunc' => 'content_523819bd861b03_98772164',
+  'unifunc' => 'content_523829020c33b7_46774679',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_523819bd861b03_98772164')) {function content_523819bd861b03_98772164($_smarty_tpl) {?><!-- start 頁碼 -->
+<?php if ($_valid && !is_callable('content_523829020c33b7_46774679')) {function content_523829020c33b7_46774679($_smarty_tpl) {?><!-- start 頁碼 -->
 <div id="turn-page"> <?php echo $_smarty_tpl->tpl_vars['lang']->value['total_records'];?>
  <span id="totalRecords"><?php echo $_smarty_tpl->tpl_vars['filter']->value['record_count'];?>
 </span> <?php echo $_smarty_tpl->tpl_vars['lang']->value['total_pages'];?>
