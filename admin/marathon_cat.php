@@ -33,7 +33,7 @@ else
 
 require_once(ROOT_PATH . '/includes/cls_sys_menu.php');
 $sys_menu = new cls_sys_menu($db, $chh->table("sys_menu") );
-$ur_here = $sys_menu->get_ur_here(8);
+$ur_here = $sys_menu->get_ur_here(48);
 $smarty->assign('ur_here',     $ur_here);
 
 /*------------------------------------------------------ */

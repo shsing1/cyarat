@@ -35,3 +35,6 @@
 .news_btn{
     cursor: pointer;
 }
+.qa_list ul ul{
+    display: none;
+}

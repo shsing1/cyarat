@@ -70,7 +70,7 @@ array_push($js_ext, 'Scripts/index.js');
 				<div class="news_center">
 					<ul>
 						<?php foreach($newslist as $v){?>
-						<li><a href="#"><span class="news_title"><?php echo htmlspecialchars($v['name'])?></span><span class="news_brief"><?php echo htmlspecialchars($v['brief'])?></span>（<?php echo $v['sp_date2']?>）</a>
+						<li><a href="news_detail.php?id=<?php echo $v['id']?>"><span class="news_title"><?php echo htmlspecialchars($v['name'])?></span><span class="news_brief"><?php echo htmlspecialchars($v['brief'])?></span>（<?php echo $v['sp_date2']?>）</a>
 						</li>
 						<?php }?>
 					</ul>

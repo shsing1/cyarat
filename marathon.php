@@ -76,6 +76,7 @@ $path = $data->get_path($id);
                                         <?php foreach($menu as $v2){?>
                                         <li <?php if($v2['current']){?>class="click"<?php }?>><a href="marathon.php?id=<?php echo $v2['id'];?>"><?php echo htmlspecialchars($v2['name'])?></a></li>
                                         <?php }?>
+                                        <li><a href="qa.php">Q&A</a></li>
                                     </ul>
                                 </li>
                             </ul>

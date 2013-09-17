@@ -39,11 +39,11 @@ $path = $cat->get_path($id);
 
 ?>
 <?php include_once('header.php');?>
-    <div id="unit_news" style="background:url(../images/my/about_bg02.jpg) no-repeat center top;">
+    <div id="unit_news" style="background:url(images/my/about_bg02.jpg) no-repeat center top;">
         <div id="pagebody">
             <div class="container">
                 <aside>
-                    <div id="logo"><img src="../images/default/logo.png"></div>
+                    <div id="logo"><img src="images/default/logo.png"></div>
                     <div id="navigation">
                         <div class="title"><h3><?php echo $root_info['name'];?></h3></div>
                         <div class="center">
