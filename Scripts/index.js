@@ -13,7 +13,7 @@ $(function () {
         appendBackTo : $('#slider_back'),
         forwardText : '',
         backText : '',
-        autoPlay : true,
+        autoPlay : false,
         hashTags : false
     }).anythingSliderFx({
         /*inFx : {

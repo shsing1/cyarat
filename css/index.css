@@ -53,18 +53,17 @@ ul.items_bar li{
 	color:#fff;
 }
 .slider_text{
-	position:relative;
-	width:980px;
-	margin:0 auto;
-	z-index:9;
+	position: relative;
 	text-align:left;
-	top:-300px;
+	width:980px;
+	top:-300px; left:0;
+	margin:0 auto;
 }
 .rsABlock{
 	width:525px;
 }
-.rsContent h1{font-size:36px; color:#fff; top:295px; padding:0; margin:0 0 15px 0;}
-.rsContent h2{ font-size:15px; color:#fff; top:350px; padding:0; margin:0; line-height:22px;}
+.rsContent h1{font-size:36px; color:#fff; top:0; padding:0; margin:0 0 15px 0;}
+.rsContent h2{ font-size:15px; color:#fff; top:0; padding:0; margin:0; line-height:22px;}
 
 /* 主選單 */
 #box_menu{
