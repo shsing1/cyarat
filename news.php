@@ -25,7 +25,7 @@ $list = $data->get_list(true, $id);
 $list = $list['list'];
 $firephp->info($list);
 
-$page_title = $data->get_page_title($id);
+$page_title = $cat->get_page_title($id);
 $keywords = htmlspecialchars($info['meta_keywords']);
 $description = htmlspecialchars($info['meta_description']);
 if (empty($keywords)) {

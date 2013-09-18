@@ -40,6 +40,7 @@ $data = new cls_qa($db, $chh->table("qa"), $cat);
 
 $qa_root_info = $cat->get_info(1);
 $firephp->info($root_info);
+$page_title = $qa_root_info['name'] .' - '. $page_title;
 $path .= ' / '. $qa_root_info['name'];
 
 $tmp = array();

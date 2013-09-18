@@ -52,8 +52,10 @@ array_push($js_ext, 'Scripts/index.js');
 					<li>
 						<div class="rsContent">
 							<img src="<?php echo $v['original_img']?>">
-							<h1 class="rsABlock main_title"><?php echo htmlspecialchars($v['main_title'])?></h1>
-							<h2 class="rsABlock sub_title"><?php echo htmlspecialchars($v['sub_title'])?></h2>
+							<div class="slider_text">
+								<h1 class="rsABlock main_title"><?php echo htmlspecialchars($v['main_title'])?></h1>
+								<h2 class="rsABlock sub_title"><?php echo htmlspecialchars($v['sub_title'])?></h2>
+							</div>
 						</div>
 					</li>
 					<?php }?>
