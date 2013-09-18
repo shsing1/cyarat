@@ -101,7 +101,6 @@ aside{
 }
 #navigation .center li a{
 	display:block;
-	background:url(../images/my/left_li.png) left top no-repeat;
 	color:#5c5c5c;
 	line-height:22px;
 	padding:5px 10px 5px 0px;
@@ -109,13 +108,9 @@ aside{
 	text-align:right;
 	font-weight:bold;
 }
-#navigation .center li a:hover{ background:url(../images/my/left_li_over.png) left top no-repeat;}
-#navigation .center li.open{
-	
-}
-#navigation .center li.open a{
-	background:url(../images/my/left_li_open.png) left top no-repeat;
-}
+#navigation .center li a:hover{}
+#navigation .center li.open{}
+#navigation .center li.open a{}
 /* 第二層 */
 #navigation .center li ul{}
 #navigation .center li.open ul li{
