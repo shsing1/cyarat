@@ -38,3 +38,12 @@
 .qa_list ul ul{
     display: none;
 }
+.captcha{
+    text-transform: uppercase;
+}
+button{
+    border:0;
+}
+.ui-widget{
+    text-align: left;
+}

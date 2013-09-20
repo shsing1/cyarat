@@ -12,7 +12,7 @@
         <li><a href="#fragment-1"><span>資料內容</span></a></li>
 		{*}<li><a href="#fragment-2"><span>{$lang.replied}</span></a></li>{*}
     </ul>
-	
+
 	<form action="" method="post" onsubmit="return do_ajax(this);">
     <input type="hidden" name="id" value="{$data_info.id}" />
 	<div id="fragment-1">
@@ -22,9 +22,10 @@
 				<td>{$data_info.add_time|escape}</td>
 			</tr>
 			<tr>
-				<td class="label">{$lang.lab_reply_name}:</td>
+				<td class="label">{$lang.lab_name}:</td>
 				<td>{$data_info.name|escape}</td>
 			</tr>
+			{*}
 			<tr>
 				<td class="label">身分證字號:</td>
 				<td>{$data_info.id_number|escape}</td>
@@ -45,12 +46,13 @@
 				<td class="label">行動電話:</td>
 				<td>{$data_info.mobile|escape}</td>
 			</tr>
+			{*}
 			<tr>
 				<td class="label">電子郵件:</td>
 				<td>{$data_info.email|escape:html}</td>
 			</tr>
 			<tr>
-				<td class="label">{$lang.lab_reply_content}:</td>
+				<td class="label">{$lang.lab_content}:</td>
 				<td>
 					{$data_info.content|nl2br}
 				</td>
@@ -62,7 +64,7 @@
 			<tr>
 				<td class="label">{$lang.lab_reply_name}:</td>
 				<td><input type="text" name="name" value="{$reply_info.name|escape}" size="27" />{$lang.require_field}</td>
-			</tr>			 
+			</tr>
 			<tr>
 				<td class="label">{$lang.lab_reply_email}:</td>
 				<td><input type='text' name='email' value='{$reply_info.email|escape:html}' size='27' />{$lang.require_field}</td>
@@ -79,8 +81,8 @@
 			</tr>
 		</table>
         {*}
-    </div>  
-    {*} 
+    </div>
+    {*}
 	<div id="fragment-2">
 		<!--{foreach from=$reply_list item=data_info key=key}-->
 			<!--{if $key neq 0}--><hr><!--{/if}-->
@@ -92,7 +94,7 @@
 			<tr>
 				<td class="label">{$lang.lab_reply_name}:</td>
 				<td>{$data_info.name|escape}</td>
-			</tr>		
+			</tr>
 			<tr>
 				<td class="label">{$lang.lab_reply_email}:</td>
 				<td>{$data_info.email|escape:html}</td>
@@ -110,14 +112,14 @@
 		</table>
 		<!--{foreachelse}-->
 		<table width="90%" align="center">
-			<tr>				
+			<tr>
 				<td align="center">{$lang.no_records}</td>
 			</tr>
 		</table>
 		<!--{/foreach}-->
-    </div> 
-	
-	<div class="button-div">		
+    </div>
+
+	<div class="button-div">
 		<input type="submit" value="{$lang.button_submit}" class="button" />
 		<input type="reset" value="{$lang.button_reset}" class="button" />
 	</div>
@@ -128,4 +130,4 @@
 
 <!-- end data 表單 -->
 
-{include file="pagefooter.htm"} 
+{include file="pagefooter.htm"}

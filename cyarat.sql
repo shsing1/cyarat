@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 4.0.6
 -- http://www.phpmyadmin.net
 --
 -- 主機: 127.0.0.1
--- 產生日期: 2013 年 09 月 17 日 12:33
--- 伺服器版本: 5.5.32
--- PHP 版本: 5.4.16
+-- 產生日期: 2013 �?09 ??20 ??09:53
+-- 伺服器版本: 5.6.11
+-- PHP 版本: 5.5.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- 資料庫: `cyarat`
 --
-CREATE DATABASE IF NOT EXISTS `cyarat` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `cyarat`;
 
 -- --------------------------------------------------------
 
@@ -131,7 +129,9 @@ INSERT INTO `chh_admin_priv` (`admin_id`, `priv_id`) VALUES
 (3, 44),
 (3, 47),
 (3, 48),
-(3, 49);
+(3, 49),
+(3, 50),
+(3, 51);
 
 -- --------------------------------------------------------
 
@@ -166,8 +166,8 @@ CREATE TABLE IF NOT EXISTS `chh_admin_user` (
 --
 
 INSERT INTO `chh_admin_user` (`id`, `cat_id`, `name`, `email`, `password`, `add_time`, `last_login`, `last_ip`, `action_list`, `nav_list`, `lang_type`, `agency_id`, `suppliers_id`, `todolist`, `is_show`, `sort`) VALUES
-(1, 2, 'shsing1', 'shsing1@yahoo.com.tw', '94e8cde4612b3fd390677d42e7b22002', 1252915460, 1379410784, '127.0.0.1', 'all', '商品列表|goods.php?act=list,訂單列表|order.php?act=list,用戶評論|comment_manage.php?act=list,會員列表|users.php?act=list,商店設置|shop_config.php?act=list_edit', '', 0, 0, NULL, 1, 1),
-(3, 3, 'cyarat', 'shsing2@yahoo.com.tw', 'aeb694d88aa5c5887d7b9ea3473df534', 1260013687, 1379410826, '127.0.0.1', '', '', '', 0, 0, NULL, 1, 3);
+(1, 2, 'shsing1', 'shsing1@yahoo.com.tw', '94e8cde4612b3fd390677d42e7b22002', 1252915460, 1379661705, '127.0.0.1', 'all', '商品列表|goods.php?act=list,訂單列表|order.php?act=list,用戶評論|comment_manage.php?act=list,會員列表|users.php?act=list,商店設置|shop_config.php?act=list_edit', '', 0, 0, NULL, 1, 1),
+(3, 3, 'cyarat', 'shsing2@yahoo.com.tw', 'aeb694d88aa5c5887d7b9ea3473df534', 1260013687, 1379662129, '127.0.0.1', '', '', '', 0, 0, NULL, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -260,12 +260,12 @@ INSERT INTO `chh_config` (`id`, `cat_id`, `name`, `code`, `type`, `store_range`,
 (34, 4, '商品分類頁默認排序方式', 'sort_order_method', 4, '0,1', '0', 1, 27),
 (35, 5, '郵件服務', 'mail_service', 4, '0,1', '1', 1, 42),
 (36, 5, '郵件服務器是否要求加密連接(SSL)', 'smtp_ssl', 4, '0,1', '0', 1, 41),
-(37, 5, '發送郵件服務器地址(SMTP)', 'smtp_host', 0, '', 'smtp.anet.net.tw', 1, 40),
+(37, 5, '發送郵件服務器地址(SMTP)', 'smtp_host', 0, '', 'ms1.hinet.net', 1, 40),
 (38, 5, '服務器端口', 'smtp_port', 0, '', '25', 1, 39),
-(39, 5, '郵件發送帳號', 'smtp_user', 0, '', 'shsing1', 1, 38),
-(40, 5, '帳號密碼', 'smtp_pass', 6, '', 'uh8cyOtuXlzI', 1, 37),
-(41, 5, '郵件回復地址', 'smtp_mail', 0, '', 'shsing1@yahoo.com.tw', 1, 36),
-(42, 5, '郵件編碼', 'mail_charset', 4, 'UTF8,GB2312,BIG5', 'BIG5', 1, 35),
+(39, 5, '郵件發送帳號', 'smtp_user', 0, '', '', 1, 38),
+(40, 5, '帳號密碼', 'smtp_pass', 6, '', '', 1, 37),
+(41, 5, '郵件回復地址', 'smtp_mail', 0, '', 'service@cy-arat.com.tw', 1, 36),
+(42, 5, '郵件編碼', 'mail_charset', 4, 'UTF8,GB2312,BIG5', 'UTF8', 1, 35),
 (43, 6, '干擾金鑰', 'hash_code', 0, '', '31693422540744c0a6b6da635b7a5a93', 1, 47),
 (44, 6, '套用樣版', 'template', 0, '', 'default', 1, 46),
 (45, 6, '啟用驗證碼', 'captcha', 0, '', '12', 1, 45),
@@ -326,14 +326,7 @@ CREATE TABLE IF NOT EXISTS `chh_contact` (
   `is_show` tinyint(1) NOT NULL DEFAULT '1',
   `sort` mediumint(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
-
---
--- 轉存資料表中的資料 `chh_contact`
---
-
-INSERT INTO `chh_contact` (`id`, `cat_id`, `name`, `email`, `phone`, `content`, `add_time`, `is_reply`, `is_show`, `sort`) VALUES
-(44, 1, '11', 'shsing999@gmail.com', '1234567890', 'f2af1da23f156ew46r5e\n\nffa0da.0fd23asfasd', 1273844127, 0, 1, 44);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -376,7 +369,7 @@ CREATE TABLE IF NOT EXISTS `chh_contact_reply` (
   `is_show` tinyint(1) NOT NULL DEFAULT '1',
   `sort` mediumint(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1097,6 +1090,62 @@ INSERT INTO `chh_news_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `
 -- --------------------------------------------------------
 
 --
+-- 表的結構 `chh_qa`
+--
+
+CREATE TABLE IF NOT EXISTS `chh_qa` (
+  `id` mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cat_id` mediumint(10) unsigned NOT NULL DEFAULT '1',
+  `name` varchar(50) NOT NULL,
+  `meta_keywords` varchar(255) NOT NULL,
+  `meta_description` varchar(255) NOT NULL,
+  `desc` text NOT NULL,
+  `is_show` tinyint(1) NOT NULL DEFAULT '1',
+  `sort` mediumint(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- 轉存資料表中的資料 `chh_qa`
+--
+
+INSERT INTO `chh_qa` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_description`, `desc`, `is_show`, `sort`) VALUES
+(1, 2, '國慶超人路跑活動是甚麼阿？', '', '', '上個月跑了二場半程馬拉松繼去年底參加了第一場半程馬拉松（2012台北富邦馬拉松）之後，今年三月又報名了 台北自去年夏天練跑以來，這幾個月幾乎每個月都至少維持50KM的路量。', 1, 1),
+(2, 2, '參加者有年齡限制嗎？', '', '', '開心自由的奔跑，沒有壓力、沒有束縛、調劑身心，促進身體健康，只要喜歡路跑的朋友們都可參加！', 1, 2),
+(3, 3, '問題01', '', '', '答案01', 1, 3),
+(4, 3, '問題1', '', '', '答案2', 1, 4);
+
+-- --------------------------------------------------------
+
+--
+-- 表的結構 `chh_qa_cat`
+--
+
+CREATE TABLE IF NOT EXISTS `chh_qa_cat` (
+  `id` mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `meta_keywords` varchar(255) NOT NULL,
+  `meta_description` varchar(255) NOT NULL,
+  `is_show` tinyint(1) NOT NULL DEFAULT '1',
+  `lft` mediumint(20) unsigned NOT NULL,
+  `rgt` mediumint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- 轉存資料表中的資料 `chh_qa_cat`
+--
+
+INSERT INTO `chh_qa_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is_show`, `lft`, `rgt`) VALUES
+(1, 'Q&A', '', '', 1, 1, 10),
+(2, '國慶超人路跑活動', '', '', 1, 2, 3),
+(3, '關於活動費用 / 匯款 / 退款疑慮', '', '', 1, 4, 5),
+(4, '關於新竹藝動節節目內容？', '', '', 1, 6, 7),
+(5, '交通問題', '', '', 1, 8, 9);
+
+-- --------------------------------------------------------
+
+--
 -- 表的結構 `chh_sessions`
 --
 
@@ -1120,8 +1169,12 @@ CREATE TABLE IF NOT EXISTS `chh_sessions` (
 --
 
 INSERT INTO `chh_sessions` (`sesskey`, `expiry`, `userid`, `adminid`, `ip`, `user_name`, `user_rank`, `discount`, `email`, `data`) VALUES
-('13209026c2253ad183371e0118840dd9', 1379413733, 0, 1, '127.0.0.1', '0', 0, '1.00', '0', 'a:5:{s:10:"login_fail";i:0;s:12:"admin_cat_id";s:1:"2";s:10:"admin_name";s:7:"shsing1";s:11:"action_list";s:3:"all";s:10:"last_check";s:0:"";}'),
-('55abfe6c10e18ed34450052511c31390', 1379412223, 0, 3, '127.0.0.1', '0', 0, '0.00', '0', 'a:5:{s:12:"captcha_word";s:16:"MGFlNmQ2NDE3MA==";s:12:"admin_cat_id";s:1:"3";s:10:"admin_name";s:6:"cyarat";s:11:"action_list";s:0:"";s:10:"last_check";s:10:"1379392254";}');
+('41ae5380e56bc425535a9808db37b93e', 1379661704, 0, 1, '127.0.0.1', '0', 0, '0.00', '0', 'a:4:{s:12:"admin_cat_id";s:1:"2";s:10:"admin_name";s:7:"shsing1";s:11:"action_list";s:3:"all";s:10:"last_check";s:0:"";}'),
+('c5e0c2ad37b3f577dd6f2c81113667bf', 1379663450, 0, 3, '127.0.0.1', '0', 0, '1.00', '0', 'a:6:{s:10:"login_fail";i:0;s:12:"admin_cat_id";s:1:"3";s:10:"admin_name";s:6:"cyarat";s:11:"action_list";s:0:"";s:10:"last_check";s:0:"";s:12:"captcha_word";s:16:"ZmMxNWEzMGVmMg==";}'),
+('a7f921bc46de1cf1f7a8d3ab09081eb0', 1379663292, 0, 1, '127.0.0.1', '0', 0, '1.00', '0', 'a:6:{s:12:"admin_cat_id";s:1:"2";s:10:"admin_name";s:7:"shsing1";s:11:"action_list";s:3:"all";s:10:"last_check";s:0:"";s:10:"login_fail";i:0;s:12:"captcha_word";s:16:"OTdkMjU1ZWQzMQ==";}'),
+('5b9f5bf393a1ce0d6987bf72ac075939', 1379661705, 0, 1, '127.0.0.1', '0', 0, '0.00', '0', 'a:4:{s:12:"admin_cat_id";s:1:"2";s:10:"admin_name";s:7:"shsing1";s:11:"action_list";s:3:"all";s:10:"last_check";s:0:"";}'),
+('185c6418345c519fb43f93342847f3c1', 1379661705, 0, 1, '127.0.0.1', '0', 0, '0.00', '0', 'a:4:{s:12:"admin_cat_id";s:1:"2";s:10:"admin_name";s:7:"shsing1";s:11:"action_list";s:3:"all";s:10:"last_check";s:0:"";}'),
+('d94140bb99a3213271d5cc3bb25c21b5', 1379661705, 0, 1, '127.0.0.1', '0', 0, '0.00', '0', 'a:4:{s:12:"admin_cat_id";s:1:"2";s:10:"admin_name";s:7:"shsing1";s:11:"action_list";s:3:"all";s:10:"last_check";s:0:"";}');
 
 -- --------------------------------------------------------
 
@@ -1137,62 +1190,64 @@ CREATE TABLE IF NOT EXISTS `chh_sys_menu` (
   `lft` mediumint(20) unsigned NOT NULL,
   `rgt` mediumint(20) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
 
 --
 -- 轉存資料表中的資料 `chh_sys_menu`
 --
 
 INSERT INTO `chh_sys_menu` (`id`, `name`, `url`, `is_chh`, `lft`, `rgt`) VALUES
-(1, '系統選單', '', 0, 1, 98),
+(1, '系統選單', '', 0, 1, 102),
 (2, '系統選單管理', '', 1, 2, 5),
 (3, '資料管理', 'sys_menu.php', 1, 3, 4),
 (4, '關於藝動節', '', 0, 12, 17),
 (5, '分類管理', 'about_us_cat.php', 0, 13, 14),
 (6, '資料管理', 'about_us.php', 0, 15, 16),
-(7, '最新動態', '', 0, 24, 29),
-(8, '分類管理', 'news_cat.php', 1, 25, 26),
-(9, '資料管理', 'news.php', 0, 27, 28),
-(10, '網站相簿', '', 0, 30, 35),
-(11, '分類管理', 'gallery_cat.php', 0, 31, 32),
-(12, '資料管理', 'gallery.php', 0, 33, 34),
-(13, '權限管理', '', 0, 36, 41),
-(14, '管理員分類', 'admin_cat.php', 1, 37, 38),
-(15, '管理員列表', 'admin.php', 0, 39, 40),
-(16, '系統設置', '', 0, 42, 49),
-(17, '分類管理', 'config_cat.php', 1, 43, 44),
-(18, '資料管理', 'config.php', 1, 45, 46),
-(19, '網站設置', 'config_set.php', 0, 47, 48),
-(20, '檔案下載', '', 0, 50, 55),
-(21, '分類管理', 'download_cat.php', 1, 51, 52),
-(22, '資料管理', 'download.php', 0, 53, 54),
-(23, '聯絡我們', '', 0, 56, 61),
-(24, '分類管理', 'contact_cat.php', 1, 57, 58),
-(25, '資料管理', 'contact.php', 0, 59, 60),
-(26, '留言版', '', 0, 62, 67),
-(27, '分類管理', 'guestbook_cat.php', 1, 63, 64),
-(28, '資料管理', 'guestbook.php', 0, 65, 66),
-(29, '會員管理', '', 0, 68, 73),
-(30, '分類管理', 'user_cat.php', 0, 69, 70),
-(31, '資料管理', 'user.php', 0, 71, 72),
-(32, '自定義畫面', '', 0, 74, 79),
-(33, '分類管理', 'custom_cat.php', 1, 75, 76),
-(34, '資料管理', 'custom.php', 0, 77, 78),
-(35, '商品管理', '', 0, 80, 85),
-(36, '分類管理', 'goods_cat.php', 0, 81, 82),
-(37, '資料管理', 'goods.php', 0, 83, 84),
-(38, '電子報管理', '', 0, 86, 97),
-(39, '訂閱名單分類', 'epaper_user_cat.php', 1, 87, 88),
-(40, '訂閱名單', 'epaper_user.php', 0, 89, 90),
-(41, '電子報分類', 'epaper_cat.php', 1, 91, 92),
-(42, '電子報資料', 'epaper.php', 0, 93, 94),
-(43, '發送隊列', 'epaper_queue.php', 0, 95, 96),
+(7, '最新動態', '', 0, 28, 33),
+(8, '分類管理', 'news_cat.php', 1, 29, 30),
+(9, '資料管理', 'news.php', 0, 31, 32),
+(10, '網站相簿', '', 0, 34, 39),
+(11, '分類管理', 'gallery_cat.php', 0, 35, 36),
+(12, '資料管理', 'gallery.php', 0, 37, 38),
+(13, '權限管理', '', 0, 40, 45),
+(14, '管理員分類', 'admin_cat.php', 1, 41, 42),
+(15, '管理員列表', 'admin.php', 0, 43, 44),
+(16, '系統設置', '', 0, 46, 53),
+(17, '分類管理', 'config_cat.php', 1, 47, 48),
+(18, '資料管理', 'config.php', 1, 49, 50),
+(19, '網站設置', 'config_set.php', 0, 51, 52),
+(20, '檔案下載', '', 0, 54, 59),
+(21, '分類管理', 'download_cat.php', 1, 55, 56),
+(22, '資料管理', 'download.php', 0, 57, 58),
+(23, '聯絡我們', '', 0, 60, 65),
+(24, '分類管理', 'contact_cat.php', 1, 61, 62),
+(25, '資料管理', 'contact.php', 0, 63, 64),
+(26, '留言版', '', 0, 66, 71),
+(27, '分類管理', 'guestbook_cat.php', 1, 67, 68),
+(28, '資料管理', 'guestbook.php', 0, 69, 70),
+(29, '會員管理', '', 0, 72, 77),
+(30, '分類管理', 'user_cat.php', 0, 73, 74),
+(31, '資料管理', 'user.php', 0, 75, 76),
+(32, '自定義畫面', '', 0, 78, 83),
+(33, '分類管理', 'custom_cat.php', 1, 79, 80),
+(34, '資料管理', 'custom.php', 0, 81, 82),
+(35, '商品管理', '', 0, 84, 89),
+(36, '分類管理', 'goods_cat.php', 0, 85, 86),
+(37, '資料管理', 'goods.php', 0, 87, 88),
+(38, '電子報管理', '', 0, 90, 101),
+(39, '訂閱名單分類', 'epaper_user_cat.php', 1, 91, 92),
+(40, '訂閱名單', 'epaper_user.php', 0, 93, 94),
+(41, '電子報分類', 'epaper_cat.php', 1, 95, 96),
+(42, '電子報資料', 'epaper.php', 0, 97, 98),
+(43, '發送隊列', 'epaper_queue.php', 0, 99, 100),
 (44, '首頁背景', '', 0, 6, 11),
 (45, '分類管理', 'indexbg_cat.php', 1, 7, 8),
 (46, '資料管理', 'indexbg.php', 0, 9, 10),
-(47, '1010國慶超人路跑', '', 0, 18, 23),
+(47, '1010國慶超人路跑', '', 0, 18, 27),
 (48, '分類管理', 'marathon_cat.php', 1, 19, 20),
-(49, '資料管理', 'marathon.php', 0, 21, 22);
+(49, '資料管理', 'marathon.php', 0, 21, 22),
+(50, 'Q&A分類', 'qa_cat.php', 0, 23, 24),
+(51, 'Q&A資料', 'qa.php', 0, 25, 26);
 
 -- --------------------------------------------------------
 

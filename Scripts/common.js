@@ -1,10 +1,14 @@
 /*global $*/
+/*jslint browser: true */
 $(function () {
     'use strict';
 
     var menu_li = $('#navigation>div>ul>li>a'),
         qa_li = $('#qa_list>ul>li>a'),
-        qa_option = $('#qa_select option');
+        qa_option = $('#qa_select option'),
+        myalert,
+        myajax,
+        myprocessing;
 
     // 左方選單點擊事件
     menu_li.click(function (evt) {
@@ -54,4 +58,44 @@ $(function () {
     $('#qa_select').change(function () {
         qa_li.eq(qa_option.filter(':selected').index()).trigger('click');
     });
+
+    myalert = function (msg) {
+        var div = $('<div>').appendTo('body');
+
+        div.attr({'title' : '系統訊息'});
+        div.html(msg);
+        div.dialog({
+            modal : true
+        });
+    };
+    window.myalert = myalert;
+
+    myajax = function (option) {
+        var op = {
+            dataType : 'json',
+            type : 'post'
+        };
+
+        $.extend(op, option);
+        $.ajax(op);
+    };
+    window.myajax = myajax;
+
+    myprocessing = function (msg) {
+        var div = $('<div>').appendTo('body');
+
+        if (!msg) {
+            msg = '處理中';
+        }
+        div.attr({'title' : '系統訊息'});
+        div.html(msg);
+        div.dialog({
+            modal : true,
+            create: function() {
+                div.parent().find('.ui-button').remove();
+            }
+        });
+        return div;
+    };
+    window.myprocessing = myprocessing;
 });
