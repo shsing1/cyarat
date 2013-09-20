@@ -3,7 +3,7 @@
 $(function () {
     'use strict';
 
-    var menu_li = $('#navigation>div>ul>li>a'),
+    var menu_li = $('.accordion_item'),
         qa_li = $('#qa_list>ul>li>a'),
         qa_option = $('#qa_select option'),
         myalert,
@@ -15,11 +15,11 @@ $(function () {
         evt.preventDefault();
         var $this = $(this),
             parent = $this.parent(),
-            ul = parent.children('ul');
+            ul = parent.children('.accordion_panel');
 
 
         if (!parent.hasClass('open')) {
-            parent.parent().children('.open').not(parent).children('ul').slideUp(400, function () {
+            parent.parent().children('.open').not(parent).children('.accordion_panel').slideUp(400, function () {
                 parent.parent().children('.open').not(parent).removeClass('open');
             });
             parent.addClass('open');

@@ -88,11 +88,11 @@ array_push($js_ext, 'Scripts/contact.js');
 
 ?>
 <?php include_once('header.php');?>
-    <div id="unit_contact" style="background:url(../images/my/about_bg01.jpg) no-repeat center top;">
+    <div id="unit_contact" style="background:url(images/my/about_bg01.jpg) no-repeat center top;">
         <div id="pagebody">
             <div class="container">
                 <aside>
-                    <div id="logo"><img src="../images/default/logo.png"></div>
+                    <div id="logo"><img src="images/default/logo.png"></div>
                     <div id="navigation">
                         <div class="title"><h3><?php echo $root_info['name'];?></h3></div>
                     </div>
@@ -129,7 +129,7 @@ array_push($js_ext, 'Scripts/contact.js');
                                     </tr>
                                     <tr>
                                         <td>驗證碼<br/><input name="captcha" id="captcha" type="text" placeholder="請輸入圖片中的英文或數字" size="40" class="captcha validate[required]"> <img src="<?=$captcha_img?>"></td>
-                                        <td align="right" valign="bottom"><button type="reset"><img src="../images/default/btn_correct.png"></button> <button type="send"><img src="../images/default/btn_send.png"></button></td>
+                                        <td align="right" valign="bottom"><button type="reset"><img src="images/default/btn_correct.png"></button> <button type="send"><img src="images/default/btn_send.png"></button></td>
                                     </tr>
                                 </table>
                             </form>
