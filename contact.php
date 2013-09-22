@@ -5,7 +5,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : null;
 
 require_once(dirname(__FILE__) . '/includes/init.php');
 
-$main_nav[0]['current'] = true;
+$main_nav[4]['current'] = true;
 
 require_once(ROOT_PATH . '/includes/cls_contact_cat.php');
 $cat = new cls_contact_cat($db, $chh->table("contact_cat") );

@@ -83,6 +83,8 @@ if (empty($description)) {
     $description = strip_tags($info['desc']);
     $description = preg_replace( "/\s/", "" , $description );
 }
+$fun_name = '城市藝境';
+$_LANG['home'] = '首頁 / '.$fun_name;
 $path = $cat->get_path($cat_id);
 
 array_push($js_ext, 'Scripts/masonry.pkgd.min.js');
@@ -95,7 +97,7 @@ array_push($js_ext, 'Scripts/art.js');
                 <aside>
                     <div id="logo"><img src="images/default/logo.png"></div>
                     <div id="navigation">
-                        <div class="title"><h3>城市藝境</h3></div>
+                        <div class="title"><h3><?php echo $fun_name;?></h3></div>
                         <div class="center">
                             <ul>
                                 <?php foreach($menu as $v){?>
