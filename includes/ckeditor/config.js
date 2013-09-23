@@ -9,9 +9,9 @@ CKEDITOR.editorConfig = function( config )
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 	config.height = '400';
-	
+
 	config.skin = 'office2003';
-	
+
 	config.toolbar = 'MyToolbar';
 
     config.toolbar_MyToolbar =
@@ -26,7 +26,7 @@ CKEDITOR.editorConfig = function( config )
 		['JustifyLeft','JustifyCenter','JustifyRight'],
 		['TextColor','BGColor']
     ];
-	
+
  	config.toolbar_MyBasic =
     [
         ['Bold','Italic','Underline','-','Format','FontSize','TextColor','BGColor','-','Smiley','Link','Unlink','Image','Flash','Table'],

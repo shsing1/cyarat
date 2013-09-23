@@ -7,7 +7,7 @@
 <!-- 資料列表 -->
 <form method="post" action="" id="listForm" name="listForm" onsubmit="return confirmSubmit(this)">
 	<!-- start data list -->
-	<div class="list-div" id="listDiv"> {/if}		
+	<div class="list-div" id="listDiv"> {/if}
 		<table cellpadding="3" cellspacing="1">
 			<tr>
 				<th width="50"> <input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" />
@@ -23,7 +23,7 @@
 				<td class="first-cell"><span >{$data.name|escape:html}</span></td>
 				<td align="center"><img src="images/{if $data.is_show}yes{else}no{/if}.gif" /></td>
 				<td align="center"><span >{$data.sort}</span></td>
-				<td align="center"><a href="../about_us.php{$data.url}" target="_blank" title="{$lang.view}"><img src="images/icon_view.gif" width="16" height="16" border="0" /></a> <a href="?act=edit&id={$data.id}" title="{$lang.edit}"><img src="images/icon_edit.gif" width="16" height="16" border="0" /></a> <a href="?act=copy&id={$data.id}" title="{$lang.copy}"><img src="images/icon_copy.gif" width="16" height="16" border="0" /></a> <a href="javascript:;" onclick="remove({$data.id})" title="{$lang.remove}"><img src="images/icon_drop.gif" width="16" height="16" border="0" /></a></td>
+				<td align="center"><a href="../about.php{$data.url}" target="_blank" title="{$lang.view}"><img src="images/icon_view.gif" width="16" height="16" border="0" /></a> <a href="?act=edit&id={$data.id}" title="{$lang.edit}"><img src="images/icon_edit.gif" width="16" height="16" border="0" /></a> <a href="?act=copy&id={$data.id}" title="{$lang.copy}"><img src="images/icon_copy.gif" width="16" height="16" border="0" /></a> <a href="javascript:;" onclick="remove({$data.id})" title="{$lang.remove}"><img src="images/icon_drop.gif" width="16" height="16" border="0" /></a></td>
 			</tr>
 			{foreachelse}
 			<tr>
@@ -50,16 +50,16 @@
 		</select>
 		<select name="target_cat" style="display:none">
 			<option value="0">{$lang.select_please}</option>
-			{$cat_list_all}  
+			{$cat_list_all}
 		</select>
 		<input type="submit" value="{$lang.button_submit}" id="btnSubmit" name="btnSubmit" class="button" disabled="true" />
 	</div>
 </form>
-<script type="text/javascript">	
+<script type="text/javascript">
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';
 	{/foreach}
-	
+
 	{literal}
 	/**
 	* @param: bool ext 其他條件：用於轉移分類
@@ -83,23 +83,23 @@
 		}
 		return false;
 	}
-	
+
 	function do_batch_ajax(){
 		var data = $("#listForm").serialize();
 		data += '&is_ajax=1';
 		$.ajax({
 			data: data
-		});			
+		});
 	}
-	
+
 	function changeAction()
 	{
 		var frm = document . forms['listForm'];
-	
+
 		// 切換分類列表的顯示
 		frm . elements['target_cat'] . style . display = frm . elements['type'] . value ==
 			'move_to' ? '':'none';
-	
+
 //		if (!document . getElementById('btnSubmit') . disabled && confirmSubmit(frm, false))
 //		{
 //			//frm . submit();

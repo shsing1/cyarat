@@ -149,64 +149,181 @@
 		}
 
 		/* 取得搜尋資料列表 */
-	function get_search_list($mindate = null, $maxdate = null){
+		function get_search_list($mindate = null, $maxdate = null){
 
-        $filter['sort_by']				= empty($_REQUEST['sort_by']) 			? 'date'	: trim($_REQUEST['sort_by']);
-        $filter['sort_order']			= empty($_REQUEST['sort_order'])		? 'DESC' 	: trim($_REQUEST['sort_order']);
+	        $filter['sort_by']				= empty($_REQUEST['sort_by']) 			? 'date'	: trim($_REQUEST['sort_by']);
+	        $filter['sort_order']			= empty($_REQUEST['sort_order'])		? 'DESC' 	: trim($_REQUEST['sort_order']);
 
-        $show_all = true;
-        $mindate = local_strtotime($mindate);
-        $maxdate = local_strtotime($maxdate);
-		$where .= " AND `date` BETWEEN '".$mindate."' AND '".$maxdate."' ";
+	        $show_all = true;
+	        $mindate = local_strtotime($mindate);
+	        $maxdate = local_strtotime($maxdate);
+			$where .= " AND `date` BETWEEN '".$mindate."' AND '".$maxdate."' ";
 
-		/* 在前台is_show必須為1 */
-		if(!defined('CHH_ADMIN')){
-			$filter['is_show']	= 1;
-			$where .= " AND `is_show` = 1 ";
-		}
-
-		$param_str = join('-', $filter);
-		/* 取得上次的過濾條件 */
-    	$result = $this->get_filter($param_str);
-		if ($result === false){
-
-			/* 記錄總數 */
-			$sql = "SELECT COUNT(*) FROM " .$this->table. " WHERE 1 ". $where ." ;";
-			$filter['record_count'] = $this->db->getOne($sql);
-
-			/* 分頁大小 */
-			$filter = $this->page_and_size($filter);
-
-			$sql = '';
-			if(!$show_all){
-				$sql =	"LIMIT " . $filter['start'] . ", ".$filter['page_size']." ;";
+			/* 在前台is_show必須為1 */
+			if(!defined('CHH_ADMIN')){
+				$filter['is_show']	= 1;
+				$where .= " AND `is_show` = 1 ";
 			}
 
-			$sql =	"SELECT * ".
-					"FROM ".$this->table ." ".
-					"WHERE 1 ". $where ." ".
-					"ORDER BY ".$filter['sort_by']." ".$filter['sort_order']." ".
-					"$sql";
+			$param_str = join('-', $filter);
+			/* 取得上次的過濾條件 */
+	    	$result = $this->get_filter($param_str);
+			if ($result === false){
 
-			/* 保存過濾條件*/
-			$filter['keyword'] = stripslashes($filter['keyword']);
-			$this->set_filter($filter, $sql, $param_str);
+				/* 記錄總數 */
+				$sql = "SELECT COUNT(*) FROM " .$this->table. " WHERE 1 ". $where ." ;";
+				$filter['record_count'] = $this->db->getOne($sql);
 
-		}else{
-			$sql    = $result['sql'];
-			$filter = $result['filter'];
+				/* 分頁大小 */
+				$filter = $this->page_and_size($filter);
+
+				$sql = '';
+				if(!$show_all){
+					$sql =	"LIMIT " . $filter['start'] . ", ".$filter['page_size']." ;";
+				}
+
+				$sql =	"SELECT * ".
+						"FROM ".$this->table ." ".
+						"WHERE 1 ". $where ." ".
+						"ORDER BY ".$filter['sort_by']." ".$filter['sort_order']." ".
+						"$sql";
+
+				/* 保存過濾條件*/
+				$filter['keyword'] = stripslashes($filter['keyword']);
+				$this->set_filter($filter, $sql, $param_str);
+
+			}else{
+				$sql    = $result['sql'];
+				$filter = $result['filter'];
+			}
+
+			$arr = $this->db->GetAll($sql);
+
+			foreach($arr as $k=>$v){
+				$v['url'] = empty($v['url'])?$this->page_name."?".authcode("act=detail&id=".$v['id'], 'ENCODE'):$v['url'];
+				$v['date'] = local_date('Y / m / d', $v['date']);
+				$arr[$k] = $v;
+			}
+			return array('list' => $arr, 'filter' => $filter);
+
 		}
 
-		$arr = $this->db->GetAll($sql);
+		/* 取得日期資料列表 */
+		function get_date_list(){
 
-		foreach($arr as $k=>$v){
-			$v['url'] = empty($v['url'])?$this->page_name."?".authcode("act=detail&id=".$v['id'], 'ENCODE'):$v['url'];
-			$v['date'] = local_date('Y / m / d', $v['date']);
-			$arr[$k] = $v;
+	        $filter['sort_by']				= empty($_REQUEST['sort_by']) 			? 'date'	: trim($_REQUEST['sort_by']);
+	        $filter['sort_order']			= empty($_REQUEST['sort_order'])		? 'DESC' 	: trim($_REQUEST['sort_order']);
+
+	        $show_all = true;
+
+			/* 在前台is_show必須為1 */
+			if(!defined('CHH_ADMIN')){
+				$filter['is_show']	= 1;
+				$where .= " AND `is_show` = 1 ";
+			}
+
+			$param_str = join('-', $filter);
+			/* 取得上次的過濾條件 */
+	    	$result = $this->get_filter($param_str);
+			if ($result === false){
+
+				/* 記錄總數 */
+				$sql = "SELECT COUNT(*) FROM " .$this->table. " WHERE 1 ". $where ." ;";
+				$filter['record_count'] = $this->db->getOne($sql);
+
+				/* 分頁大小 */
+				$filter = $this->page_and_size($filter);
+
+				$sql = '';
+				if(!$show_all){
+					$sql =	"LIMIT " . $filter['start'] . ", ".$filter['page_size']." ;";
+				}
+
+				$sql =	"SELECT * ".
+						"FROM ".$this->table ." ".
+						"WHERE 1 ". $where ." ".
+						"GROUP BY `date`".
+						"ORDER BY ".$filter['sort_by']." ".$filter['sort_order']." ".
+						"$sql";
+
+				/* 保存過濾條件*/
+				$filter['keyword'] = stripslashes($filter['keyword']);
+				$this->set_filter($filter, $sql, $param_str);
+
+			}else{
+				$sql    = $result['sql'];
+				$filter = $result['filter'];
+			}
+
+			$arr = $this->db->GetAll($sql);
+
+			foreach($arr as $k=>$v){
+				$v['url'] = empty($v['url'])?$this->page_name."?".authcode("act=detail&id=".$v['id'], 'ENCODE'):$v['url'];
+				$v['date'] = local_date('Y/m/d', $v['date']);
+				$arr[$k] = $v;
+			}
+			return $arr;
+
 		}
-		return array('list' => $arr, 'filter' => $filter);
 
-	}
+		/* 取得日期資料列表 */
+		function get_list_by_date($date = null){
+
+	        $filter['sort_by']				= empty($_REQUEST['sort_by']) 			? 'date'	: trim($_REQUEST['sort_by']);
+	        $filter['sort_order']			= empty($_REQUEST['sort_order'])		? 'DESC' 	: trim($_REQUEST['sort_order']);
+
+	        $show_all = true;
+	        $date = local_strtotime($date);
+			$where .= " AND `date` = '".$date."' ";
+
+			/* 在前台is_show必須為1 */
+			if(!defined('CHH_ADMIN')){
+				$filter['is_show']	= 1;
+				$where .= " AND `is_show` = 1 ";
+			}
+
+			$param_str = join('-', $filter);
+			/* 取得上次的過濾條件 */
+	    	$result = $this->get_filter($param_str);
+			if ($result === false){
+
+				/* 記錄總數 */
+				$sql = "SELECT COUNT(*) FROM " .$this->table. " WHERE 1 ". $where ." ;";
+				$filter['record_count'] = $this->db->getOne($sql);
+
+				/* 分頁大小 */
+				$filter = $this->page_and_size($filter);
+
+				$sql = '';
+				if(!$show_all){
+					$sql =	"LIMIT " . $filter['start'] . ", ".$filter['page_size']." ;";
+				}
+
+				$sql =	"SELECT * ".
+						"FROM ".$this->table ." ".
+						"WHERE 1 ". $where ." ".
+						"ORDER BY ".$filter['sort_by']." ".$filter['sort_order']." ".
+						"$sql";
+
+				/* 保存過濾條件*/
+				$filter['keyword'] = stripslashes($filter['keyword']);
+				$this->set_filter($filter, $sql, $param_str);
+
+			}else{
+				$sql    = $result['sql'];
+				$filter = $result['filter'];
+			}
+
+			$arr = $this->db->GetAll($sql);
+
+			foreach($arr as $k=>$v){
+				$v['url'] = empty($v['url'])?$this->page_name."?".authcode("act=detail&id=".$v['id'], 'ENCODE'):$v['url'];
+				$v['date'] = local_date('Y / m / d', $v['date']);
+				$arr[$k] = $v;
+			}
+			return array('list' => $arr, 'filter' => $filter);
+
+		}
 
 	}
 ?>

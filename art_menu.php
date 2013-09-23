@@ -10,6 +10,7 @@ $menu = array();
 $tmp_list = $cat->get_list(1, true);
 foreach ($tmp_list as &$v) {
     $v['current'] = false;
+    $php_self = str_replace('/formal', '',  $php_self);
     if (in_array($php_self, array('/art.php', '/art_detail.php'))) {
         if ($v['id'] === $cat_id) {
             $v['current'] = true;
@@ -31,6 +32,7 @@ foreach ($tmp_list as &$v) {
     $v['childs'] = $tmp2;
     $menu[] = $v;
 }
+$firephp->info($php_self);
 $firephp->info($menu);
 
 require_once(ROOT_PATH . '/includes/cls_activity_cat.php');

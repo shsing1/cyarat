@@ -61,3 +61,10 @@ input.search_btn{
     background: url(../images/default/btn_star.png) no-repeat;
     float: right;
 }
+.empty_data{
+    line-height: 300px;
+    text-align: center;
+}
+.search_date{
+    cursor: pointer;
+}

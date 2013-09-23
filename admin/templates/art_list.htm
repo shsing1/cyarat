@@ -30,7 +30,7 @@
 				<td align="center"><img src="images/{if $data.is_show}yes{else}no{/if}.gif" /></td>
 				<td align="center"><span >{$data.sort}</span></td>
 				<td align="center">
-					<a href="../art.php{$data.url}" target="_blank" title="{$lang.view}"><img src="images/icon_view.gif" width="16" height="16" border="0" /></a>
+					<a href="../art_detail.php{$data.url}" target="_blank" title="{$lang.view}"><img src="images/icon_view.gif" width="16" height="16" border="0" /></a>
 					<a href="?act=edit&id={$data.id}" title="{$lang.edit}"><img src="images/icon_edit.gif" width="16" height="16" border="0" /></a>
 					<a href="?act=copy&id={$data.id}" title="{$lang.copy}"><img src="images/icon_copy.gif" width="16" height="16" border="0" /></a>
 					<a href="javascript:;" onclick="remove({$data.id})" title="{$lang.remove}"><img src="images/icon_drop.gif" width="16" height="16" border="0" /></a></td>

@@ -22,7 +22,8 @@ $data_img = new cls_activity_img($db, $chh->table("activity_img") );
 
 // 快速查詢
 if ($date) {
-
+    $list = $data->get_list_by_date($date);
+    $list = $list['list'];
 // 範圍搜尋
 } else {
     $list = $data->get_search_list($mindate, $maxdate);
@@ -74,10 +75,11 @@ array_push($js_ext, 'Scripts/activity.js');
                     <div id="my_title"><h2>【<?php echo $root_info['name'];?>】</h2></div>
                     <section id="my_content" class="edtor">
                         <div class="photo_list">
+                            <?php if (count($list) > 0) {?>
                             <ul>
                                 <?php foreach($list as $v){?>
                                 <li>
-                                    <div class="photo_listl"><a href="activity_detail.php?id=<?php echo $v['id'];?>"><img src="<?php echo $v['thumb'];?>" width="105"></div>
+                                    <div class="photo_listl"><a href="activity_detail.php?id=<?php echo $v['id'];?>"><img src="<?php echo $v['thumb'];?>" width="105"></a></div>
                                     <div class="photo_listr">
                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                             <tr>
@@ -97,6 +99,9 @@ array_push($js_ext, 'Scripts/activity.js');
                                 </li>
                                 <?php }?>
                             </ul>
+                            <?php }else{?>
+                            <div class="empty_data">查無資料！</div>
+                            <?php }?>
                         </div>
                     </section>
                 </activityicle>

@@ -1,24 +1,24 @@
 <?php
 
 /**
- * CHH 自定義畫面資料管理
+ * CHH 關於我們資料管理
  * ============================================================================
  *
  *
  * ============================================================================
  * Author: shsing1
- * Id: custom.php 2009-11-27 12:00:00
+ * Id: art_qa.php 2009-11-27 12:00:00
 */
 
 define('IN_CHH', true);
 
 require_once(dirname(__FILE__) . '/includes/init.php');
 
-require_once(ROOT_PATH . '/includes/cls_custom_cat.php');
-$cat = new cls_custom_cat($db, $chh->table("custom_cat") );
+require_once(ROOT_PATH . '/includes/cls_art_qa_cat.php');
+$cat = new cls_art_qa_cat($db, $chh->table("art_qa_cat") );
 
-require_once(ROOT_PATH . '/includes/cls_custom.php');
-$data = new cls_custom($db, $chh->table("custom"), $cat);
+require_once(ROOT_PATH . '/includes/cls_art_qa.php');
+$data = new cls_art_qa($db, $chh->table("art_qa"), $cat);
 
 /* act操作項的初始化 */
 if (empty($_REQUEST['act']))
@@ -32,7 +32,7 @@ else
 /* 設定功能路徑 */
 require_once(ROOT_PATH . '/includes/cls_sys_menu.php');
 $sys_menu = new cls_sys_menu($db, $chh->table("sys_menu") );
-$ur_here = $sys_menu->get_ur_here(34);
+$ur_here = $sys_menu->get_ur_here(58);
 $smarty->assign('ur_here',     $ur_here);
 
 /*------------------------------------------------------ */
@@ -63,16 +63,11 @@ switch($_REQUEST['act'] ){
 
 
 		/* 模板賦值 */
-		if($_SESSION['admin_cat_id'] == 2){
-			$smarty->assign('action_link',  array('href' => 'custom.php?act=add', 'text' => $_LANG['data_add']));
-		}
+		$smarty->assign('action_link',  array('href' => 'art_qa.php?act=add', 'text' => $_LANG['data_add']));
 		$smarty->assign('full_page',    1);
 
 		$smarty->assign('data_list',	$data_list['list']);
 		$smarty->assign('filter',		$data_list['filter']);
-
-		/* 設定是否為最高管理者 */
-		$smarty->assign('admin_cat_id',	$_SESSION['admin_cat_id']);
 
 		/* 排序標記 */
 		$sort_flag  = sort_flag($data_list['filter']);
@@ -80,7 +75,7 @@ switch($_REQUEST['act'] ){
 
 		/* 列表頁面 */
 		assign_query_info();
-		$smarty->display('custom_list.htm');
+		$smarty->display('art_qa_list.htm');
 
 		break;
 /*------------------------------------------------------ */
@@ -96,7 +91,7 @@ switch($_REQUEST['act'] ){
 		$smarty->assign('cat_list',  $cat_select);
 
 		/* 模板賦值 */
-		$smarty->assign('action_link',  array('href' => 'custom.php?act=add', 'text' => $_LANG['data_add']));
+		$smarty->assign('action_link',  array('href' => 'art_qa.php?act=add', 'text' => $_LANG['data_add']));
 
 		$smarty->assign('data_list',	$data_list['list']);
 		$smarty->assign('filter',		$data_list['filter']);
@@ -108,7 +103,7 @@ switch($_REQUEST['act'] ){
 		/* 列表頁面 */
 		assign_query_info();
 
-		make_json_result(	$smarty->fetch('custom_list.htm'),
+		make_json_result(	$smarty->fetch('art_qa_list.htm'),
 							'',
 							array(	'filter' => $data_list['filter'], 'page_count' => $data_list['page_count'] )
 						);
@@ -118,7 +113,7 @@ switch($_REQUEST['act'] ){
 /*------------------------------------------------------ */
 	case 'add':
 		/* 模板賦值 */
-		$smarty->assign('action_link',  array('href' => 'custom.php?act=list', 'text' => $_LANG['data_list']));
+		$smarty->assign('action_link',  array('href' => 'art_qa.php?act=list', 'text' => $_LANG['data_list']));
 
 		/* 創建 html editor */
 		create_html_editor('desc');
@@ -129,12 +124,9 @@ switch($_REQUEST['act'] ){
 		$smarty->assign('form_act',     'insert');
 		$smarty->assign('data_info',     array('is_show' => 1));
 
-		/* 設定是否為最高管理者 */
-		$smarty->assign('admin_cat_id',	$_SESSION['admin_cat_id']);
-
 		/* 顯示頁面 */
 		assign_query_info();
-		$smarty->display('custom_info.htm');
+		$smarty->display('art_qa_info.htm');
 
 		break;
 /*------------------------------------------------------ */
@@ -155,12 +147,18 @@ switch($_REQUEST['act'] ){
 			make_json_error($_LANG['name_empty']);
 		}
 
+		/* 參數檢查 */
+		if($field['cat_id'] == 1){
+			make_json_error($_LANG['cat_empty']);
+		}
+
+
 		/* 資料入庫 */
 		if(!$data->add($field)){
 			make_json_error($_LANG['data_add_failed']);
 		}
 
-		make_json_result('', $_LANG['data_add_succed'], array('url'=>'custom.php?'.get_last_filter_url() ) );
+		make_json_result('', $_LANG['data_add_succed'], array('url'=>'art_qa.php?'.get_last_filter_url() ) );
 
 		break;
 /*------------------------------------------------------ */
@@ -171,7 +169,7 @@ switch($_REQUEST['act'] ){
 
 		$data_info = $data->get_info($id);
 
-		$smarty->assign('action_link', array('text' => $_LANG['data_list'], 'href' => 'custom.php?act=list'));
+		$smarty->assign('action_link', array('text' => $_LANG['data_list'], 'href' => 'art_qa.php?act=list'));
 
 		/* 創建 html editor */
 		create_html_editor('desc', $data_info['desc']);
@@ -183,58 +181,10 @@ switch($_REQUEST['act'] ){
 		$smarty->assign('form_act',    'update');
 		$smarty->assign('data_select',  $data_select);
 
-		/* 設定是否為最高管理者 */
-		$smarty->assign('admin_cat_id',	$_SESSION['admin_cat_id']);
-
 		/* 顯示頁面 */
 		assign_query_info();
 		$smarty->assign('ur_here',     $ur_here . ' - '.$data_info['name'] );
-		$smarty->display('custom_info.htm');
-
-		break;
-/*------------------------------------------------------ */
-//-- 編輯資料
-/*------------------------------------------------------ */
-	case 'edit2':
-		$id	=	!isset($_REQUEST['id'])	?	0	:	intval($_REQUEST['id']);
-
-		switch($id){
-			case '1':
-				$ur_here = $sys_menu->get_ur_here(59);
-				$smarty->assign('ur_here',     $ur_here);
-				break;
-			case '2':
-				$ur_here = $sys_menu->get_ur_here(87);
-				$smarty->assign('ur_here',     $ur_here);
-				break;
-			case '3':
-				$ur_here = $sys_menu->get_ur_here(87);
-				$smarty->assign('ur_here',     $ur_here);
-				break;
-		}
-
-
-		$data_info = $data->get_info($id);
-
-		$smarty->assign('action_link', array('text' => $_LANG['data_list'], 'href' => 'custom.php?act=list'));
-
-		/* 創建 html editor */
-		create_html_editor('desc', $data_info['desc']);
-
-		$cat_select = $cat->get_list_option(1, $data_info['cat_id']);
-		$smarty->assign('cat_select',   $cat_select);
-
-		$smarty->assign('data_info',    $data_info);
-		$smarty->assign('form_act',    'update2');
-		$smarty->assign('data_select',  $data_select);
-
-		/* 設定是否為最高管理者 */
-		$smarty->assign('admin_cat_id',	$_SESSION['admin_cat_id']);
-
-		/* 顯示頁面 */
-		assign_query_info();
-		$smarty->assign('ur_here',     $ur_here . ' - '.$data_info['name'] );
-		$smarty->display('custom_info.htm');
+		$smarty->display('art_qa_info.htm');
 
 		break;
 /*------------------------------------------------------ */
@@ -243,6 +193,7 @@ switch($_REQUEST['act'] ){
 	case 'update':
 		/* 初始化變量 */
 		$field['id']				= !isset($_POST['id'])     			?	0	: intval($_POST['id']);
+		$field['name']     			= !isset($_POST['name'])     		?	''	: trim($_POST['name']);
 		$field['cat_id']   			= !isset($_POST['cat_id'])     		?	1	: intval($_POST['cat_id']);
 		$field['meta_keywords']		= !isset($_POST['meta_keywords'])   ?	''	: trim($_POST['meta_keywords']);
 		$field['meta_description']	= !isset($_POST['meta_description'])?	''	: trim($_POST['meta_description']);
@@ -254,47 +205,20 @@ switch($_REQUEST['act'] ){
 			make_json_error($_LANG['id_empty']);
 		}
 
-		if(	$_SESSION['admin_cat_id'] == 2){
-			$field['name']     			= !isset($_POST['name'])     		?	''	: trim($_POST['name']);
-			if($field['name'] == ''){
-				make_json_error($_LANG['name_empty']);
-			}
+		if($field['name'] == ''){
+			make_json_error($_LANG['name_empty']);
 		}
+
+		/* 參數檢查 */
+		if($field['cat_id'] == 1){
+			make_json_error($_LANG['cat_empty']);
+		}
+
 		if(!$data->upd($field)){
 			make_json_error($_LANG['data_upd_failed']);
 		}
 
-		make_json_result('', $_LANG['data_upd_succed'], array('url'=>'custom.php?'.get_last_filter_url() ) );
-
-		break;
-/*------------------------------------------------------ */
-//-- 編輯資料後的處理
-/*------------------------------------------------------ */
-	case 'update2':
-		/* 初始化變量 */
-		$field['id']				= !isset($_POST['id'])     			?	0	: intval($_POST['id']);
-		$field['cat_id']   			= !isset($_POST['cat_id'])     		?	1	: intval($_POST['cat_id']);
-		$field['meta_keywords']		= !isset($_POST['meta_keywords'])   ?	''	: trim($_POST['meta_keywords']);
-		$field['meta_description']	= !isset($_POST['meta_description'])?	''	: trim($_POST['meta_description']);
-		$field['sort']   			= !isset($_POST['sort'])     		?	0	: intval($_POST['sort']);
-		$field['is_show']     		= !isset($_POST['is_show'])      	?	1	: intval($_POST['is_show']);
-		$field['desc']     			= !isset($_POST['desc'])     		?	''	: trim($_POST['desc']);
-
-		if(empty($field['id'])){
-			make_json_error($_LANG['id_empty']);
-		}
-
-		if(	$_SESSION['admin_cat_id'] == 2){
-			$field['name']     			= !isset($_POST['name'])     		?	''	: trim($_POST['name']);
-			if($field['name'] == ''){
-				make_json_error($_LANG['name_empty']);
-			}
-		}
-		if(!$data->upd($field)){
-			make_json_error($_LANG['data_upd_failed']);
-		}
-
-		make_json_result('', $_LANG['data_upd_succed'], array('url'=>'custom.php?act=edit2&id='.$field['id'] ) );
+		make_json_result('', $_LANG['data_upd_succed'], array('url'=>'art_qa.php?'.get_last_filter_url() ) );
 
 		break;
 /*------------------------------------------------------ */
@@ -306,7 +230,7 @@ switch($_REQUEST['act'] ){
 		$data_info = $data->get_info($id);
 		$data_info['sort'] = 0;
 
-		$smarty->assign('action_link', array('text' => $_LANG['data_list'], 'href' => 'custom.php?act=list'));
+		$smarty->assign('action_link', array('text' => $_LANG['data_list'], 'href' => 'art_qa.php?act=list'));
 
 		/* 創建 html editor */
 		create_html_editor('desc', $data_info['desc']);
@@ -320,7 +244,7 @@ switch($_REQUEST['act'] ){
 
 		/* 顯示頁面 */
 		assign_query_info();
-		$smarty->display('custom_info.htm');
+		$smarty->display('art_qa_info.htm');
 
 		break;
 /*------------------------------------------------------ */
@@ -335,7 +259,7 @@ switch($_REQUEST['act'] ){
 			make_json_error($_LANG['data_del_failed']);
 		}
 
-		make_json_result('', $_LANG['data_del_succed'], array('url'=>'custom.php?'.get_last_filter_url() ) );
+		make_json_result('', $_LANG['data_del_succed'], array('url'=>'art_qa.php?'.get_last_filter_url() ) );
 
 		break;
 /*------------------------------------------------------ */
@@ -391,7 +315,7 @@ switch($_REQUEST['act'] ){
 				break;
 		}
 
-		make_json_result('', $_LANG['data_batch_succed'], array('url'=>'custom.php?'.get_last_filter_url() ) );
+		make_json_result('', $_LANG['data_batch_succed'], array('url'=>'art_qa.php?'.get_last_filter_url() ) );
 
 		break;
 

@@ -1,8 +1,6 @@
 <?php
 define('IN_CHH', true);
 
-$id = isset($_GET['id']) ? $_GET['id'] : null;
-
 require_once(dirname(__FILE__) . '/includes/init.php');
 
 $main_nav[1]['current'] = true;
@@ -13,65 +11,13 @@ $cat = new cls_activity_cat($db, $chh->table("activity_cat") );
 require_once(ROOT_PATH . '/includes/cls_activity.php');
 $data = new cls_activity($db, $chh->table("activity"), $cat);
 
-$cat_list = array();
-$data_list = array();
-$cat_id = null;
+$cat_id = 1;
 
-// 沒有id
-if ($id === null) {
-    $cat_list = $cat->get_list(1, true);
-    foreach ($cat_list as $v) {
-        $cat_id = $v['id'];
-        break;
-    }
-    $data_list = $data->get_list(true, $cat_id);
-    $data_list = $data_list['list'];
-    foreach ($data_list as $v) {
-        $id = $v['id'];
-        break;
-    }
-}
-$firephp->info($cat_id, 'cat_id');
-$firephp->info('id:'.$id);
-
-$list = array();
-foreach ($data_list as &$v) {
-    $brief = strip_tags($v['author_title']);
-    preg_replace( "/\s/", "" , $brief);
-    $v['brief'] = $brief;
-
-    $list[] = $v;
-}
-
-$info = $data->get_info($id);
-$cat_id = $info['cat_id'];
-$firephp->info($info);
-
-$root_info = $cat->get_info(1);
+$root_info = $cat->get_info($cat_id);
 $firephp->info($root_info);
 
-$tmp = array();
-$menu = array();
-$tmp_list = $cat->get_list(1, true);
-foreach ($tmp_list as &$v) {
-    $v['current'] = false;
-    if ($v['id'] === $cat_id) {
-        $v['current'] = true;
-    }
-    $tmp = $data->get_list(true, $v['id']);
-    $tmp = $tmp['list'];
-    $tmp2 = array();
-    foreach ($tmp as &$v2) {
-        $v2['current'] = false;
-        // if ($v2['id'] === $id) {
-        //     $v2['current'] = true;
-        // }
-        $tmp2[] = $v2;
-    }
-    $v['childs'] = $tmp2;
-    $menu[] = $v;
-}
-$firephp->info($menu);
+$list = $data->get_date_list();
+$firephp->info($list);
 
 $page_title = $cat->get_page_title($cat_id);
 $keywords = htmlspecialchars($info['meta_keywords']);
@@ -122,7 +68,11 @@ array_push($js_ext, 'Scripts/activity.js');
                                 </tr>
                                 <tr>
                                     <td valign="top">快速查詢：</td>
-                                    <td><input name="" type="text" value="2013/08/12" size="9">&nbsp;&nbsp;&nbsp;&nbsp;<input name="" type="text" value="2013/08/12" size="9">&nbsp;&nbsp;&nbsp;&nbsp;<input name="" type="text" value="2013/08/12" size="9">&nbsp;&nbsp;&nbsp;&nbsp;<input name="" type="text" value="2013/08/12" size="9">&nbsp;&nbsp;&nbsp;&nbsp;<input name="" type="text" value="2013/08/12" size="9">&nbsp;&nbsp;&nbsp;&nbsp;<input name="" type="text" value="2013/08/12" size="9"></td>
+                                    <td>
+                                        <?php foreach($list as $v){?>
+                                        <input name="" type="text" value="<?php echo $v['date'];?>" size="9" class="search_date">&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <?php }?>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
