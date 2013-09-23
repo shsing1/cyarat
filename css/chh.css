@@ -55,3 +55,9 @@ button{
     margin-right: 0px;
     /*width: 210px;*/
 }
+input.search_btn{
+    width : 79px;
+    height : 41px;
+    background: url(../images/default/btn_star.png) no-repeat;
+    float: right;
+}

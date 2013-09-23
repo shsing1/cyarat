@@ -111,7 +111,7 @@ define('DATA_DIR', $chh->data_dir());
 define('IMAGE_DIR', $chh->image_dir());
 
 /* 初始化數據庫類 */
-require(ROOT_PATH . 'includes/cls_mysql.php');
+include_once(ROOT_PATH . 'includes/cls_mysql.php');
 $db = new cls_mysql($db_host, $db_user, $db_pass, $db_name);
 $db->set_disable_cache_tables(array($chh->table('sessions'), $chh->table('sessions_data'), $chh->table('cart')));
 $db_host = $db_user = $db_pass = $db_name = NULL;
@@ -123,7 +123,7 @@ $err = new chh_error('message.dwt');
 $_CFG = load_config();
 
 /* 載入語言文件 */
-require(ROOT_PATH . 'languages/' . $_CFG['lang'] . '/common.php');
+include_once(ROOT_PATH . 'languages/' . $_CFG['lang'] . '/common.php');
 if (file_exists(ROOT_PATH . 'languages/' . $_CFG['lang'] . '/' . basename(PHP_SELF)))
 {
     include_once(ROOT_PATH . 'languages/' . $_CFG['lang'] . '/' . basename(PHP_SELF));

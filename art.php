@@ -50,29 +50,6 @@ $firephp->info($info);
 $root_info = $cat->get_info(1);
 $firephp->info($root_info);
 
-$tmp = array();
-$menu = array();
-$tmp_list = $cat->get_list(1, true);
-foreach ($tmp_list as &$v) {
-    $v['current'] = false;
-    if ($v['id'] === $cat_id) {
-        $v['current'] = true;
-    }
-    $tmp = $data->get_list(true, $v['id']);
-    $tmp = $tmp['list'];
-    $tmp2 = array();
-    foreach ($tmp as &$v2) {
-        $v2['current'] = false;
-        // if ($v2['id'] === $id) {
-        //     $v2['current'] = true;
-        // }
-        $tmp2[] = $v2;
-    }
-    $v['childs'] = $tmp2;
-    $menu[] = $v;
-}
-$firephp->info($menu);
-
 $page_title = $cat->get_page_title($cat_id);
 $keywords = htmlspecialchars($info['meta_keywords']);
 $description = htmlspecialchars($info['meta_description']);
@@ -94,27 +71,7 @@ array_push($js_ext, 'Scripts/art.js');
     <div id="unit_art" style="background:url(images/my/about_bg02.jpg) no-repeat center top;">
         <div id="pagebody">
             <div class="container">
-                <aside>
-                    <div id="logo"><img src="images/default/logo.png"></div>
-                    <div id="navigation">
-                        <div class="title"><h3><?php echo $fun_name;?></h3></div>
-                        <div class="center">
-                            <ul>
-                                <?php foreach($menu as $v){?>
-                                <li <?php if($v['current']){?>class="open"<?php }?>><a href="#" class="accordion_item"><?php echo htmlspecialchars($v['name'])?></a>
-                                    <?php if($v['childs']){?>
-                                    <ul class="accordion_panel">
-                                        <?php foreach($v['childs'] as $v2){?>
-                                        <li <?php if($v2['current']){?>class="click"<?php }?>><a href="art_detail.php?id=<?php echo $v2['id'];?>"><?php echo htmlspecialchars($v2['name'])?></a></li>
-                                        <?php }?>
-                                    </ul>
-                                    <?php }?>
-                                </li>
-                                <?php }?>
-                            </ul>
-                        </div>
-                    </div>
-                </aside>
+                <?php include_once('art_menu.php');?>
 
                 <article id="box_center">
                     <?php include_once('main_nav.php');?>

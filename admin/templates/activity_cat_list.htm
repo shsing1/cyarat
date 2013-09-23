@@ -1,0 +1,50 @@
+{include file="pageheader.htm"}
+<script type="text/javascript" src="../../js/utils.js"></script>
+<script type="text/javascript" src="../js/listtable.js"></script>
+<link href="../../css/prettyPhoto/prettyPhoto.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../js/jquery.prettyPhoto.js"></script>
+<form method="post" action="" name="listForm">
+	<!-- start 資料 list -->
+	<div class="list-div" id="listDiv">
+		<table width="100%" cellspacing="1" cellpadding="2" id="list-table">
+			<tr>
+				<th>{$lang.lab_name}</th>
+				<th width="50" >{$lang.lab_is_show}</th>
+				<th width="150" >{$lang.lab_handler}</th>
+			</tr>
+			{foreach from=$cat_info item=cat}
+			<tr align="center" class="{$cat.depth}">
+				<td align="left" class="first-cell" >
+					{if $cat.img}
+						<span style="float:right"><a href="{$cat.original_img}" rel="prettyPhoto"><img height="16" border="0" width="16" alt="{$cat.name}" src="images/picflag.gif"/></a></span>
+					{/if}
+					{if $cat.is_leaf neq 1}
+						<img src="images/menu_minus.gif" width="9" height="9" border="0" style="margin-left:{$cat.depth}em" onclick="rowClicked(this)" />
+					{else}
+						<img src="images/menu_arrow.gif" width="9" height="9" border="0" style="margin-left:{$cat.depth}em" />
+					{/if}
+					<span>{$cat.name}</span></td>
+				<td><img src="images/{if $cat.is_show eq '1'}yes{else}no{/if}.gif" /></td>
+				<td>
+					<a href="?act=edit&cat_id={$cat.id}"><img src="images/icon_edit.gif" border="0" /></a>
+					<a href="javascript:;" onclick="remove({$cat.id})" title="{$lang.remove}"><img src="images/icon_drop.gif" border="0" /></a></td>
+			</tr>
+			{foreachelse}
+			<tr>
+				<td class="no-records" colspan="10">{$lang.no_records}</td>
+			</tr>
+			{/foreach}
+		</table>
+	</div>
+	<!-- end 資料 list -->
+</form>
+{literal}
+<script language="JavaScript">
+<!--
+	$(document).ready(function(){
+		$("a[rel^='prettyPhoto']").prettyPhoto({theme:'dark_rounded'});
+	});
+//-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}
