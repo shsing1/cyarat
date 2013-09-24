@@ -20,7 +20,7 @@ $firephp->info($root_info);
 
 $page_title = $art_qa_root_info['name'] .' - '. $page_title;
 
-$fun_name = '城市藝境';
+$fun_name = '城市地景藝術展';
 $_LANG['home'] = '首頁 / '.$fun_name;
 $path = $cat->get_path($cat_id);
 

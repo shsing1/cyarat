@@ -69,7 +69,7 @@ if (empty($description)) {
     $description = strip_tags($info['desc']);
     $description = preg_replace( "/\s/", "" , $description );
 }
-$fun_name = '城市藝境';
+$fun_name = '城市地景藝術展';
 $_LANG['home'] = '首頁 / '.$fun_name;
 $path = $cat->get_path($cat_id);
 

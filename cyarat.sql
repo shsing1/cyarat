@@ -2,10 +2,10 @@
 -- version 4.0.6
 -- http://www.phpmyadmin.net
 --
--- 主機: 127.0.0.1
--- 產生日期: 2013 年 09 月 23 日 12:39
--- 伺服器版本: 5.5.32
--- PHP 版本: 5.4.16
+-- Host: 127.0.0.1
+-- Generation Time: Sep 24, 2013 at 02:03 AM
+-- Server version: 5.6.11
+-- PHP Version: 5.5.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- 資料庫: `cyarat`
+-- Database: `cyarat`
 --
 
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_about_us`
+-- Table structure for table `chh_about_us`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_about_us` (
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `chh_about_us` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- 轉存資料表中的資料 `chh_about_us`
+-- Dumping data for table `chh_about_us`
 --
 
 INSERT INTO `chh_about_us` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_description`, `desc`, `is_show`, `sort`) VALUES
@@ -49,7 +49,7 @@ INSERT INTO `chh_about_us` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_descr
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_about_us_cat`
+-- Table structure for table `chh_about_us_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_about_us_cat` (
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `chh_about_us_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- 轉存資料表中的資料 `chh_about_us_cat`
+-- Dumping data for table `chh_about_us_cat`
 --
 
 INSERT INTO `chh_about_us_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is_show`, `lft`, `rgt`) VALUES
@@ -75,7 +75,7 @@ INSERT INTO `chh_about_us_cat` (`id`, `name`, `meta_keywords`, `meta_description
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_activity`
+-- Table structure for table `chh_activity`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_activity` (
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `chh_activity` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- 轉存資料表中的資料 `chh_activity`
+-- Dumping data for table `chh_activity`
 --
 
 INSERT INTO `chh_activity` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_description`, `location`, `content`, `date`, `img`, `original_img`, `desc`, `is_show`, `sort`) VALUES
@@ -105,7 +105,7 @@ INSERT INTO `chh_activity` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_descr
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_activity_cat`
+-- Table structure for table `chh_activity_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_activity_cat` (
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `chh_activity_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- 轉存資料表中的資料 `chh_activity_cat`
+-- Dumping data for table `chh_activity_cat`
 --
 
 INSERT INTO `chh_activity_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `img`, `original_img`, `is_show`, `lft`, `rgt`) VALUES
@@ -131,7 +131,7 @@ INSERT INTO `chh_activity_cat` (`id`, `name`, `meta_keywords`, `meta_description
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_activity_img`
+-- Table structure for table `chh_activity_img`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_activity_img` (
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `chh_activity_img` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- 轉存資料表中的資料 `chh_activity_img`
+-- Dumping data for table `chh_activity_img`
 --
 
 INSERT INTO `chh_activity_img` (`id`, `activity_id`, `brief`, `thumb`, `img`, `original_img`, `is_show`, `sort`) VALUES
@@ -156,7 +156,7 @@ INSERT INTO `chh_activity_img` (`id`, `activity_id`, `brief`, `thumb`, `img`, `o
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_admin_cat`
+-- Table structure for table `chh_admin_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_admin_cat` (
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `chh_admin_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- 轉存資料表中的資料 `chh_admin_cat`
+-- Dumping data for table `chh_admin_cat`
 --
 
 INSERT INTO `chh_admin_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is_show`, `lft`, `rgt`) VALUES
@@ -182,7 +182,7 @@ INSERT INTO `chh_admin_cat` (`id`, `name`, `meta_keywords`, `meta_description`, 
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_admin_priv`
+-- Table structure for table `chh_admin_priv`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_admin_priv` (
@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `chh_admin_priv` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- 轉存資料表中的資料 `chh_admin_priv`
+-- Dumping data for table `chh_admin_priv`
 --
 
 INSERT INTO `chh_admin_priv` (`admin_id`, `priv_id`) VALUES
@@ -212,12 +212,23 @@ INSERT INTO `chh_admin_priv` (`admin_id`, `priv_id`) VALUES
 (3, 48),
 (3, 49),
 (3, 50),
-(3, 51);
+(3, 51),
+(3, 52),
+(3, 53),
+(3, 54),
+(3, 55),
+(3, 56),
+(3, 57),
+(3, 58),
+(3, 23),
+(3, 24),
+(3, 25),
+(3, 59);
 
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_admin_user`
+-- Table structure for table `chh_admin_user`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_admin_user` (
@@ -243,17 +254,17 @@ CREATE TABLE IF NOT EXISTS `chh_admin_user` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- 轉存資料表中的資料 `chh_admin_user`
+-- Dumping data for table `chh_admin_user`
 --
 
 INSERT INTO `chh_admin_user` (`id`, `cat_id`, `name`, `email`, `password`, `add_time`, `last_login`, `last_ip`, `action_list`, `nav_list`, `lang_type`, `agency_id`, `suppliers_id`, `todolist`, `is_show`, `sort`) VALUES
-(1, 2, 'shsing1', 'shsing1@yahoo.com.tw', '94e8cde4612b3fd390677d42e7b22002', 1252915460, 1379915866, '127.0.0.1', 'all', '商品列表|goods.php?act=list,訂單列表|order.php?act=list,用戶評論|comment_manage.php?act=list,會員列表|users.php?act=list,商店設置|shop_config.php?act=list_edit', '', 0, 0, NULL, 1, 1),
-(3, 3, 'cyarat', 'shsing2@yahoo.com.tw', 'aeb694d88aa5c5887d7b9ea3473df534', 1260013687, 1379666032, '127.0.0.1', '', '', '', 0, 0, NULL, 1, 3);
+(1, 2, 'shsing1', 'shsing1@yahoo.com.tw', '94e8cde4612b3fd390677d42e7b22002', 1252915460, 1379980582, '127.0.0.1', 'all', '商品列表|goods.php?act=list,訂單列表|order.php?act=list,用戶評論|comment_manage.php?act=list,會員列表|users.php?act=list,商店設置|shop_config.php?act=list_edit', '', 0, 0, NULL, 1, 1),
+(3, 3, 'cyarat', 'shsing2@yahoo.com.tw', 'aeb694d88aa5c5887d7b9ea3473df534', 1260013687, 1379950510, '127.0.0.1', '', '', '', 0, 0, NULL, 1, 3);
 
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_art`
+-- Table structure for table `chh_art`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_art` (
@@ -275,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `chh_art` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- 轉存資料表中的資料 `chh_art`
+-- Dumping data for table `chh_art`
 --
 
 INSERT INTO `chh_art` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_description`, `author_title`, `author_desc`, `works_title`, `works_desc`, `img`, `original_img`, `desc`, `is_show`, `sort`) VALUES
@@ -285,7 +296,7 @@ INSERT INTO `chh_art` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_descriptio
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_art_cat`
+-- Table structure for table `chh_art_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_art_cat` (
@@ -302,7 +313,7 @@ CREATE TABLE IF NOT EXISTS `chh_art_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- 轉存資料表中的資料 `chh_art_cat`
+-- Dumping data for table `chh_art_cat`
 --
 
 INSERT INTO `chh_art_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `img`, `original_img`, `is_show`, `lft`, `rgt`) VALUES
@@ -311,7 +322,7 @@ INSERT INTO `chh_art_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `i
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_art_img`
+-- Table structure for table `chh_art_img`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_art_img` (
@@ -327,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `chh_art_img` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
--- 轉存資料表中的資料 `chh_art_img`
+-- Dumping data for table `chh_art_img`
 --
 
 INSERT INTO `chh_art_img` (`id`, `art_id`, `brief`, `thumb`, `img`, `original_img`, `is_show`, `sort`) VALUES
@@ -341,7 +352,63 @@ INSERT INTO `chh_art_img` (`id`, `art_id`, `brief`, `thumb`, `img`, `original_im
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_cart`
+-- Table structure for table `chh_art_qa`
+--
+
+CREATE TABLE IF NOT EXISTS `chh_art_qa` (
+  `id` mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cat_id` mediumint(10) unsigned NOT NULL DEFAULT '1',
+  `name` varchar(50) NOT NULL,
+  `meta_keywords` varchar(255) NOT NULL,
+  `meta_description` varchar(255) NOT NULL,
+  `desc` text NOT NULL,
+  `is_show` tinyint(1) NOT NULL DEFAULT '1',
+  `sort` mediumint(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `chh_art_qa`
+--
+
+INSERT INTO `chh_art_qa` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_description`, `desc`, `is_show`, `sort`) VALUES
+(1, 2, '國慶超人路跑活動是甚麼阿？', '', '', '上個月跑了二場半程馬拉松繼去年底參加了第一場半程馬拉松（2012台北富邦馬拉松）之後，今年三月又報名了 台北自去年夏天練跑以來，這幾個月幾乎每個月都至少維持50KM的路量。', 1, 1),
+(2, 2, '參加者有年齡限制嗎？', '', '', '開心自由的奔跑，沒有壓力、沒有束縛、調劑身心，促進身體健康，只要喜歡路跑的朋友們都可參加！', 1, 2),
+(3, 3, '問題01', '', '', '答案01', 1, 3),
+(4, 3, '問題1', '', '', '答案2', 1, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chh_art_qa_cat`
+--
+
+CREATE TABLE IF NOT EXISTS `chh_art_qa_cat` (
+  `id` mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `meta_keywords` varchar(255) NOT NULL,
+  `meta_description` varchar(255) NOT NULL,
+  `is_show` tinyint(1) NOT NULL DEFAULT '1',
+  `lft` mediumint(20) unsigned NOT NULL,
+  `rgt` mediumint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `chh_art_qa_cat`
+--
+
+INSERT INTO `chh_art_qa_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is_show`, `lft`, `rgt`) VALUES
+(1, 'Q&A', '', '', 1, 1, 10),
+(2, '國慶超人路跑活動', '', '', 1, 2, 3),
+(3, '關於活動費用 / 匯款 / 退款疑慮', '', '', 1, 4, 5),
+(4, '關於新竹藝動節節目內容？', '', '', 1, 6, 7),
+(5, '交通問題', '', '', 1, 8, 9);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chh_cart`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_cart` (
@@ -370,7 +437,7 @@ CREATE TABLE IF NOT EXISTS `chh_cart` (
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_config`
+-- Table structure for table `chh_config`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_config` (
@@ -389,7 +456,7 @@ CREATE TABLE IF NOT EXISTS `chh_config` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
 
 --
--- 轉存資料表中的資料 `chh_config`
+-- Dumping data for table `chh_config`
 --
 
 INSERT INTO `chh_config` (`id`, `cat_id`, `name`, `code`, `type`, `store_range`, `value`, `is_show`, `sort`) VALUES
@@ -450,7 +517,7 @@ INSERT INTO `chh_config` (`id`, `cat_id`, `name`, `code`, `type`, `store_range`,
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_config_cat`
+-- Table structure for table `chh_config_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_config_cat` (
@@ -465,7 +532,7 @@ CREATE TABLE IF NOT EXISTS `chh_config_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
--- 轉存資料表中的資料 `chh_config_cat`
+-- Dumping data for table `chh_config_cat`
 --
 
 INSERT INTO `chh_config_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is_show`, `lft`, `rgt`) VALUES
@@ -480,7 +547,7 @@ INSERT INTO `chh_config_cat` (`id`, `name`, `meta_keywords`, `meta_description`,
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_contact`
+-- Table structure for table `chh_contact`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_contact` (
@@ -500,7 +567,7 @@ CREATE TABLE IF NOT EXISTS `chh_contact` (
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_contact_cat`
+-- Table structure for table `chh_contact_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_contact_cat` (
@@ -515,7 +582,7 @@ CREATE TABLE IF NOT EXISTS `chh_contact_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- 轉存資料表中的資料 `chh_contact_cat`
+-- Dumping data for table `chh_contact_cat`
 --
 
 INSERT INTO `chh_contact_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is_show`, `lft`, `rgt`) VALUES
@@ -524,7 +591,7 @@ INSERT INTO `chh_contact_cat` (`id`, `name`, `meta_keywords`, `meta_description`
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_contact_reply`
+-- Table structure for table `chh_contact_reply`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_contact_reply` (
@@ -543,7 +610,7 @@ CREATE TABLE IF NOT EXISTS `chh_contact_reply` (
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_custom`
+-- Table structure for table `chh_custom`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_custom` (
@@ -559,7 +626,7 @@ CREATE TABLE IF NOT EXISTS `chh_custom` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- 轉存資料表中的資料 `chh_custom`
+-- Dumping data for table `chh_custom`
 --
 
 INSERT INTO `chh_custom` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_description`, `desc`, `is_show`, `sort`) VALUES
@@ -568,7 +635,7 @@ INSERT INTO `chh_custom` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_descrip
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_custom_cat`
+-- Table structure for table `chh_custom_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_custom_cat` (
@@ -583,7 +650,7 @@ CREATE TABLE IF NOT EXISTS `chh_custom_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- 轉存資料表中的資料 `chh_custom_cat`
+-- Dumping data for table `chh_custom_cat`
 --
 
 INSERT INTO `chh_custom_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is_show`, `lft`, `rgt`) VALUES
@@ -592,7 +659,7 @@ INSERT INTO `chh_custom_cat` (`id`, `name`, `meta_keywords`, `meta_description`,
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_download`
+-- Table structure for table `chh_download`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_download` (
@@ -608,7 +675,7 @@ CREATE TABLE IF NOT EXISTS `chh_download` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- 轉存資料表中的資料 `chh_download`
+-- Dumping data for table `chh_download`
 --
 
 INSERT INTO `chh_download` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_description`, `desc`, `is_show`, `sort`) VALUES
@@ -617,7 +684,7 @@ INSERT INTO `chh_download` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_descr
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_download_cat`
+-- Table structure for table `chh_download_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_download_cat` (
@@ -632,7 +699,7 @@ CREATE TABLE IF NOT EXISTS `chh_download_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- 轉存資料表中的資料 `chh_download_cat`
+-- Dumping data for table `chh_download_cat`
 --
 
 INSERT INTO `chh_download_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is_show`, `lft`, `rgt`) VALUES
@@ -643,7 +710,7 @@ INSERT INTO `chh_download_cat` (`id`, `name`, `meta_keywords`, `meta_description
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_download_file`
+-- Table structure for table `chh_download_file`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_download_file` (
@@ -657,7 +724,7 @@ CREATE TABLE IF NOT EXISTS `chh_download_file` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
--- 轉存資料表中的資料 `chh_download_file`
+-- Dumping data for table `chh_download_file`
 --
 
 INSERT INTO `chh_download_file` (`id`, `download_id`, `brief`, `file`, `is_show`, `sort`) VALUES
@@ -668,7 +735,7 @@ INSERT INTO `chh_download_file` (`id`, `download_id`, `brief`, `file`, `is_show`
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_epaper`
+-- Table structure for table `chh_epaper`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_epaper` (
@@ -686,7 +753,7 @@ CREATE TABLE IF NOT EXISTS `chh_epaper` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- 轉存資料表中的資料 `chh_epaper`
+-- Dumping data for table `chh_epaper`
 --
 
 INSERT INTO `chh_epaper` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_description`, `last_update`, `last_send`, `desc`, `is_show`, `sort`) VALUES
@@ -695,7 +762,7 @@ INSERT INTO `chh_epaper` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_descrip
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_epaper_cat`
+-- Table structure for table `chh_epaper_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_epaper_cat` (
@@ -710,7 +777,7 @@ CREATE TABLE IF NOT EXISTS `chh_epaper_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- 轉存資料表中的資料 `chh_epaper_cat`
+-- Dumping data for table `chh_epaper_cat`
 --
 
 INSERT INTO `chh_epaper_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is_show`, `lft`, `rgt`) VALUES
@@ -719,7 +786,7 @@ INSERT INTO `chh_epaper_cat` (`id`, `name`, `meta_keywords`, `meta_description`,
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_epaper_queue`
+-- Table structure for table `chh_epaper_queue`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_epaper_queue` (
@@ -736,7 +803,7 @@ CREATE TABLE IF NOT EXISTS `chh_epaper_queue` (
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_epaper_user`
+-- Table structure for table `chh_epaper_user`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_epaper_user` (
@@ -750,7 +817,7 @@ CREATE TABLE IF NOT EXISTS `chh_epaper_user` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
--- 轉存資料表中的資料 `chh_epaper_user`
+-- Dumping data for table `chh_epaper_user`
 --
 
 INSERT INTO `chh_epaper_user` (`id`, `cat_id`, `name`, `email`, `is_show`, `sort`) VALUES
@@ -760,7 +827,7 @@ INSERT INTO `chh_epaper_user` (`id`, `cat_id`, `name`, `email`, `is_show`, `sort
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_epaper_user_cat`
+-- Table structure for table `chh_epaper_user_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_epaper_user_cat` (
@@ -775,7 +842,7 @@ CREATE TABLE IF NOT EXISTS `chh_epaper_user_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- 轉存資料表中的資料 `chh_epaper_user_cat`
+-- Dumping data for table `chh_epaper_user_cat`
 --
 
 INSERT INTO `chh_epaper_user_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is_show`, `lft`, `rgt`) VALUES
@@ -785,7 +852,7 @@ INSERT INTO `chh_epaper_user_cat` (`id`, `name`, `meta_keywords`, `meta_descript
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_gallery`
+-- Table structure for table `chh_gallery`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_gallery` (
@@ -803,7 +870,7 @@ CREATE TABLE IF NOT EXISTS `chh_gallery` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- 轉存資料表中的資料 `chh_gallery`
+-- Dumping data for table `chh_gallery`
 --
 
 INSERT INTO `chh_gallery` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_description`, `img`, `original_img`, `desc`, `is_show`, `sort`) VALUES
@@ -814,7 +881,7 @@ INSERT INTO `chh_gallery` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_descri
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_gallery_cat`
+-- Table structure for table `chh_gallery_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_gallery_cat` (
@@ -831,7 +898,7 @@ CREATE TABLE IF NOT EXISTS `chh_gallery_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- 轉存資料表中的資料 `chh_gallery_cat`
+-- Dumping data for table `chh_gallery_cat`
 --
 
 INSERT INTO `chh_gallery_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `img`, `original_img`, `is_show`, `lft`, `rgt`) VALUES
@@ -844,7 +911,7 @@ INSERT INTO `chh_gallery_cat` (`id`, `name`, `meta_keywords`, `meta_description`
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_gallery_img`
+-- Table structure for table `chh_gallery_img`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_gallery_img` (
@@ -860,7 +927,7 @@ CREATE TABLE IF NOT EXISTS `chh_gallery_img` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 
 --
--- 轉存資料表中的資料 `chh_gallery_img`
+-- Dumping data for table `chh_gallery_img`
 --
 
 INSERT INTO `chh_gallery_img` (`id`, `gallery_id`, `brief`, `thumb`, `img`, `original_img`, `is_show`, `sort`) VALUES
@@ -906,7 +973,7 @@ INSERT INTO `chh_gallery_img` (`id`, `gallery_id`, `brief`, `thumb`, `img`, `ori
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_goods`
+-- Table structure for table `chh_goods`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_goods` (
@@ -928,7 +995,7 @@ CREATE TABLE IF NOT EXISTS `chh_goods` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- 轉存資料表中的資料 `chh_goods`
+-- Dumping data for table `chh_goods`
 --
 
 INSERT INTO `chh_goods` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_description`, `sn`, `market`, `price`, `inventory`, `img`, `original_img`, `desc`, `is_show`, `sort`) VALUES
@@ -940,7 +1007,7 @@ INSERT INTO `chh_goods` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_descript
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_goods_cat`
+-- Table structure for table `chh_goods_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_goods_cat` (
@@ -957,7 +1024,7 @@ CREATE TABLE IF NOT EXISTS `chh_goods_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
--- 轉存資料表中的資料 `chh_goods_cat`
+-- Dumping data for table `chh_goods_cat`
 --
 
 INSERT INTO `chh_goods_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `img`, `original_img`, `is_show`, `lft`, `rgt`) VALUES
@@ -978,7 +1045,7 @@ INSERT INTO `chh_goods_cat` (`id`, `name`, `meta_keywords`, `meta_description`, 
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_goods_img`
+-- Table structure for table `chh_goods_img`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_goods_img` (
@@ -994,7 +1061,7 @@ CREATE TABLE IF NOT EXISTS `chh_goods_img` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
--- 轉存資料表中的資料 `chh_goods_img`
+-- Dumping data for table `chh_goods_img`
 --
 
 INSERT INTO `chh_goods_img` (`id`, `goods_id`, `brief`, `thumb`, `img`, `original_img`, `is_show`, `sort`) VALUES
@@ -1015,7 +1082,7 @@ INSERT INTO `chh_goods_img` (`id`, `goods_id`, `brief`, `thumb`, `img`, `origina
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_guestbook`
+-- Table structure for table `chh_guestbook`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_guestbook` (
@@ -1033,7 +1100,7 @@ CREATE TABLE IF NOT EXISTS `chh_guestbook` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
--- 轉存資料表中的資料 `chh_guestbook`
+-- Dumping data for table `chh_guestbook`
 --
 
 INSERT INTO `chh_guestbook` (`id`, `cat_id`, `name`, `email`, `phone`, `content`, `add_time`, `is_reply`, `is_show`, `sort`) VALUES
@@ -1047,7 +1114,7 @@ INSERT INTO `chh_guestbook` (`id`, `cat_id`, `name`, `email`, `phone`, `content`
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_guestbook_cat`
+-- Table structure for table `chh_guestbook_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_guestbook_cat` (
@@ -1062,7 +1129,7 @@ CREATE TABLE IF NOT EXISTS `chh_guestbook_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- 轉存資料表中的資料 `chh_guestbook_cat`
+-- Dumping data for table `chh_guestbook_cat`
 --
 
 INSERT INTO `chh_guestbook_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is_show`, `lft`, `rgt`) VALUES
@@ -1071,7 +1138,7 @@ INSERT INTO `chh_guestbook_cat` (`id`, `name`, `meta_keywords`, `meta_descriptio
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_guestbook_reply`
+-- Table structure for table `chh_guestbook_reply`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_guestbook_reply` (
@@ -1090,7 +1157,7 @@ CREATE TABLE IF NOT EXISTS `chh_guestbook_reply` (
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_indexbg`
+-- Table structure for table `chh_indexbg`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_indexbg` (
@@ -1108,7 +1175,7 @@ CREATE TABLE IF NOT EXISTS `chh_indexbg` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- 轉存資料表中的資料 `chh_indexbg`
+-- Dumping data for table `chh_indexbg`
 --
 
 INSERT INTO `chh_indexbg` (`id`, `cat_id`, `name`, `main_title`, `sub_title`, `img`, `original_img`, `desc`, `is_show`, `sort`) VALUES
@@ -1119,7 +1186,7 @@ INSERT INTO `chh_indexbg` (`id`, `cat_id`, `name`, `main_title`, `sub_title`, `i
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_indexbg_cat`
+-- Table structure for table `chh_indexbg_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_indexbg_cat` (
@@ -1134,7 +1201,7 @@ CREATE TABLE IF NOT EXISTS `chh_indexbg_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- 轉存資料表中的資料 `chh_indexbg_cat`
+-- Dumping data for table `chh_indexbg_cat`
 --
 
 INSERT INTO `chh_indexbg_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is_show`, `lft`, `rgt`) VALUES
@@ -1143,7 +1210,7 @@ INSERT INTO `chh_indexbg_cat` (`id`, `name`, `meta_keywords`, `meta_description`
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_marathon`
+-- Table structure for table `chh_marathon`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_marathon` (
@@ -1160,7 +1227,7 @@ CREATE TABLE IF NOT EXISTS `chh_marathon` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- 轉存資料表中的資料 `chh_marathon`
+-- Dumping data for table `chh_marathon`
 --
 
 INSERT INTO `chh_marathon` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_description`, `date`, `desc`, `is_show`, `sort`) VALUES
@@ -1171,7 +1238,7 @@ INSERT INTO `chh_marathon` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_descr
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_marathon_cat`
+-- Table structure for table `chh_marathon_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_marathon_cat` (
@@ -1186,7 +1253,7 @@ CREATE TABLE IF NOT EXISTS `chh_marathon_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- 轉存資料表中的資料 `chh_marathon_cat`
+-- Dumping data for table `chh_marathon_cat`
 --
 
 INSERT INTO `chh_marathon_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is_show`, `lft`, `rgt`) VALUES
@@ -1195,7 +1262,7 @@ INSERT INTO `chh_marathon_cat` (`id`, `name`, `meta_keywords`, `meta_description
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_news`
+-- Table structure for table `chh_news`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_news` (
@@ -1212,7 +1279,7 @@ CREATE TABLE IF NOT EXISTS `chh_news` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
--- 轉存資料表中的資料 `chh_news`
+-- Dumping data for table `chh_news`
 --
 
 INSERT INTO `chh_news` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_description`, `date`, `desc`, `is_show`, `sort`) VALUES
@@ -1235,7 +1302,7 @@ INSERT INTO `chh_news` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_descripti
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_news_cat`
+-- Table structure for table `chh_news_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_news_cat` (
@@ -1250,7 +1317,7 @@ CREATE TABLE IF NOT EXISTS `chh_news_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- 轉存資料表中的資料 `chh_news_cat`
+-- Dumping data for table `chh_news_cat`
 --
 
 INSERT INTO `chh_news_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is_show`, `lft`, `rgt`) VALUES
@@ -1259,7 +1326,7 @@ INSERT INTO `chh_news_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_qa`
+-- Table structure for table `chh_qa`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_qa` (
@@ -1275,7 +1342,7 @@ CREATE TABLE IF NOT EXISTS `chh_qa` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- 轉存資料表中的資料 `chh_qa`
+-- Dumping data for table `chh_qa`
 --
 
 INSERT INTO `chh_qa` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_description`, `desc`, `is_show`, `sort`) VALUES
@@ -1287,7 +1354,7 @@ INSERT INTO `chh_qa` (`id`, `cat_id`, `name`, `meta_keywords`, `meta_description
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_qa_cat`
+-- Table structure for table `chh_qa_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_qa_cat` (
@@ -1302,7 +1369,7 @@ CREATE TABLE IF NOT EXISTS `chh_qa_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- 轉存資料表中的資料 `chh_qa_cat`
+-- Dumping data for table `chh_qa_cat`
 --
 
 INSERT INTO `chh_qa_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is_show`, `lft`, `rgt`) VALUES
@@ -1315,7 +1382,7 @@ INSERT INTO `chh_qa_cat` (`id`, `name`, `meta_keywords`, `meta_description`, `is
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_sessions`
+-- Table structure for table `chh_sessions`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_sessions` (
@@ -1334,16 +1401,16 @@ CREATE TABLE IF NOT EXISTS `chh_sessions` (
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 
 --
--- 轉存資料表中的資料 `chh_sessions`
+-- Dumping data for table `chh_sessions`
 --
 
 INSERT INTO `chh_sessions` (`sesskey`, `expiry`, `userid`, `adminid`, `ip`, `user_name`, `user_rank`, `discount`, `email`, `data`) VALUES
-('a14075200ff870b2588175b814b12bc0', 1379932618, 0, 0, '127.0.0.1', '0', 0, '1.00', '0', 'a:1:{s:10:"login_fail";i:0;}');
+('7051bed5be831c30cd5c29af490bb2ac', 1379980707, 0, 1, '127.0.0.1', '0', 0, '1.00', '0', 'a:6:{s:10:"login_fail";i:0;s:12:"admin_cat_id";s:1:"2";s:10:"admin_name";s:7:"shsing1";s:11:"action_list";s:3:"all";s:10:"last_check";s:0:"";s:12:"captcha_word";s:16:"MTgzZjQ2YTk2NA==";}');
 
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_sys_menu`
+-- Table structure for table `chh_sys_menu`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_sys_menu` (
@@ -1354,74 +1421,77 @@ CREATE TABLE IF NOT EXISTS `chh_sys_menu` (
   `lft` mediumint(20) unsigned NOT NULL,
   `rgt` mediumint(20) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=57 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=60 ;
 
 --
--- 轉存資料表中的資料 `chh_sys_menu`
+-- Dumping data for table `chh_sys_menu`
 --
 
 INSERT INTO `chh_sys_menu` (`id`, `name`, `url`, `is_chh`, `lft`, `rgt`) VALUES
-(1, '系統選單', '', 0, 1, 112),
+(1, '系統選單', '', 0, 1, 118),
 (2, '系統選單管理', '', 1, 2, 5),
 (3, '資料管理', 'sys_menu.php', 1, 3, 4),
 (4, '關於藝動節', '', 0, 12, 17),
 (5, '分類管理', 'about_us_cat.php', 0, 13, 14),
 (6, '資料管理', 'about_us.php', 0, 15, 16),
-(7, '最新動態', '', 0, 38, 43),
-(8, '分類管理', 'news_cat.php', 1, 39, 40),
-(9, '資料管理', 'news.php', 0, 41, 42),
-(10, '網站相簿', '', 0, 44, 49),
-(11, '分類管理', 'gallery_cat.php', 0, 45, 46),
-(12, '資料管理', 'gallery.php', 0, 47, 48),
-(13, '權限管理', '', 0, 50, 55),
-(14, '管理員分類', 'admin_cat.php', 1, 51, 52),
-(15, '管理員列表', 'admin.php', 0, 53, 54),
-(16, '系統設置', '', 0, 56, 63),
-(17, '分類管理', 'config_cat.php', 1, 57, 58),
-(18, '資料管理', 'config.php', 1, 59, 60),
-(19, '網站設置', 'config_set.php', 0, 61, 62),
-(20, '檔案下載', '', 0, 64, 69),
-(21, '分類管理', 'download_cat.php', 1, 65, 66),
-(22, '資料管理', 'download.php', 0, 67, 68),
-(23, '聯絡我們', '', 0, 70, 75),
-(24, '分類管理', 'contact_cat.php', 1, 71, 72),
-(25, '資料管理', 'contact.php', 0, 73, 74),
-(26, '留言版', '', 0, 76, 81),
-(27, '分類管理', 'guestbook_cat.php', 1, 77, 78),
-(28, '資料管理', 'guestbook.php', 0, 79, 80),
-(29, '會員管理', '', 0, 82, 87),
-(30, '分類管理', 'user_cat.php', 0, 83, 84),
-(31, '資料管理', 'user.php', 0, 85, 86),
-(32, '自定義畫面', '', 0, 88, 93),
-(33, '分類管理', 'custom_cat.php', 1, 89, 90),
-(34, '資料管理', 'custom.php', 0, 91, 92),
-(35, '商品管理', '', 0, 94, 99),
-(36, '分類管理', 'goods_cat.php', 0, 95, 96),
-(37, '資料管理', 'goods.php', 0, 97, 98),
-(38, '電子報管理', '', 0, 100, 111),
-(39, '訂閱名單分類', 'epaper_user_cat.php', 1, 101, 102),
-(40, '訂閱名單', 'epaper_user.php', 0, 103, 104),
-(41, '電子報分類', 'epaper_cat.php', 1, 105, 106),
-(42, '電子報資料', 'epaper.php', 0, 107, 108),
-(43, '發送隊列', 'epaper_queue.php', 0, 109, 110),
+(7, '最新動態', '', 0, 42, 47),
+(8, '分類管理', 'news_cat.php', 1, 43, 44),
+(9, '資料管理', 'news.php', 0, 45, 46),
+(10, '網站相簿', '', 0, 48, 53),
+(11, '分類管理', 'gallery_cat.php', 0, 49, 50),
+(12, '資料管理', 'gallery.php', 0, 51, 52),
+(13, '權限管理', '', 0, 54, 59),
+(14, '管理員分類', 'admin_cat.php', 1, 55, 56),
+(15, '管理員列表', 'admin.php', 0, 57, 58),
+(16, '系統設置', '', 0, 60, 67),
+(17, '分類管理', 'config_cat.php', 1, 61, 62),
+(18, '資料管理', 'config.php', 1, 63, 64),
+(19, '網站設置', 'config_set.php', 0, 65, 66),
+(20, '檔案下載', '', 0, 68, 73),
+(21, '分類管理', 'download_cat.php', 1, 69, 70),
+(22, '資料管理', 'download.php', 0, 71, 72),
+(23, '聯絡我們', '', 0, 74, 79),
+(24, '分類管理', 'contact_cat.php', 1, 75, 76),
+(25, '資料管理', 'contact.php', 0, 77, 78),
+(26, '留言版', '', 0, 82, 87),
+(27, '分類管理', 'guestbook_cat.php', 1, 83, 84),
+(28, '資料管理', 'guestbook.php', 0, 85, 86),
+(29, '會員管理', '', 0, 88, 93),
+(30, '分類管理', 'user_cat.php', 0, 89, 90),
+(31, '資料管理', 'user.php', 0, 91, 92),
+(32, '自定義畫面', '', 0, 94, 99),
+(33, '分類管理', 'custom_cat.php', 1, 95, 96),
+(34, '資料管理', 'custom.php', 0, 97, 98),
+(35, '商品管理', '', 0, 100, 105),
+(36, '分類管理', 'goods_cat.php', 0, 101, 102),
+(37, '資料管理', 'goods.php', 0, 103, 104),
+(38, '電子報管理', '', 0, 106, 117),
+(39, '訂閱名單分類', 'epaper_user_cat.php', 1, 107, 108),
+(40, '訂閱名單', 'epaper_user.php', 0, 109, 110),
+(41, '電子報分類', 'epaper_cat.php', 1, 111, 112),
+(42, '電子報資料', 'epaper.php', 0, 113, 114),
+(43, '發送隊列', 'epaper_queue.php', 0, 115, 116),
 (44, '首頁背景', '', 0, 6, 11),
 (45, '分類管理', 'indexbg_cat.php', 1, 7, 8),
 (46, '資料管理', 'indexbg.php', 0, 9, 10),
-(47, '1010國慶超人路跑', '', 0, 28, 37),
-(48, '分類管理', 'marathon_cat.php', 1, 29, 30),
-(49, '資料管理', 'marathon.php', 0, 31, 32),
-(50, 'Q&A分類', 'qa_cat.php', 0, 33, 34),
-(51, 'Q&A資料', 'qa.php', 0, 35, 36),
-(52, '城市藝境', '', 0, 18, 27),
+(47, '1010國慶超人路跑', '', 0, 32, 41),
+(48, '分類管理', 'marathon_cat.php', 1, 33, 34),
+(49, '資料管理', 'marathon.php', 0, 35, 36),
+(50, 'Q&A分類', 'qa_cat.php', 0, 37, 38),
+(51, 'Q&A資料', 'qa.php', 0, 39, 40),
+(52, '城市地景藝術展', '', 0, 18, 31),
 (53, '參展藝術家分類', 'art_cat.php', 1, 19, 20),
 (54, '參展藝術家資料', 'art.php', 0, 21, 22),
 (55, '藝術活動分類', 'activity_cat.php', 1, 23, 24),
-(56, '藝術活動資料', 'activity.php', 0, 25, 26);
+(56, '藝術活動資料', 'activity.php', 0, 25, 26),
+(57, 'Q&A分類', 'art_qa_cat.php', 0, 27, 28),
+(58, 'Q&A資料', 'art_qa.php', 0, 29, 30),
+(59, 'footer', 'custom.php?act=edit2&id=1', 0, 80, 81);
 
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_user`
+-- Table structure for table `chh_user`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_user` (
@@ -1445,7 +1515,7 @@ CREATE TABLE IF NOT EXISTS `chh_user` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
--- 轉存資料表中的資料 `chh_user`
+-- Dumping data for table `chh_user`
 --
 
 INSERT INTO `chh_user` (`id`, `cat_id`, `name`, `email`, `password`, `sex`, `birthday`, `office_phone`, `home_phone`, `mobile`, `reg_time`, `last_login`, `last_ip`, `visit_count`, `is_show`, `sort`) VALUES
@@ -1454,7 +1524,7 @@ INSERT INTO `chh_user` (`id`, `cat_id`, `name`, `email`, `password`, `sex`, `bir
 -- --------------------------------------------------------
 
 --
--- 表的結構 `chh_user_cat`
+-- Table structure for table `chh_user_cat`
 --
 
 CREATE TABLE IF NOT EXISTS `chh_user_cat` (
@@ -1467,7 +1537,7 @@ CREATE TABLE IF NOT EXISTS `chh_user_cat` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- 轉存資料表中的資料 `chh_user_cat`
+-- Dumping data for table `chh_user_cat`
 --
 
 INSERT INTO `chh_user_cat` (`id`, `name`, `is_show`, `lft`, `rgt`) VALUES

@@ -44,35 +44,35 @@ aside{
 }
 .menu_01{
 	background:url(../images/default/menu_01.png) no-repeat left top;
-	width:132px; height:45px;
+	width:120px; height:45px;
 }
 .menu_01:hover, .menu_01.click{
 	background:url(../images/default/menu_01ov.png) no-repeat left top;
 }
 .menu_02{
 	background:url(../images/default/menu_02.png) no-repeat left top;
-	width:114px; height:45px;
+	width:150px; height:45px;
 }
 .menu_02:hover, .menu_02.click{
 	background:url(../images/default/menu_02ov.png) no-repeat left top;
 }
 .menu_03{
 	background:url(../images/default/menu_03.png) no-repeat left top;
-	width:178px; height:45px;
+	width:170px; height:45px;
 }
 .menu_03:hover, .menu_03.click{
 	background:url(../images/default/menu_03ov.png) no-repeat left top;
 }
 .menu_04{
 	background:url(../images/default/menu_04.png) no-repeat left top;
-	width:112px; height:45px;
+	width:98px; height:45px;
 }
 .menu_04:hover, .menu_04.click{
 	background:url(../images/default/menu_04ov.png) no-repeat left top;
 }
 .menu_05{
 	background:url(../images/default/menu_05.png) no-repeat left top;
-	width:126px; height:45px;
+	width:100px; height:45px;
 }
 .menu_05:hover, .menu_05.click{
 	background:url(../images/default/menu_05ov.png) no-repeat left top;
