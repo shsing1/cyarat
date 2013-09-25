@@ -60,7 +60,7 @@ array_push($js_ext, 'Scripts/activity.js');
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td valign="top" width="80">自訂查詢：</td>
-                                    <td>起日 <input name="mindate" id="mindate" type="text" value="" size="9" class="validate[required]"> <img src="images/default/icon_date.gif">&nbsp;&nbsp;&nbsp;迄日 <input name="maxdate" id="maxdate" type="text" value="" size="9" class="validate[required]"> <img src="images/default/icon_date.gif"><br/><span class="photo_date_ps">可查詢近六個月藝術活動，每次查詢區間最多為二個月</span></td>
+                                    <td>起日 <input name="mindate" id="mindate" type="text" value="" size="9" class="validate[required]"> &nbsp;&nbsp;&nbsp;迄日 <input name="maxdate" id="maxdate" type="text" value="" size="9" class="validate[required]"> <br/><span class="photo_date_ps">可查詢近六個月藝術活動，每次查詢區間最多為二個月</span></td>
                                 </tr>
                                 <tr>
                                     <td>&nbsp;</td>
