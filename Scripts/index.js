@@ -1,12 +1,15 @@
 /*global $*/
+/*jslint browser : true*/
 $(function () {
     'use strict';
 
     var news_open_btn = $('#news_open_btn'),
         news_close_btn = $('#news_close_btn'),
-        news_panel = $('#news_panel');
+        news_panel = $('#news_panel'),
+        slider,
+        win = $(window);
 
-    $('#slider').anythingSlider({
+    slider = $('#slider').anythingSlider({
         buildNavigation : false,
         buildStartStop : false,
         appendForwardTo : $('#slider_forward'),
@@ -14,7 +17,8 @@ $(function () {
         forwardText : '',
         backText : '',
         autoPlay : false,
-        hashTags : false
+        hashTags : false,
+        resizeContents : false
     }).anythingSliderFx({
         /*inFx : {
             '.main_title' : {top : 295, duration: 400, easing : 'easeOutBounce'},
@@ -26,6 +30,11 @@ $(function () {
         }*/
         '.main_title' : ['fade'],
         '.sub_title' : ['fade']
+    });
+
+    win.resize(function() {
+        slider.find('.rsContent').css({'max-width' : '100%'});
+        slider.data('AnythingSlider').updateSlider();
     });
 
     news_open_btn.click(function (evt) {

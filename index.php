@@ -50,8 +50,7 @@ array_push($js_ext, 'Scripts/index.js');
 				<ul class="items_bar" id="slider">
 					<?php foreach($bglist as $v){?>
 					<li>
-						<div class="rsContent">
-							<img src="<?php echo $v['original_img']?>">
+						<div class="rsContent" style="background-image:url(<?php echo $v['original_img']?>);">
 							<div class="slider_text">
 								<h1 class="rsABlock main_title"><?php echo htmlspecialchars($v['main_title'])?></h1>
 								<h2 class="rsABlock sub_title"><?php echo htmlspecialchars($v['sub_title'])?></h2>
