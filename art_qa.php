@@ -7,6 +7,14 @@ require_once(dirname(__FILE__) . '/includes/init.php');
 
 $main_nav[1]['current'] = true;
 
+require_once(ROOT_PATH . '/includes/cls_funbg_cat.php');
+$cat = new cls_funbg_cat($db, $chh->table("funbg_cat") );
+
+require_once(ROOT_PATH . '/includes/cls_funbg.php');
+$data = new cls_funbg($db, $chh->table("funbg"), $cat);
+
+$bg_info = $data->get_info(2);
+
 require_once(ROOT_PATH . '/includes/cls_art_qa_cat.php');
 $cat = new cls_art_qa_cat($db, $chh->table("art_qa_cat") );
 
@@ -61,7 +69,7 @@ if (empty($description)) {
 ?>
 <?php include_once('header.php');?>
 
-    <div id="unit_about" style="background:url(images/my/about_bg01.jpg) no-repeat center top;">
+    <div id="unit_about" style="background:url(<?php echo $bg_info['original_img']?>) no-repeat center top;">
         <div id="pagebody">
             <div class="container">
                 <?php include_once('art_menu.php');?>

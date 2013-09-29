@@ -48,7 +48,7 @@ $activity_name = $tmp_info['name'];
                         <div class="center">
                             <ul>
                                 <?php foreach($menu as $v){?>
-                                <li <?php if($v['current']){?>class="open"<?php }?>><a href="#" class="accordion_item"><?php echo htmlspecialchars($v['name'])?></a>
+                                <li <?php if($v['current']){?>class="open"<?php }?>><a href="art.php"><?php echo htmlspecialchars($v['name'])?></a>
                                     <?php if($v['childs']){?>
                                     <ul class="accordion_panel">
                                         <?php foreach($v['childs'] as $v2){?>

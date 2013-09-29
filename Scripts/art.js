@@ -5,8 +5,8 @@ $(function () {
 
     var container  = $('.masonry_panel');
 
-    container.each(function () {
-        $(this).masonry({
+    container.imagesLoaded(function () {
+        container.masonry({
             columnWidth: 210,
             itemSelector: '.art_list',
             "gutter": 60

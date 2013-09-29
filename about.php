@@ -7,6 +7,14 @@ require_once(dirname(__FILE__) . '/includes/init.php');
 
 $main_nav[0]['current'] = true;
 
+require_once(ROOT_PATH . '/includes/cls_funbg_cat.php');
+$cat = new cls_funbg_cat($db, $chh->table("funbg_cat") );
+
+require_once(ROOT_PATH . '/includes/cls_funbg.php');
+$data = new cls_funbg($db, $chh->table("funbg"), $cat);
+
+$bg_info = $data->get_info(1);
+
 require_once(ROOT_PATH . '/includes/cls_about_us_cat.php');
 $cat = new cls_about_us_cat($db, $chh->table("about_us_cat") );
 
@@ -79,7 +87,7 @@ $path = $data->get_path($id);
 ?>
 <?php include_once('header.php');?>
 
-    <div id="unit_about" style="background:url(images/my/about_bg01.jpg) no-repeat center top;">
+    <div id="unit_about" style="background:url(<?php echo $bg_info['original_img']?>) no-repeat center top;">
         <div id="pagebody">
             <div class="container">
                 <aside>

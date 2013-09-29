@@ -7,6 +7,14 @@ require_once(dirname(__FILE__) . '/includes/init.php');
 
 $main_nav[1]['current'] = true;
 
+require_once(ROOT_PATH . '/includes/cls_funbg_cat.php');
+$cat = new cls_funbg_cat($db, $chh->table("funbg_cat") );
+
+require_once(ROOT_PATH . '/includes/cls_funbg.php');
+$data = new cls_funbg($db, $chh->table("funbg"), $cat);
+
+$bg_info = $data->get_info(2);
+
 require_once(ROOT_PATH . '/includes/cls_art_cat.php');
 $cat = new cls_art_cat($db, $chh->table("art_cat") );
 
@@ -64,11 +72,12 @@ $fun_name = '城市地景藝術展';
 $_LANG['home'] = '首頁 / '.$fun_name;
 $path = $cat->get_path($cat_id);
 
+array_push($js_ext, 'Scripts/imagesloaded.pkgd.min.js');
 array_push($js_ext, 'Scripts/masonry.pkgd.min.js');
 array_push($js_ext, 'Scripts/art.js');
 ?>
 <?php include_once('header.php');?>
-    <div id="unit_art" style="background:url(images/my/about_bg02.jpg) no-repeat center top;">
+    <div id="unit_art" style="background:url(<?php echo $bg_info['original_img']?>) no-repeat center top;">
         <div id="pagebody">
             <div class="container">
                 <?php include_once('art_menu.php');?>
