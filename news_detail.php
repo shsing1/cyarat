@@ -126,7 +126,7 @@ $path = $cat->get_path($cat_id);
                             <span class="new_fb">
                                 <div class="fb-like" data-href="<?php echo curPageURL();?>" data-width="100" data-layout="button_count" data-action="recommend" data-show-faces="true" data-send="true"></div>
                             </span>
-                            <span class="btn_go"><?php if($prev){?><a href="news_detail.php?id=<?php echo $prev['id'];?>">< 上一則</a><?php }?>　|　<?php if($next){?><a href="news_detail.php?id=<?php echo $next['id'];?>">< 下一則</a><?php }?></span>
+                            <span class="btn_go"><?php if($prev){?><a href="news_detail.php?id=<?php echo $prev['id'];?>">< 上一則</a><?php }?>　|　<?php if($next){?><a href="news_detail.php?id=<?php echo $next['id'];?>">下一則 ></a><?php }?></span>
                         </div>
                     </section>
                 </article>
