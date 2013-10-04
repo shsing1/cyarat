@@ -13,20 +13,20 @@
 				<th width="50"> <input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" />
 					<a href="javascript:listTable.sort('id'); ">{$lang.lab_id}</a>{$sort_id} </th>
 				<th><a href="javascript:listTable.sort('name'); ">{$lang.lab_name}</a>{$sort_name}</th>
-				<th width="200"><a href="javascript:listTable.sort('date'); ">{$lang.lab_date}</a>{$sort_date}</th>
-                {*}<th width="50"><a href="javascript:listTable.sort('is_hot'); ">HOT</a>{$sort_is_hot}</th>{*}
+				{*}<th width="200"><a href="javascript:listTable.sort('date'); ">{$lang.lab_date}</a>{$sort_date}</th>
+                <th width="50"><a href="javascript:listTable.sort('is_hot'); ">HOT</a>{$sort_is_hot}</th>{*}
 				<th width="50"><a href="javascript:listTable.sort('is_show'); ">{$lang.lab_is_show}</a>{$sort_is_show}</th>
-				<th width="50" style="display:none;"><a href="javascript:listTable.sort('sort'); ">{$lang.lab_sort}</a>{$sort_sort}</th>
+				<th width="50"><a href="javascript:listTable.sort('sort'); ">{$lang.lab_sort}</a>{$sort_sort}</th>
 				<th width="150">{$lang.lab_handler}</th>
 			<tr> {foreach from=$data_list item=data}
 			<tr>
 				<td><input type="checkbox" name="checkboxes[]" value="{$data.id}" />
 					{$data.id}</td>
 				<td class="first-cell"><span >{$data.name|escape:html}</span></td>
-				<td align="center">{$data.date|escape:html}</td>
-				{*}<td align="center"><img src="images/{if $data.is_hot}yes{else}no{/if}.gif" /></td>{*}
+				{*}<td align="center">{$data.date|escape:html}</td>
+				<td align="center"><img src="images/{if $data.is_hot}yes{else}no{/if}.gif" /></td>{*}
 				<td align="center"><img src="images/{if $data.is_show}yes{else}no{/if}.gif" /></td>
-				<td align="center" style="display:none;"><span >{$data.sort}</span></td>
+				<td align="center"><span >{$data.sort}</span></td>
 				<td align="center">
 					<a href="../marathon.php{$data.url}" target="_blank" title="{$lang.view}"><img src="images/icon_view.gif" width="16" height="16" border="0" /></a>
 					<a href="?act=edit&id={$data.id}" title="{$lang.edit}"><img src="images/icon_edit.gif" width="16" height="16" border="0" /></a>

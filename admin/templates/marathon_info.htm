@@ -150,10 +150,12 @@
                     建議尺寸：314*107
 				</td>
 			</tr>
-			<tr style="display:none;">
+{*}
+			<tr>
 				<td class="label">{$lang.lab_sort}:</td>
 				<td><input type="text" name="sort" value="{$data_info.sort|default:0}" size="5" />{$lang.notice_sort}</td>
 			</tr>
+{*}
             <tr>
 				<td class="label">{$lang.lab_is_index}:</td>
 				<td><input type="radio" name="is_index" value="1" {if $data_info.is_index neq 0} checked="true"{/if}/>

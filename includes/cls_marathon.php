@@ -70,7 +70,7 @@
 				$sql =	"SELECT * ".
 						"FROM ".$this->table ." ".
 						"WHERE 1 ". $where ." ".
-						"ORDER BY date DESC, ".$filter['sort_by']." ".$filter['sort_order']." ".
+						"ORDER BY ".$filter['sort_by']." ".$filter['sort_order']." ".
 						"$sql";
 
 				/* 保存過濾條件*/
