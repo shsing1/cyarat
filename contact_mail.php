@@ -6,12 +6,6 @@ td.label {
   font-weight: bold;
   padding: 5px 1em;
 }
-.contact_mail_table{
-	background:#0CF;
-}
-.contact_mail_table td{
-	background:#FFF;
-}
 </style>
 <table width="500" border="0" cellpadding="0" cellspacing="1" class="contact_mail_table">
 	<tr>

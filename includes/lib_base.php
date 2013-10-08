@@ -194,140 +194,176 @@ function get_crlf()
  */
 function send_mail($name, $email, $subject, $content, $type = 0, $notification=false, $send_name='', $send_email='')
 {
-    /* 如果郵件編碼不是CHH_CHARSET，創建字符集轉換對象，轉換編碼 */
-	$site_name = empty($send_name)?$GLOBALS['_CFG']['site_name']:$send_name;
-	$smtp_mail = empty($send_email)?$GLOBALS['_CFG']['smtp_mail']:$send_email;
-    if ($GLOBALS['_CFG']['mail_charset'] != CHH_CHARSET)
-    {
-        $name      = chh_iconv(CHH_CHARSET, $GLOBALS['_CFG']['mail_charset'], $name);
-        $subject   = chh_iconv(CHH_CHARSET, $GLOBALS['_CFG']['mail_charset'], $subject);
-        $content   = chh_iconv(CHH_CHARSET, $GLOBALS['_CFG']['mail_charset'], $content);
-        $site_name = chh_iconv(CHH_CHARSET, $GLOBALS['_CFG']['mail_charset'], $site_name);
-    }
-    $charset   = $GLOBALS['_CFG']['mail_charset'];
-    /**
-     * 使用mail函數發送郵件
-     */
-    if ($GLOBALS['_CFG']['mail_service'] == 0 && function_exists('mail'))
-    {
-        /* 郵件的頭部信息 */
-        $content_type = ($type == 0) ? 'Content-Type: text/plain; charset=' . $charset : 'Content-Type: text/html; charset=' . $charset;
-        $headers = array();
-        $headers[] = 'From: "' . '=?' . $charset . '?B?' . base64_encode($site_name) . '?='.'" <' . $smtp_mail . '>';
-        $headers[] = $content_type . '; format=flowed';
-        if ($notification)
-        {
-            $headers[] = 'Disposition-Notification-To: ' . '=?' . $charset . '?B?' . base64_encode($site_name) . '?='.'" <' . $smtp_mail . '>';
+    global $firephp;
+
+    include_once(ROOT_PATH . 'includes/PHPMailer/class.phpmailer.php');
+    $mail = new PHPMailer;
+    if ($GLOBALS['_CFG']['mail_service'] == 1) {
+        $mail->isSMTP();
+        $mail->Host = $GLOBALS['_CFG']['smtp_host'];
+        $mail->Port = $GLOBALS['_CFG']['smtp_port'];
+        if (trim($GLOBALS['_CFG']['smtp_user']) != '') {
+            $mail->SMTPAuth = true;
+            $mail->Username = $GLOBALS['_CFG']['smtp_user'];
+            $mail->Password  = $GLOBALS['_CFG']['smtp_pass'];
         }
-
-        $res = @mail($email, '=?' . $charset . '?B?' . base64_encode($subject) . '?=', $content, implode("\r\n", $headers));
-
-        if (!$res)
-        {
-            $GLOBALS['err'] ->add($GLOBALS['_LANG']['sendemail_false']);
-
-            return false;
-        }
-        else
-        {
-            return true;
+        if ($GLOBALS['_CFG']['smtp_ssl'] === 1) {
+            $mail->SMTPSecure = 'tls';
         }
     }
-    /**
-     * 使用smtp服務發送郵件
-     */
-    else
-    {
-        /* 郵件的頭部信息 */
-        $content_type = ($type == 0) ?
-            'Content-Type: text/plain; charset=' . $charset : 'Content-Type: text/html; charset=' . $charset;
-        $content   =  base64_encode($content);
+    $mail->CharSet = 'utf-8';
+    $mail->isHTML(true);
 
-        $headers = array();
-        $headers[] = 'Date: ' . gmdate('D, j M Y H:i:s') . ' +0000';
-        $headers[] = 'To: "' . '=?' . $charset . '?B?' . base64_encode($name) . '?=' . '" <' . $email. '>';
-        $headers[] = 'From: "' . '=?' . $charset . '?B?' . base64_encode($site_name) . '?='.'" <' . $smtp_mail . '>';
-        $headers[] = 'Subject: ' . '=?' . $charset . '?B?' . base64_encode($subject) . '?=';
-        $headers[] = $content_type . '; format=flowed';
-        $headers[] = 'Content-Transfer-Encoding: base64';
-        $headers[] = 'Content-Disposition: inline';
-        if ($notification)
-        {
-            $headers[] = 'Disposition-Notification-To: ' . '=?' . $charset . '?B?' . base64_encode($site_name) . '?='.'" <' . $smtp_mail . '>';
-        }
+    $mail->Subject = $subject;
+    $mail->Body    = $content;
+    $mail->AltBody = strip_tags($content);
 
-        /* 獲得郵件服務器的參數設置 */
-        $params['host'] = $GLOBALS['_CFG']['smtp_host'];
-        $params['port'] = $GLOBALS['_CFG']['smtp_port'];
-        $params['user'] = $GLOBALS['_CFG']['smtp_user'];
-        $params['pass'] = $GLOBALS['_CFG']['smtp_pass'];
-
-        if (empty($params['host']) || empty($params['port']))
-        {
-            // 如果沒有設置主機和端口直接返回 false
-            $GLOBALS['err'] ->add($GLOBALS['_LANG']['smtp_setting_error']);
-
-            return false;
-        }
-        else
-        {
-            // 發送郵件
-            if (!function_exists('fsockopen'))
-            {
-                //如果fsockopen被禁用，直接返回
-                $GLOBALS['err']->add($GLOBALS['_LANG']['disabled_fsockopen']);
-
-                return false;
-            }
-
-            include_once(ROOT_PATH . 'includes/cls_smtp.php');
-            static $smtp;
-
-            $send_params['recipients'] = explode(',', $email);
-            $send_params['headers']    = $headers;
-            $send_params['from']       = $smtp_mail;
-            $send_params['body']       = $content;
-
-            if (!isset($smtp))
-            {
-                $smtp = new smtp($params);
-            }
-
-            if ($smtp->connect() && $smtp->send($send_params))
-            {
-                return true;
-            }
-            else
-            {
-                $err_msg = $smtp->error_msg();
-                if (empty($err_msg))
-                {
-                    $GLOBALS['err']->add('Unknown Error');
-                }
-                else
-                {
-                    if (strpos($err_msg, 'Failed to connect to server') !== false)
-                    {
-                        $GLOBALS['err']->add(sprintf($GLOBALS['_LANG']['smtp_connect_failure'], $params['host'] . ':' . $params['port']));
-                    }
-                    else if (strpos($err_msg, 'AUTH command failed') !== false)
-                    {
-                        $GLOBALS['err']->add($GLOBALS['_LANG']['smtp_login_failure']);
-                    }
-                    elseif (strpos($err_msg, 'bad sequence of commands') !== false)
-                    {
-                        $GLOBALS['err']->add($GLOBALS['_LANG']['smtp_refuse']);
-                    }
-                    else
-                    {
-                        $GLOBALS['err']->add($err_msg);
-                    }
-                }
-
-                return false;
-            }
-        }
+    $mail->From = $GLOBALS['_CFG']['smtp_mail'];
+    $mail->FromName = $GLOBALS['_CFG']['site_name'];
+    $mail->addAddress($email, $name);  // Add a recipient
+// $firephp->info($subject);
+    if(!$mail->send()) {
+       echo 'Message could not be sent.';
+       echo 'Mailer Error: ' . $mail->ErrorInfo;
+       exit;
     }
+    $mail->clearAddresses();
+
+
+ //    /* 如果郵件編碼不是CHH_CHARSET，創建字符集轉換對象，轉換編碼 */
+	// $site_name = empty($send_name)?$GLOBALS['_CFG']['site_name']:$send_name;
+	// $smtp_mail = empty($send_email)?$GLOBALS['_CFG']['smtp_mail']:$send_email;
+ //    if ($GLOBALS['_CFG']['mail_charset'] != CHH_CHARSET)
+ //    {
+ //        $name      = chh_iconv(CHH_CHARSET, $GLOBALS['_CFG']['mail_charset'], $name);
+ //        $subject   = chh_iconv(CHH_CHARSET, $GLOBALS['_CFG']['mail_charset'], $subject);
+ //        $content   = chh_iconv(CHH_CHARSET, $GLOBALS['_CFG']['mail_charset'], $content);
+ //        $site_name = chh_iconv(CHH_CHARSET, $GLOBALS['_CFG']['mail_charset'], $site_name);
+ //    }
+ //    $charset   = $GLOBALS['_CFG']['mail_charset'];
+ //    /**
+ //     * 使用mail函數發送郵件
+ //     */
+ //    if ($GLOBALS['_CFG']['mail_service'] == 0 && function_exists('mail'))
+ //    {
+ //        /* 郵件的頭部信息 */
+ //        $content_type = ($type == 0) ? 'Content-Type: text/plain; charset=' . $charset : 'Content-Type: text/html; charset=' . $charset;
+ //        $headers = array();
+ //        $headers[] = 'From: "' . '=?' . $charset . '?B?' . base64_encode($site_name) . '?='.'" <' . $smtp_mail . '>';
+ //        $headers[] = $content_type . '; format=flowed';
+ //        if ($notification)
+ //        {
+ //            $headers[] = 'Disposition-Notification-To: ' . '=?' . $charset . '?B?' . base64_encode($site_name) . '?='.'" <' . $smtp_mail . '>';
+ //        }
+
+ //        $res = @mail($email, '=?' . $charset . '?B?' . base64_encode($subject) . '?=', $content, implode("\r\n", $headers));
+
+ //        if (!$res)
+ //        {
+ //            $GLOBALS['err'] ->add($GLOBALS['_LANG']['sendemail_false']);
+
+ //            return false;
+ //        }
+ //        else
+ //        {
+ //            return true;
+ //        }
+ //    }
+ //    /**
+ //     * 使用smtp服務發送郵件
+ //     */
+ //    else
+ //    {
+ //        /* 郵件的頭部信息 */
+ //        $content_type = ($type == 0) ?
+ //            'Content-Type: text/plain; charset=' . $charset : 'Content-Type: text/html; charset=' . $charset;
+ //        $content   =  base64_encode($content);
+
+ //        $headers = array();
+ //        $headers[] = 'Date: ' . gmdate('D, j M Y H:i:s') . ' +0000';
+ //        $headers[] = 'To: "' . '=?' . $charset . '?B?' . base64_encode($name) . '?=' . '" <' . $email. '>';
+ //        $headers[] = 'From: "' . '=?' . $charset . '?B?' . base64_encode($site_name) . '?='.'" <' . $smtp_mail . '>';
+ //        $headers[] = 'Subject: ' . '=?' . $charset . '?B?' . base64_encode($subject) . '?=';
+ //        $headers[] = $content_type . '; format=flowed';
+ //        $headers[] = 'Content-Transfer-Encoding: base64';
+ //        $headers[] = 'Content-Disposition: inline';
+ //        if ($notification)
+ //        {
+ //            $headers[] = 'Disposition-Notification-To: ' . '=?' . $charset . '?B?' . base64_encode($site_name) . '?='.'" <' . $smtp_mail . '>';
+ //        }
+
+ //        /* 獲得郵件服務器的參數設置 */
+ //        $params['host'] = $GLOBALS['_CFG']['smtp_host'];
+ //        $params['port'] = $GLOBALS['_CFG']['smtp_port'];
+ //        $params['user'] = $GLOBALS['_CFG']['smtp_user'];
+ //        $params['pass'] = $GLOBALS['_CFG']['smtp_pass'];
+
+ //        if (empty($params['host']) || empty($params['port']))
+ //        {
+ //            // 如果沒有設置主機和端口直接返回 false
+ //            $GLOBALS['err'] ->add($GLOBALS['_LANG']['smtp_setting_error']);
+
+ //            return false;
+ //        }
+ //        else
+ //        {
+ //            // 發送郵件
+ //            if (!function_exists('fsockopen'))
+ //            {
+ //                //如果fsockopen被禁用，直接返回
+ //                $GLOBALS['err']->add($GLOBALS['_LANG']['disabled_fsockopen']);
+
+ //                return false;
+ //            }
+
+ //            include_once(ROOT_PATH . 'includes/cls_smtp.php');
+ //            static $smtp;
+
+ //            $send_params['recipients'] = explode(',', $email);
+ //            $send_params['headers']    = $headers;
+ //            $send_params['from']       = $smtp_mail;
+ //            $send_params['body']       = $content;
+
+ //            if (!isset($smtp))
+ //            {
+ //                $smtp = new smtp($params);
+ //            }
+
+ //            if ($smtp->connect() && $smtp->send($send_params))
+ //            {
+ //                return true;
+ //            }
+ //            else
+ //            {
+ //                $err_msg = $smtp->error_msg();
+ //                if (empty($err_msg))
+ //                {
+ //                    $GLOBALS['err']->add('Unknown Error');
+ //                }
+ //                else
+ //                {
+ //                    if (strpos($err_msg, 'Failed to connect to server') !== false)
+ //                    {
+ //                        $GLOBALS['err']->add(sprintf($GLOBALS['_LANG']['smtp_connect_failure'], $params['host'] . ':' . $params['port']));
+ //                    }
+ //                    else if (strpos($err_msg, 'AUTH command failed') !== false)
+ //                    {
+ //                        $GLOBALS['err']->add($GLOBALS['_LANG']['smtp_login_failure']);
+ //                    }
+ //                    elseif (strpos($err_msg, 'bad sequence of commands') !== false)
+ //                    {
+ //                        $GLOBALS['err']->add($GLOBALS['_LANG']['smtp_refuse']);
+ //                    }
+ //                    else
+ //                    {
+ //                        $GLOBALS['err']->add($err_msg);
+ //                    }
+ //                }
+
+ //                return false;
+ //            }
+ //        }
+ //    }
 }
 
 /**

@@ -98,7 +98,7 @@ if(!$data->add($field)){
     include_once('contact_mail.php');
     $content = ob_get_contents();
     ob_end_clean();
-
+// $firephp->info($_CFG['service_email']);
     send_mail($_CFG['site_name'], $_CFG['service_email'], sprintf($_LANG['add_mail_title'], $field['name'], $field['add_time']), $content, 1, false, $field['name'], $field['email']);
     send_mail($field['name'], $field['email'], sprintf($_LANG['add_mail_title2'], $_CFG['site_name'], $field['add_time']), $content, 1, false, $_CFG['site_name'], $_CFG['service_email']);
 
