@@ -1,12 +1,3 @@
-<!--utf8編碼-->
-<style type="text/css">
-td.label {
-  text-align: right;
-  vertical-align: top;
-  font-weight: bold;
-  padding: 5px 1em;
-}
-</style>
 <table width="500" border="0" cellpadding="0" cellspacing="1" class="contact_mail_table">
 	<tr>
 		<td>此信件為系統自動發出，請勿直接回覆！</td>
