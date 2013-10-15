@@ -49,6 +49,16 @@ $(function () {
         });
     });
 
-    $('.news_title').trunk8();
-    $('.news_brief').trunk8({width : 35});
+    $('.news_title').each(function () {
+        var $this = $(this);
+        if ($this.text().length > 15) {
+            $this.trunk8({width : 15});
+        }
+    });
+    $('.news_brief').each(function () {
+        var $this = $(this);
+        if ($this.text().length > 0) {
+            $this.trunk8({width : 30});
+        }
+    });
 });

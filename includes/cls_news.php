@@ -99,7 +99,8 @@
 				$v['cat_name'] = $cat_info['name'];
 
 				$brief = strip_tags($v['desc']);
-				preg_replace( "/\s/", "" , $brief);
+				$brief = preg_replace( "/[\s|&nbsp;]/mis", "" , $brief);
+				// $brief = str_replace( array("&nbsp;", " "), array("", "") , $brief);
 				$v['brief'] = $brief;
 
 				$arr[$k] = $v;
